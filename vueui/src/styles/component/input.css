@@ -1,0 +1,21 @@
+.m-input {
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid var(--line-gray);
+    outline: none;
+    box-sizing: border-box;
+    padding: 0px 12px;
+}
+
+.m-input:focus { /*Tu them vao*/
+    border-color: var(--border-active);
+}
+
+.text-input:read-only {
+    background-color: var(--control-light-gray);
+}
+
+/*Input date icon*/
+::-webkit-calendar-picker-indicator {
+    background: url(../../assets/Icons/ic_date.svg) center/80% no-repeat;;
+}
