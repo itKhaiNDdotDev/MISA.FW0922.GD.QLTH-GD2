@@ -21,7 +21,7 @@
     --grid-header: #F5F6FA; /*Màu nền dòng tiêu đề của bảng*/
     --grid-line: #D5D8E6; /*Màu dòng chẵn của bảng*/
     --label-text: #757575; /*Màu text của label input trong form*/
-    --popup-mask-bg: #0000006A; /*Màu background mask bao ngoài popup (tự bổ sung)*/
+    --popup-wrapper: #0000006A; /*Màu background mask bao ngoài popup (tự bổ sung)*/
     --line-gray: #CCCCCC; /*Màu đường ngăn cách giữa 2 phía thông tin (tự bổ sung từ color guideline), màu border ô input*/
     --icon-action-bg-focus: #E9E9E9; /*Màu nền icon sửa, xóa khi hover và focus*/
     --control-light-gray: #F5F5F5; /*Màu nền ô input trạng thái readonly, màu scrollbar-thumb*/

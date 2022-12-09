@@ -1,0 +1,17 @@
+
+
+.m-popup-wrapper {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    /* z-index: 2; */
+}
+
+.toasts-container {
+    position: fixed;
+    bottom: 40px;
+    right: 64px;
+    /* z-index: 2; */
+}

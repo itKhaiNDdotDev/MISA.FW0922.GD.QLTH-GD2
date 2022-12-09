@@ -49,6 +49,7 @@
 .dropdown__option--item:hover {
     background-color: var(--grid-line-hover);
 }
-.dropdown__option--item:active,:focus {
+.dropdown__option--item:active,
+.dropdown__option--item:focus {
     background-color: var(--grid-line-focus);
 }

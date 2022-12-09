@@ -1,3 +1,13 @@
+.m-input-container {
+    display: flex;
+    flex-direction: column;
+    margin-right: 16px;
+}
+
+.m-input-container label {
+    color: var(--label-text)
+}
+
 .m-input {
     height: 32px;
     border-radius: 4px;

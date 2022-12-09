@@ -1,10 +1,15 @@
 <template>
-  <div class="m-dropdown">
-    <button class="m-icon icon-28 icon-down"></button>
-    <input type="text" class="m-input" value="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" readonly/>
-    <div class="dropdown__option">
-      <div class="dropdown__option--item">
-        Option 1
+  <div class="m-input-container">
+    <label for="">{{label}}
+        <span v-if="isRequired" style="color: var(--notice-red);">*</span>
+    </label>
+    <div class="m-dropdown">
+      <button class="m-icon icon-28 icon-down"></button>
+      <input type="text" class="m-input" readonly
+        value="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      />
+      <div class="dropdown__option">
+        <div class="dropdown__option--item">Option 1</div>
       </div>
     </div>
   </div>
@@ -12,10 +17,12 @@
 
 <script>
 export default {
-    name: "MDropdown",
+  name: "MDropdown",
+
+  props: ["label", "isRequired"]
 };
 </script>
 
 <style scoped>
-    @import url(../../styles/component/dropdown.css);
+@import url(../../styles/component/dropdown.css);
 </style>

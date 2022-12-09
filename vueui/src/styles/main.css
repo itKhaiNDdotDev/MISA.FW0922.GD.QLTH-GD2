@@ -3,6 +3,8 @@
 @import url(base/icon.css);
 @import url(base/scrollbar.css);
 
+@import url(layout/layout.css);
+
 @import url(component/button.css);
 @import url(component/input.css);
 
