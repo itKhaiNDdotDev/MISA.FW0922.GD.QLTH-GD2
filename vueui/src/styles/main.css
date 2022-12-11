@@ -1,0 +1,20 @@
+@import url(base/color.css);
+@import url(base/font.css);
+@import url(base/icon.css);
+@import url(base/scrollbar.css);
+
+@import url(layout/layout.css);
+
+@import url(component/button.css);
+@import url(component/input.css);
+
+* {
+    font-family: OpenSans;
+    font-size: 13px;
+}
+
+body {
+    margin: 0px;
+    background-color: var(--background);
+    min-width: 1024px;
+}

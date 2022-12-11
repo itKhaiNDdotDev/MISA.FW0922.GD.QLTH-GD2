@@ -1,0 +1,56 @@
+.m-button {
+    margin: 0px 0px 0px 8px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.text-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 12px;
+    min-width: 96px;
+    font-family: OpenSansSemibold;
+}
+
+.btn-green {
+    background-color: var(--main-green);
+    color: var(--white);
+}
+.btn-green:hover {
+    background-color: var(--main-hover-green);
+}
+.btn-green:disabled {
+    background-color: var(--main-disable);
+    color: var(--text-control-disable);
+    cursor: not-allowed;
+}
+
+.btn-light {
+    background-color: var(--white);
+    color: var(--text-control-black);
+    border: 1px solid var(--border);
+}
+.btn-light:hover {
+    background-color: var(--background);
+}
+.btn-light:disabled {
+    background-color: var(--white);
+    color: var(--text-control-disable);
+    cursor: not-allowed;
+}
+
+.icon-button {
+    width: 32px;
+    background-position: center;
+}
+.icon-button:hover {
+    background-color: var(--btn-icon-hover);
+}
+.icon-button:disabled {
+    background-color: var(--border)/*#FFFFFF*/;   /*Cmt la theo SG mo ta, thuc te la theo hinh anh SG*/
+    /* color: var(--text-control-disable); */
+    cursor: not-allowed;
+}

@@ -1,0 +1,31 @@
+:root {
+    --main-green: #03AE66; /*Màu nền button xanh, chữ button thêm ngoài, forcus ô input*/
+    --main-hover-green: #02BF70; /*Màu nền button anh khi hover*/
+    --main-disable: #E0E0E0; /*màu button xanh khi disable*/
+    --border: #CECECE; /*màu border button sáng*/
+    --background: #EAECEF; /*Màu nền button sáng khi hover, màu background tổng*/
+    --text-control-black: #3D3F4E; /*Màu chữ trên button sáng*/
+    --text-control-disable: #A6A6A6; /*Màu chữ trên button khi disable*/
+    --white: #FFFFFF; /*Màu chữ trên button xanh, màu nền trên button sáng, màu nền header, màu nền dòng lẻ trong bảng, màu nền form, màu nền ô input (mặc định)*/
+    --black: #000000; /*màu chữ ô input, màu chữ trên thẻ tag, (màu chữ mặc định)*/
+    --gradient: #009253; /*Màu nền phần icon của button xanh*/
+    --gradient-hover: #05A25E; /*Màu nền phần icon của button xanh khi hover*/
+    --gradient-disable: #D6D3D3; /*Màu nền phần icon của button xanh disable*/
+    --btn-icon-hover: #F8F8F8; /*Màu nền button icon khi hover*/
+    --sidebar-bg: #24344B; /*Màu nền sidebar*/
+    --border-active: #0DD469; /*Màu thanh border left ở menu tương ứng actie, border ô input khi active*/
+    --sidebar-bg-active: #404F64; /*Mày menu tương ứng sidebar đang hover*/
+    --grid-line-hover: #E5F3FF; /*Màu nền dòng dữ liệu trong bảng khi hover*/
+    --grid-line-focus: #CCE8FF; /*Màu nền dòng dữ liệu trong bảng khi focus*/
+    --notice-red: #FA3939; /*màu icon xóa, hủy khi hover, màu border input khi error, màu main toast mesage error*/
+    --grid-header: #F5F6FA; /*Màu nền dòng tiêu đề của bảng, màu chữ tiêu đề toàn ứng dụng*/
+    --grid-line: #D5D8E6; /*Màu dòng chẵn của bảng, màu chữ các menu item*/
+    --label-text: #757575; /*Màu text của label input trong form*/
+    --popup-wrapper: #0000006A; /*Màu background mask bao ngoài popup (tự bổ sung)*/
+    --line-gray: #CCCCCC; /*Màu đường ngăn cách giữa 2 phía thông tin (tự bổ sung từ color guideline), màu border ô input*/
+    --icon-action-bg-focus: #E9E9E9; /*Màu nền icon sửa, xóa khi hover và focus*/
+    --control-light-gray: #F5F5F5; /*Màu nền ô input trạng thái readonly, màu scrollbar-thumb*/
+    --scrollbar-hover: #8F8F8F; /*Màu scrollbar thumb khi hover*/
+    --tab-unactive: #848484; /*Màu nền tiêu đề các tab đang không active*/
+    --box-shadow: #D5D5D5; /*Màu đổ bóng xung quanh các phần tử nổi lên trên*/
+}

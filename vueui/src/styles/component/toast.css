@@ -1,0 +1,48 @@
+.m-toast {
+    min-width: 300px;
+    min-height: 80px;
+    max-width: 768px;
+    border-radius: 4px;
+    border-left: 8px solid;
+    box-shadow: 0px 0px 10px var(--box-shadow);
+    grid-template-columns: 76px auto;
+    grid-template-rows: 34px auto;
+    margin: 0px 0px 18px 0px;
+    background-color: var(--white);
+}
+
+.m-toast .toast-icon {
+    grid-row-start: 1;
+    grid-row-end: 3;
+    justify-self: center;
+    align-self: center;
+}
+
+.m-toast .toast-title {
+    font-family: OpenSansSemiBold;
+    font-size: 16px;
+    padding-top: 18px;
+    padding-right: 18px;
+}
+
+.m-toast .toast-content {
+    font-size: 13px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 18px;
+    padding-right: 18px;
+}
+
+/*Be sang Vue*/
+.toastFail {
+    border-color: red;
+}
+.toastSuccess {
+    border-color: green;
+}
+.toastInfo {
+    border-color: blue;
+}
+.toastWarning {
+    border-color: yellow;
+}
