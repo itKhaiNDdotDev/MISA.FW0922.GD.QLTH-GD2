@@ -118,11 +118,11 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .container {
   background-color: var(--white);
   margin: 16px;
-  height: calc(100vh - 32px);
+  height: 100%;
 }
 
 .container > div {

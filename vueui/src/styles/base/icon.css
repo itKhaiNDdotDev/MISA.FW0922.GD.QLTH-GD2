@@ -166,8 +166,12 @@
     background-position: -804px -295px;
 }
 
+.icon-help-green {
+    background-image: url(../../assets/Icons/ic_Help.png);
+}
 
-/* icon logo của toàn trang, icon ẩn hiện sidebar */
+
+/* icon logo của toàn trang, icon ẩn hiện sidebar, icon home */
 
 .icon-logo-thietbi {
     background-image: url(../../assets/Icons/ic_IconThietBi.svg);
@@ -186,6 +190,11 @@
     height: 48px;
     background-image: url(../../assets/Icons/ic_sprites.svg);
     background-position: 0px 0px;
+}
+
+.icon-home {
+    background-image: url(../../assets/Icons/ic_sprites.svg);
+    background-position: -12px -60px;
 }
 
 

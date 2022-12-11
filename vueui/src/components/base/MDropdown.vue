@@ -6,7 +6,7 @@
     <div class="m-dropdown">
       <button class="m-icon icon-28 icon-down"></button>
       <input type="text" class="m-input" readonly
-        value="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        :value="value"
       />
       <div class="dropdown__option">
         <div class="dropdown__option--item">Option 1</div>
@@ -19,7 +19,7 @@
 export default {
   name: "MDropdown",
 
-  props: ["label", "isRequired"]
+  props: ["label", "isRequired", "value"]
 };
 </script>
 

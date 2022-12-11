@@ -18,8 +18,8 @@
     --grid-line-hover: #E5F3FF; /*Màu nền dòng dữ liệu trong bảng khi hover*/
     --grid-line-focus: #CCE8FF; /*Màu nền dòng dữ liệu trong bảng khi focus*/
     --notice-red: #FA3939; /*màu icon xóa, hủy khi hover, màu border input khi error, màu main toast mesage error*/
-    --grid-header: #F5F6FA; /*Màu nền dòng tiêu đề của bảng*/
-    --grid-line: #D5D8E6; /*Màu dòng chẵn của bảng*/
+    --grid-header: #F5F6FA; /*Màu nền dòng tiêu đề của bảng, màu chữ tiêu đề toàn ứng dụng*/
+    --grid-line: #D5D8E6; /*Màu dòng chẵn của bảng, màu chữ các menu item*/
     --label-text: #757575; /*Màu text của label input trong form*/
     --popup-wrapper: #0000006A; /*Màu background mask bao ngoài popup (tự bổ sung)*/
     --line-gray: #CCCCCC; /*Màu đường ngăn cách giữa 2 phía thông tin (tự bổ sung từ color guideline), màu border ô input*/

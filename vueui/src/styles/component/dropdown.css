@@ -2,12 +2,13 @@
     position: relative;
 }
 
-.m-input {
+.m-dropdown .m-input {
     z-index: 0;
     padding-right: 36px !important;
+    width: 100%;
 }
 
-.icon-down {
+.m-dropdown .icon-down {
     z-index: 1;
     cursor: pointer;
     position: absolute;
@@ -19,10 +20,10 @@
     background-color: inherit;
 }
 
-.icon-down:hover {
+.m-dropdown .icon-down:hover {
     background-color: var(--icon-action-bg-focus);
 }
-.icon-down:focus ~ .m-input {
+.m-dropdown .icon-down:focus ~ .m-input {
     border-color: var(--border-active);
 }
 

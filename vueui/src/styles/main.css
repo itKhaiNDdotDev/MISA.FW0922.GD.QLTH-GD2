@@ -15,6 +15,6 @@
 
 body {
     margin: 0px;
-    background-color: #EAECEF;
+    background-color: var(--background);
     min-width: 1024px;
 }
