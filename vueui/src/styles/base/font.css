@@ -22,3 +22,8 @@
     font-family: OpenSansLight;
     src: url(../../assets//Fonts/OpenSans-Light.woff2);
 }
+
+@font-face {
+    font-family: IconFont;
+    src: url(../../assets/Fonts/iconfont.eot);
+}

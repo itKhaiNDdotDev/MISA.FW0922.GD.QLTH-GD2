@@ -4,29 +4,56 @@
     flex-wrap: wrap;
     box-sizing: border-box;
 }
-/*XEM LAI HET*/
-.content .toolbar {
-    height: 64px;
-    padding: 16px;
+
+.content__navtab {
+    width: 100%;
+}
+
+.content__view {
+    flex: 1;
+    background-color: var(--white);
+}
+
+.content__view .content__toolbar {
+    height: 56px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    /* position: relative; */
-    width: 100%;
     box-sizing: border-box;
 }
+
+.content__table {
+    background-color: aqua;
+    width: 100%;
+    height: calc(100% - 112px);
+}
+
+.content__paging {
+    width: 100%;
+    box-sizing: border-box;
+    height: 56px;
+    display:  flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--label-text);
+    padding: 0px 16px;
+}
+
+/*Bỏ/
 .toolbar .toolbar-left {
     width: 338px;
     box-sizing: border-box;
 }
 .toolbar .toolbar-left .m-input {
-    margin: 0px;   /*De bo di margin left 12px, right 16px cua input*/
+    margin: 0px;
 }
 .content .toolbar .toolbar-right {
     display: flex;
 }
+/******Bỏ*/
 
+/*XEM LAI HET*/
 .content .table-content {
     height: calc(100% - 120px);
     overflow: auto;
