@@ -5,7 +5,7 @@
           <span v-if="isRequired" style="color: var(--notice-red);">*</span>
       </label>
 
-      <div class="m-dropdown">
+      <div @click="toggleDropdown" class="m-dropdown">
         <button class="m-icon icon-28 icon-down"></button>
         <input type="text" class="m-input" :class="{errorInput:errorState.isError}"/>
 
@@ -17,10 +17,12 @@
     </div>
 
     <MInput v-for="(item, index) in opt.head.slice(1, opt.head.length)" :key="index"
-      :label="item"
+      :label="item" :isReadOnly="true"
     />
     
-    <table class="dropdown__option combobox__option">
+    <table class="dropdown__option combobox__option"
+      v-if="isShowOption"
+    >
       <thead>
         <tr class="combobox__option--head">
           <th v-for="(item, index) in opt.head" :key="index">
@@ -52,6 +54,7 @@ export default {
 
     data() {
       return {
+        isShowOption: false,
         opt: {
           head: [
             "Họ tên",
@@ -71,6 +74,16 @@ export default {
             }
           ]
         }
+      }
+    },
+
+    methods: {
+      /**
+       * Ẩn hiện danh sách lựa chọn của Dropdown, Combobox
+       * Author: KhaiND (13/12/2022)
+       */
+      toggleDropdown() {
+        this.isShowOption = !this.isShowOption;
       }
     },
 };

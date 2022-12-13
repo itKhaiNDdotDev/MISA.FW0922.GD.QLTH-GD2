@@ -30,6 +30,10 @@ export default {
     };
   },
 
+  /**
+   * Khi tao ra toast thi kiem tra xem loai toast can hien thi
+   * Author: KhaiND (10/12/2022)
+   */
   created() {
     if (this.toastType == 1) {
       this.toastTitle = "Thành công";

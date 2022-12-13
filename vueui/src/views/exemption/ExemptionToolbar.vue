@@ -8,7 +8,7 @@
       <label class="radio-label" for="">Khoản thu</label>
     </div>
     <div class="toolbar--right">
-        <div class="m-button text-button btn-green">Thêm</div>
+        <div class="m-button text-button btn-green" @click="onOpenForm">Thêm</div>
         <div class="m-button text-button btn-green">Thêm nhanh</div>
         <div class="m-button icon-button btn-light m-icon icon-delete-32"></div>
         <div class="m-button icon-button btn-light m-icon icon-print"></div>
@@ -24,6 +24,16 @@ export default {
   name: "ExemptionToolbar",
   components: {
     MRadio,
+  },
+
+  methods: {
+    /**
+     * Sự kiện yêu cầu gọi đến Component cha để hiển thị Form
+     * Author: KhaiND (13/12/2022)
+     */
+    onOpenForm() {
+      this.$emit("onOpenForm");
+    }
   },
 };
 </script>
