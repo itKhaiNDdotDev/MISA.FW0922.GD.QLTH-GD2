@@ -11,7 +11,7 @@
 
   .combobox__option--head {
     text-align: left;
-    background-color: var(--grid-header);
+    background-color: var(--option-head-bg);
   }
 
   .combobox__option--head th {

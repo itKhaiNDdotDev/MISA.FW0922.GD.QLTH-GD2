@@ -1,0 +1,34 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+thead {
+    border-bottom: 2px solid var(--border);
+}
+
+tr {
+    height: 40px;
+}
+
+th, td {
+    border: 1px solid var(--border);
+    vertical-align: middle;
+    padding: 0px 12px;
+    box-sizing: border-box;
+}
+
+th {
+    background-color: var(--grid-header);
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--grid-line);
+}
+
+tbody tr:hover {
+    background-color: var( --grid-line-hover); /*forcus: CCE8FF*/
+}
+tbody tr:focus {
+    background-color:  var(--grid-line-focus);
+}

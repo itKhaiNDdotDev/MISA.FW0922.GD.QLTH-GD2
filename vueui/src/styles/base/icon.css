@@ -244,3 +244,12 @@
     background-image: url(../../assets/Icons/menu-icon-new.webp);
     background-position: 0px 0px;
 }
+
+
+.icon-plus-blue {
+    background-image: url(../../assets/Icons/ic_Plus_16.svg);
+}
+
+.icon-plus-green {
+    background-image: url(../../assets/Icons/ic_Plus.png);
+}
