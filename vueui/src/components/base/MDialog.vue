@@ -4,10 +4,10 @@
       <div class="dialog__header">Thông báo</div>
       <div class="dialog__content">{{ dialogMsg }}</div>
       <div class="dialog__footer">
-        <div @click="onClickClose" class="m-button text-button btn-light">Đóng</div>
+        <div class="m-button text-button btn-light" @click="onClose">Đóng</div>
         <div class="m-button text-button btn-green">Đồng ý</div>
       </div>
-      <div title="Đóng" class="m-icon icon-24 icon-close" @click="onClickClose"></div>
+      <div title="Đóng" class="m-icon icon-24 icon-close" @click="onClose"></div>
     </div>
   </div>
 </template>
@@ -17,7 +17,15 @@ export default {
   name: "MDialog",
   props: ["dialogMsg"],
 
-  methods: {},
+  methods: {
+    /**
+     * Khi có sự kiện yêu cầu Đóng thì gọi đến component cha để ẩn đi và hủy DOM của Dialog tương ứng
+     * Author: KhaiND (14/12/2022)
+     */
+    onClose() {
+      this.$emit("onClose");
+    }
+  },
 };
 </script>
 
