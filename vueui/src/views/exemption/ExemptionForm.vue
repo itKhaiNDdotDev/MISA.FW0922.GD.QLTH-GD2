@@ -11,37 +11,37 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Khoản thu</th>
-                            <th>Diện miễn giảm</th>
-                            <th>Mức miễn giảm</th>
-                            <th>Thời gian miễn giảm</th>
-                            <th>Từ tháng</th>
-                            <th>Đến tháng</th>
-                            <th></th>
+                            <th style="max-width: 200px;">Khoản thu</th>
+                            <th style="max-width: 270px;">Diện miễn giảm</th>
+                            <th style="width: 130px; max-width: 130px;">Mức miễn giảm</th>
+                            <th style="width: 150px; max-width: 150px;">Thời gian miễn giảm</th>
+                            <th style="width: 100px; max-width: 100px;">Từ tháng</th>
+                            <th style="width: 100px; max-width: 100px;">Đến tháng</th>
+                            <th style="width: 36px; max-width: 40px;"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Sữa học đường</td>
-                            <td>Con hạ sỹ quan, binh sĩ, chiến sĩ</td>
-                            <td>100,00%</td>
-                            <td>Cả năm</td>
-                            <td>08/2021</td>
-                            <td>05/2022</td>
+                            <td class="cell__text--left" style="max-width: 200px;">Sữa học đường</td>
+                            <td class="cell__text--left" style="max-width: 270px;">Con hạ sỹ quan, binh sĩ, chiến sĩ</td>
+                            <td class="cell__text--right" style="width: 130px; max-width: 130px;">100,00%</td>
+                            <td style="width: 150px; max-width: 150px;">Cả năm</td>
+                            <td class="cell__text--left" style="width: 100px; max-width: 270px;">08/2021</td>
+                            <td class="cell__text--left" style="width: 100px; max-width: 270px;">05/2022</td>
                             <td class="m-icon icon-24 icon-remove"></td>
                         </tr>
                         <tr>
-                            <td>Tiền ăn bán trú</td>
-                            <td>Bị tàn tật, khuyết tật thuộc diện hộ nghèo hoặc hộ cận nghèo</td>
-                            <td>100,00%</td>
-                            <td>Cả năm</td>
-                            <td>08/2021</td>
-                            <td>05/2022</td>
+                            <td class="cell__text--left" style="max-width: 200px;">Tiền ăn bán trú</td>
+                            <td class="cell__text--left" style="max-width: 270px;">Bị tàn tật, khuyết tật thuộc diện hộ nghèo hoặc hộ cận nghèo</td>
+                            <td class="cell__text--right" style="width: 130px; max-width: 130px;">100,00%</td>
+                            <td class="cell__text--left" style="width: 150px; max-width: 150px;">Cả năm</td>
+                            <td class="cell__text--left" style="width: 100px; max-width: 270px;">08/2021</td>
+                            <td class="cell__text--left" style="width: 100px; max-width: 270px;">05/2022</td>
                             <td class="m-icon icon-24 icon-remove"></td>
                         </tr>
                         <tr class="table__tr--add">
                             <td colspan="7">
-                                <div class="m-icon icon-plus-blue">Thêm miễn giảm</div>
+                                <div class="m-icon icon-plus-blue text--link">Thêm miễn giảm</div>
                             </td>          
                         </tr>
                     </tbody>
@@ -126,8 +126,6 @@ export default {
     .form__table .table__tr--add td div {
         background-position: 0px center;
         padding-left: 20px;
-        color: var(--link);
-        cursor: pointer;
     }
 
     .form__footer {

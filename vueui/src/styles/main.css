@@ -19,3 +19,8 @@ body {
     background-color: var(--background);
     min-width: 1024px;
 }
+
+.text--link {
+    color: var(--link);
+    cursor: pointer;
+}

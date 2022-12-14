@@ -25,7 +25,10 @@
 
 .content__table {
     width: 100%;
+    position: relative;
     height: calc(100% - 112px);
+    padding: 0px 16px;
+    box-sizing: border-box;
 }
 
 .content__paging {

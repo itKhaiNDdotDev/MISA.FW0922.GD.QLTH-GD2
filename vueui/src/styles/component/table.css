@@ -1,14 +1,22 @@
 table {
     border-collapse: collapse;
-    width: 100%;
+    position: absolute;
+    width: calc(100% - 32px);
 }
 
 thead {
     border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 0px;
 }
 
 tr {
     height: 40px;
+    box-sizing: border-box;
+}
+
+th {
+    background-color: var(--option-head-bg);
 }
 
 th, td {
@@ -16,14 +24,12 @@ th, td {
     vertical-align: middle;
     padding: 0px 12px;
     box-sizing: border-box;
-}
-
-th {
-    background-color: var(--grid-header);
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 tbody tr:nth-child(even) {
-    background-color: var(--grid-line);
+    background-color: var(--grid-header);
 }
 
 tbody tr:hover {
@@ -31,4 +37,25 @@ tbody tr:hover {
 }
 tbody tr:focus {
     background-color:  var(--grid-line-focus);
+}
+
+td {
+    white-space: nowrap;
+}
+
+.cell__icon {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cell__text--left {
+    text-align: left;
+}
+
+.cell__text--right {
+    text-align: right;
+}
+
+.cell__text--center {
+    text-align: center;
 }
