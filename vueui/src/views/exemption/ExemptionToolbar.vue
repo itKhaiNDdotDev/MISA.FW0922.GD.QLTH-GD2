@@ -1,22 +1,23 @@
 <template>
   <div class="content__toolbar">
     <div class="toolbar--left">
-      <label for="" style="margin-right: 18px">Xem theo</label>
+      <label for="" style="margin-right: 18px">{{labelText.ViewMode}}</label>
       <MRadio name="exemptionViewMode" />
-      <label class="radio-label" style="margin-right: 8px;" for="">Học sinh</label>
+      <label class="radio-label" style="margin-right: 8px;" for="">{{labelText.Student}}</label>
       <MRadio name="exemptionViewMode" />
-      <label class="radio-label" for="">Khoản thu</label>
+      <label class="radio-label" for="">{{labelText.Fee}}</label>
     </div>
     <div class="toolbar--right">
-        <div class="m-button text-button btn-green" @click="onOpenForm">Thêm</div>
-        <div class="m-button text-button btn-green">Thêm nhanh</div>
-        <div class="m-button icon-button btn-light m-icon icon-delete-32"></div>
-        <div class="m-button icon-button btn-light m-icon icon-print"></div>
-        <div class="m-button icon-button btn-light m-icon icon-more" @click="toggleMore">
+        <div class="m-button text-button btn-green" @click="onOpenForm">{{buttonText.Add}}</div>
+        <div class="m-button text-button btn-green">{{buttonText.QuickAdd}}</div>
+        <div class="m-button icon-button btn-light m-icon icon-delete-32" :title="tooltip.Delete"></div>
+        <div class="m-button icon-button btn-light m-icon icon-print" :title="tooltip.Print"></div>
+        <div class="m-button icon-button btn-light" @click="toggleMore">
+          <div class="m-icon icon-32 icon-more" :title="tooltip.More"></div>
           <div class="toolbar__more" :class="{moreHidden:isHideMore}">
-            <div class="more__item m-icon icon-nhapkhau">Nhập khẩu</div>
-            <div class="more__item m-icon icon-duplicate">Sao chép danh sách miễn giảm</div>
-            <div class="more__item m-icon icon-zoom">Phóng to/thu nhỏ màn hình (F11)</div>
+            <div class="more__item m-icon icon-nhapkhau">{{buttonText.Import}}</div>
+            <div class="more__item m-icon icon-duplicate">{{buttonText.Coppy + " " + labelText.List.toLowerCase()}}</div>
+            <div class="more__item m-icon icon-zoom">{{buttonText.Zoom}}</div>
           </div>
         </div>
     </div>
@@ -24,6 +25,8 @@
 </template>
 
 <script>
+import Resources from "./../../utils/resources/common";
+import ExemptionResources from "./../../utils/resources/exemption"
 import MRadio from "./../../components/base/MRadio.vue";
 
 export default {
@@ -34,6 +37,9 @@ export default {
 
   data() {
     return {
+      buttonText: Resources.Button,
+      tooltip: Resources.ToolTip,
+      labelText: ExemptionResources.Label,
       isHideMore: true
     }
   },
@@ -73,7 +79,7 @@ export default {
     margin-left: 4px;
   }
 
-  .toolbar--right .icon-more {
+  .toolbar--right .m-button {
     position: relative;
   }
 

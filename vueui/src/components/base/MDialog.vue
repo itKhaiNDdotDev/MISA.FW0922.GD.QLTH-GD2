@@ -1,7 +1,7 @@
 <template>
   <div class="m-popup-wrapper">
     <div class="m-dialog">
-      <div class="dialog__header">Thông báo</div>
+      <div class="dialog__header">{{dialogTitle.Notice}}</div>
       <div class="dialog__content">{{ dialogMsg }}</div>
       <div class="dialog__footer">
         <div class="m-button text-button btn-light" @click="onClose">Đóng</div>
@@ -13,9 +13,17 @@
 </template>
 
 <script>
+import Resources from "./../../utils/resources/common";
+
 export default {
   name: "MDialog",
   props: ["dialogMsg"],
+
+  data() {
+    return {
+      dialogTitle: Resources.DialogTitle
+    }
+  },
 
   methods: {
     /**

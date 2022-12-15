@@ -1,32 +1,41 @@
 <template>
     <div class="content__paging">
         <div class="paging--left">
-            <span>Tổng số&nbsp;</span>
-            <span class="paging__number">17</span>
-            <span>&nbsp;danh sách miễn giảm</span>
+            <span>{{pagingText.Total}}&nbsp;</span>
+            <span class="paging__number">{{totalRecord}}</span>
+            <span>&nbsp;{{pagingText.List.toLowerCase()}}</span>
         </div>
         <div class="paging--right">
-            <span>Trang &nbsp;</span>
+            <span>{{pagingText.Page}} &nbsp;</span>
             <div class="page-index">
                 <input type="text" class="m-input">
                 <div class="page--up">&#xe64d;</div>
                 <div class="page--down">&#xe64e;</div>
             </div>
-            <span>&nbsp; trên tổng số&nbsp;</span>
-            <span class="paging__number">1</span>
-            <span>&nbsp;trang</span>
+            <span>&nbsp; {{pagingText.onTotalPage.toLowerCase()}}&nbsp;</span>
+            <span class="paging__number">{{totalPage}}</span>
+            <span>&nbsp;{{pagingText.Page.toLowerCase()}}</span>
         </div>
     </div>
 </template>
 
 <script>
+import ExemptionResources from "./../../utils/resources/exemption"
 // import MInput from "./../../components/base/MInput.vue";
 
 export default {
     name: "ExemptionPaging",
     components: {
         // MInput
-    }
+    },
+
+    data() {
+        return {
+            pagingText: ExemptionResources.Paging,
+            totalRecord: 17,
+            totalPage: 1
+        }
+    },
 }
 </script>
 

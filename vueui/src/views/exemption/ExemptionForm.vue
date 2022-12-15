@@ -1,22 +1,20 @@
 <template>
     <div class="m-popup-wrapper">
         <div class="popup__form exemption-form">
-            <div class="form__header">
-                Thêm học sinh được miễn giảm
-            </div>
+            <div class="form__header">{{formTitle}}</div>
             <div class="form__control">
-                <MCombobox label="Họ và tên" isRequired="true" :errorState="errorInputSate"/>
+                <MCombobox :label="labelText.Student" isRequired="true" :errorState="errorInputSate"/>
             </div>
             <div class="form__table">
                 <table>
                     <thead>
                         <tr>
-                            <th style="max-width: 200px;">Khoản thu</th>
-                            <th style="max-width: 270px;">Diện miễn giảm</th>
-                            <th style="width: 130px; max-width: 130px;">Mức miễn giảm</th>
-                            <th style="width: 150px; max-width: 150px;">Thời gian miễn giảm</th>
-                            <th style="width: 100px; max-width: 100px;">Từ tháng</th>
-                            <th style="width: 100px; max-width: 100px;">Đến tháng</th>
+                            <th style="max-width: 200px;">{{labelText.Fee}}</th>
+                            <th style="max-width: 270px;">{{labelText.TargetType}}</th>
+                            <th style="width: 130px; max-width: 130px;">{{labelText.Level}}</th>
+                            <th style="width: 150px; max-width: 150px;">{{labelText.Time}}</th>
+                            <th style="width: 100px; max-width: 100px;">{{labelText.FromMonth}}</th>
+                            <th style="width: 100px; max-width: 100px;">{{labelText.ToMonth}}</th>
                             <th style="width: 36px; max-width: 40px;"></th>
                         </tr>
                     </thead>
@@ -28,7 +26,7 @@
                             <td style="width: 150px; max-width: 150px;">Cả năm</td>
                             <td class="cell__text--left" style="width: 100px; max-width: 270px;">08/2021</td>
                             <td class="cell__text--left" style="width: 100px; max-width: 270px;">05/2022</td>
-                            <td class="m-icon icon-24 icon-remove"></td>
+                            <td class="m-icon icon-24 icon-remove" :title="tooltip.Delete"></td>
                         </tr>
                         <tr>
                             <td class="cell__text--left" style="max-width: 200px;">Tiền ăn bán trú</td>
@@ -37,11 +35,11 @@
                             <td class="cell__text--left" style="width: 150px; max-width: 150px;">Cả năm</td>
                             <td class="cell__text--left" style="width: 100px; max-width: 270px;">08/2021</td>
                             <td class="cell__text--left" style="width: 100px; max-width: 270px;">05/2022</td>
-                            <td class="m-icon icon-24 icon-remove"></td>
+                            <td class="m-icon icon-24 icon-remove" :title="tooltip.Delete"></td>
                         </tr>
                         <tr class="table__tr--add">
                             <td colspan="7">
-                                <div class="m-icon icon-plus-blue text--link">Thêm miễn giảm</div>
+                                <div class="m-icon icon-plus-blue text--link">{{labelText.Insert}}</div>
                             </td>          
                         </tr>
                     </tbody>
@@ -49,15 +47,17 @@
 
             </div>
             <div class="form__footer">
-                <div class="m-button text-button btn-light" @click="onClose">Đóng</div>
-                <div class="m-button text-button btn-green">Lưu</div>
+                <div class="m-button text-button btn-light" @click="onClose">{{buttonText.Close}}</div>
+                <div class="m-button text-button btn-green">{{buttonText.Save}}</div>
             </div>
-            <div class="m-icon icon-24 icon-close" @click="onClose"></div>
+            <div class="m-icon icon-24 icon-close" @click="onClose" :title="tooltip.Close"></div>
         </div>
     </div>
 </template>
 
 <script>
+import Resources from "./../../utils/resources/common";
+import ExemptionResources from "./../../utils/resources/exemption";
 import MCombobox from "./../../components/base/MCombobox.vue";
 
 export default {
@@ -69,6 +69,10 @@ export default {
     data() {
         return {
             isShow: true,
+            formTitle: ExemptionResources.Form.Title.Insert,
+            labelText: ExemptionResources.Label,
+            buttonText: Resources.Button,
+            tooltip: Resources.ToolTip,
             errorInputSate: {
                 isError: true,
                 message: "Có lỗi rồi"

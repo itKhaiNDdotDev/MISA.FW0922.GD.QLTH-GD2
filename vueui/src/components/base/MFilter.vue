@@ -6,41 +6,43 @@
         <div class="filter__option" v-if="isShowOption">
             <div class="option__item">
                 <input type="radio" name="filterOption">
-                <div class="option__item--text m-icon">Xóa điều kiện lọc</div>
+                <div class="option__item--text m-icon">{{filterOption.ClearOption}}</div>
             </div>
              <div class="option__item">
                 <input type="radio" name="filterOption" checked>
-                <div class="option__item--text m-icon">Chứa</div>
+                <div class="option__item--text m-icon">{{filterOption.Contain}}</div>
             </div>
              <div class="option__item">
                 <input type="radio" name="filterOption">
-                <div class="option__item--text m-icon">Bằng</div>
+                <div class="option__item--text m-icon">{{filterOption.Equal}}</div>
             </div>
              <div class="option__item">
                 <input type="radio" name="filterOption">
-                <div class="option__item--text m-icon">Bắt đầu với</div>
+                <div class="option__item--text m-icon">{{filterOption.Begin}}</div>
             </div>
              <div class="option__item">
                 <input type="radio" name="filterOption">
-                <div class="option__item--text m-icon">Kết thúc với</div>
+                <div class="option__item--text m-icon">{{filterOption.End}}</div>
             </div>
              <div class="option__item">
                 <input type="radio" name="filterOption">
-                <div class="option__item--text m-icon">Không chứa</div>
+                <div class="option__item--text m-icon">{{filterOption.NotContain}}</div>
             </div>
              <div class="option__item">
                 <input type="radio" name="filterOption">
-                <div class="option__item--text m-icon">Trống</div>
+                <div class="option__item--text m-icon">{{filterOption.Blank}}</div>
             </div>
              <div class="option__item">
                 <input type="radio" name="filterOption">
-                <div class="option__item--text m-icon">Không trống</div>
+                <div class="option__item--text m-icon">{{filterOption.NotBlank}}</div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import Resources from "./../../utils/resources/common";
+
 export default {
     name: "MFilter",
 
@@ -48,6 +50,7 @@ export default {
     data() {
         return {
             isShowOption: false,
+            filterOption: Resources.Filter.Text
         }
     },
 
