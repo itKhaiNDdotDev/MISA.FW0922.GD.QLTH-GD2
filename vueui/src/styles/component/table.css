@@ -1,7 +1,8 @@
 table {
     border-collapse: collapse;
     position: absolute;
-    width: calc(100% - 32px);
+    width: 100%;
+    background-color: var(--white);
 }
 
 thead {
@@ -45,7 +46,8 @@ td {
 
 .cell__icon {
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
+    justify-content: space-evenly;
 }
 
 .cell__text--left {

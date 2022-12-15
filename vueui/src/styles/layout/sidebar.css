@@ -8,8 +8,7 @@
     flex-shrink: 0;
     height: 48px;
     position: relative;
-    display: flex;
-    
+    display: flex;  
     justify-content: space-between;
     padding: 0px 0px 0px 12px; /*XEm lai*/
     box-shadow: 4px 0px 10px rgb(0, 0, 0, 0.15);
@@ -71,20 +70,30 @@
 }
 
 /* Khi an sidebar di */
-/* .toggleSidebar {
-    width: 48px;
+.sidebarHidden {
+    width: 46px !important;
 }
-.toggleSidebar .sidebar-head div {
-    display: none;
-}
-.toggleSidebar ~ .header {
-    width: calc(100% - 48px);
-}
-.toggleSidebar .sidebar-menu .menu-item {
+.sidebarHidden .sidebar__head {
     padding: 0px;
-    height: 48px;
-    background-position: center;
- }
-.toggleSidebar .sidebar-menu .menu-item .menu-item--text {
+}
+.sidebarHidden .sidebar__head--left {
     display: none;
-} */
+}
+.sidebarHidden ~ .header, .sidebarHidden ~ .content {
+    width: calc(100% - 46px);
+}
+.sidebarHidden .sidebar__menu .menu-item {
+    padding: 0px;
+    width: 46px;
+    height: 46px;
+ }
+ .sidebarHidden .sidebar__menu .menu-item--icon {
+    background-position: center;
+    width: 46px;
+    height: 46px;
+    margin: 0px;
+    background-size: 32px;
+ }
+.sidebarHidden .sidebar__menu .menu-item--text {
+    display: none;
+}

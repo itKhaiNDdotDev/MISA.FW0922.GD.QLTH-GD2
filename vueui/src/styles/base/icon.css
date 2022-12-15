@@ -72,6 +72,10 @@
     background-image: url(../../assets/Icons/ic_Duplicate_24.svg);
 }
 
+.icon-zoom {
+    background-image: url(../../assets/Icons/ic_zoom.png);
+}
+
 .icon-print {
     background-image: url(../../assets/Icons/ic_Print.png);
 }

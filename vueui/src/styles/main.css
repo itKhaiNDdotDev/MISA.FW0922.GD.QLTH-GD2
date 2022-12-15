@@ -17,7 +17,7 @@
 body {
     margin: 0px;
     background-color: var(--background);
-    min-width: 1024px;
+    min-width: 1200px;
 }
 
 .text--link {

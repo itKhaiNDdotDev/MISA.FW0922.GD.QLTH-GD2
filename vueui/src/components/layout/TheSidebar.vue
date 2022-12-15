@@ -1,11 +1,11 @@
 <template>
-    <div class="sidebar">
+    <div class="sidebar" :class="{sidebarHidden:isHiddenSidebar}">
             <div class="sidebar__head">
                 <div class="sidebar__head--left">
                    <div class="m-logo m-icon icon-logo-khoanthu"></div>
                    <div class="m-title">Khoản thu</div>
                 </div>
-                <div class="sidebar__head--right m-icon icon-sidebar"></div>
+                <div class="sidebar__head--right m-icon icon-sidebar" @click="toggleSidebar"></div>
             </div>
 
             <div class="sidebar__menu">
@@ -42,7 +42,7 @@
                     <div class="menu-item--text">Hệ thống</div>
                 </router-link>
                 <router-link to="/" class="menu-item">
-                    <div class="menu-item--icon m-icon icon-32 icon-daotaoemis"></div>
+                    <div class="menu-item--icon m-icon icon-32 icon-daotaoemis" style="background-size: auto;"></div>
                     <div class="menu-item--text">Đào tạo MISA EMIS</div>
                 </router-link>
             </div>
@@ -52,6 +52,18 @@
 <script>
 export default {
     name: 'TheSidebar',
+
+    data() {
+        return {
+            isHiddenSidebar: false
+        }
+    },
+
+    methods: {
+        toggleSidebar() {
+            this.isHiddenSidebar = !this.isHiddenSidebar;
+        }
+    },
 }
 </script>
 

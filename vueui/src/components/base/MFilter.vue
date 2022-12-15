@@ -1,8 +1,9 @@
 <template>
     <div class="m-filter-container">
-        <div class="m-icon icon-24 icon-filter"></div>
-        <input class="filter__input"/>
-        <div class="filter__option">
+        <div class="m-icon icon-24 icon-filter" @click="toggleFilter"></div>
+        <input v-if="isInputDate" class="filter__input" />
+        <input v-else class="filter__input" type="text"/>
+        <div class="filter__option" v-if="isShowOption">
             <div class="option__item">
                 <input type="radio" name="filterOption">
                 <div class="option__item--text m-icon">Xóa điều kiện lọc</div>
@@ -41,7 +42,24 @@
 
 <script>
 export default {
-    name: "MFilter"
+    name: "MFilter",
+
+    props: ["isInputDate"],
+    data() {
+        return {
+            isShowOption: false,
+        }
+    },
+
+    methods: {
+        /**
+         * Thực hiện ẩn hiện danh sách lựa chọn cho mode filter
+         * Author: KhaiND (14/12/2022)
+         */
+        toggleFilter() {
+            this.isShowOption = !this.isShowOption;
+        }
+    },
 }
 </script>
 
