@@ -9,8 +9,8 @@
             <span>{{pagingText.Page}} &nbsp;</span>
             <div class="page-index">
                 <input type="text" class="m-input">
-                <div class="page--up">&#xe64d;</div>
-                <div class="page--down">&#xe64e;</div>
+                <div class="page--up m-icon icon-up-next"></div>
+                <div class="page--down m-icon icon-down-prev"></div>
             </div>
             <span>&nbsp; {{pagingText.onTotalPage.toLowerCase()}}&nbsp;</span>
             <span class="paging__number">{{totalPage}}</span>
@@ -62,16 +62,20 @@ export default {
         font-family: IconFont;
         position: absolute;
         right: 1px;
-        width: 15px;
+        width: 16px;
         height: 15px;
-        color: green;
-        background-color: lightcoral;
         cursor: pointer;
+        border-radius: 4px;
     }
     .page-index .page--up {
         top: 1px;
     }
     .page-index .page--down {
         bottom: 1px;
+    }
+    .page-index .page--up:hover, .page-index .page--down:hover,
+    .page-index .page--up:active, .page-index .page--down:active,
+    .page-index .page--up:focus, .page-index .page--down:focus {
+        background-color: var(--btn-icon-hover);
     }
 </style>

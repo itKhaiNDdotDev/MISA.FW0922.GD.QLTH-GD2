@@ -18,6 +18,8 @@
             <div class="m-icon icon-40 icon-daotaoemis"></div>
             <div class="m-icon icon-40 icon-sothu"></div>
             <div class="m-icon icon-40 icon-print"></div>
+            <div class="m-icon icon-40 icon-up-next"></div>
+            <div class="m-icon icon-40 icon-down-prev"></div>
             <br>
         </div>
 
