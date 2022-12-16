@@ -1,5 +1,6 @@
 .m-dropdown {
     position: relative;
+    border-radius: inherit;
 }
 
 .m-dropdown .m-input {
@@ -37,6 +38,7 @@
     box-shadow: 0px 0px 10px var(--box-shadow);
     background-color: var(--white);
     overflow: auto;
+    overflow-x: hidden;
     z-index: 1;
 }
 
@@ -66,6 +68,9 @@
 .dropdown__option table th, .dropdown__option table td {
     border: none;
     height: 28px;
+    max-width: 100px; /*RỘNG HƠN*/
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .dropdown__option table tbody tr {

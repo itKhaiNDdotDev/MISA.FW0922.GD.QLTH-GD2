@@ -66,20 +66,6 @@
 
         <div>
             <br>
-            <label for="">7. Combobox kèm error input:</label>
-            <MCombobox :errorState="errorInputSate"/>
-            <br>
-        </div>
-
-        <div>
-            <br>
-            <label for="">7. Combo kèm error input:</label>
-            <MCombo label="Họ và tên" isRequired="true" :errorState="errorInputSate"/>
-            <br>
-        </div>
-
-        <div>
-            <br>
             <label for="">8. Filter:</label>
             <MFilter/>
             <br>
@@ -104,12 +90,10 @@ import MCheckbox from "./base/MCheckbox.vue";
 import MRadio from "./base/MRadio.vue";
 import MInput from "./base/MInput.vue"
 import MDropdown from "./base/MDropdown.vue";
-import MCombo from "./base/MCombo.vue";
 import MFilter from "./base/MFilter.vue";
 import MLoader from "./base/MLoader.vue";
 import MDialog from "./base/MDialog.vue";
 import MToast from "./base/MToast.vue";
-import MCombobox from "./base/MCombobox.vue"
 
 export default {
     name: "TestCom",
@@ -118,8 +102,6 @@ export default {
         MRadio,
         MInput,
         MDropdown,
-        MCombo,
-        MCombobox,
         MFilter,
         MLoader,
         MDialog,

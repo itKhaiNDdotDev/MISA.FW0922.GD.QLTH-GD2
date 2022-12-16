@@ -3,16 +3,21 @@
         <div class="popup__form exemption-form">
             <div class="form__header">{{formTitle}}</div>
             <div class="form__control">
-                <!-- <MCombo :label="labelText.Student" isRequired="true" :errorState="errorInputSate"/> -->
-                <MDropdown label="Học sinh" :isRequired="true" :numberColumn="3"/>
-                <MInput class="form__input" label="Ngày sinh" :isDisabled="true"/>
-                <MInput/>
+                <MDropdown class="form__input border-radius" style="width: 220px;" :label="labelText.Student" :isRequired="true"
+                    :numberColumn="3"
+                />
+                <MInput class="form__input border-radius" style="width: 110px;" :label="labelText.DateOfBirth" :isDisabled="true"
+                    value="30/12/2022"
+                />
+                <MInput class="form__input border-radius" style="width: 150px;" :label="labelText.Class" :isDisabled="true"
+                    value="12/12"
+                />
             </div>
             <div class="form__table">
                 <table>
                     <thead>
                         <tr>
-                            <th style="max-width: 200px;">{{labelText.Fee}}</th>
+                            <th style="min-width: 160px; max-width: 200px;">{{labelText.Fee}}</th>
                             <th style="max-width: 270px;">{{labelText.TargetType}}</th>
                             <th style="width: 130px; max-width: 130px;">{{labelText.Level}}</th>
                             <th style="width: 150px; max-width: 150px;">{{labelText.Time}}</th>
@@ -22,22 +27,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="cell__text--left" style="max-width: 200px;">Sữa học đường</td>
-                            <td class="cell__text--left" style="max-width: 270px;">Con hạ sỹ quan, binh sĩ, chiến sĩ</td>
-                            <td class="cell__text--right" style="width: 130px; max-width: 130px;">100,00%</td>
-                            <td style="width: 150px; max-width: 150px;">Cả năm</td>
-                            <td class="cell__text--left" style="width: 100px; max-width: 270px;">08/2021</td>
-                            <td class="cell__text--left" style="width: 100px; max-width: 270px;">05/2022</td>
-                            <td class="m-icon icon-24 icon-remove" :title="tooltip.Delete"></td>
-                        </tr>
-                        <tr>
-                            <td class="cell__text--left" style="max-width: 200px;">Tiền ăn bán trú</td>
-                            <td class="cell__text--left" style="max-width: 270px;">Bị tàn tật, khuyết tật thuộc diện hộ nghèo hoặc hộ cận nghèo</td>
-                            <td class="cell__text--right" style="width: 130px; max-width: 130px;">100,00%</td>
-                            <td class="cell__text--left" style="width: 150px; max-width: 150px;">Cả năm</td>
-                            <td class="cell__text--left" style="width: 100px; max-width: 270px;">08/2021</td>
-                            <td class="cell__text--left" style="width: 100px; max-width: 270px;">05/2022</td>
+                        <tr v-for="(item, index) in exemptionOfStudent" :key="index">
+                            <td class="cell__text--left" style="max-width: 200px;" :title="item.Fee">{{item.Fee}}</td>
+                            <td class="cell__text--left" style="max-width: 270px;" :title="item.TargetType" @click="onFocusCell">
+                                {{item.TargetType}}
+                                <MDropdown class="cell__input"/>
+                            </td>
+                            <td class="cell__text--right" style="width: 130px; max-width: 130px;" @click="onFocusCell">
+                                {{item.Level.toFixed(2).replace('.', ',')}}%
+                                <MInput class="cell__input"/>
+                            </td>
+                            <td style="width: 150px; max-width: 150px;" :title="item.Time">
+                                {{item.Time}}
+                            </td>
+                            <td class="cell__text--left" style="width: 100px; max-width: 270px;">{{item.FromMonth}}</td>
+                            <td class="cell__text--left" style="width: 100px; max-width: 270px;">{{item.ToMonth}}</td>
                             <td class="m-icon icon-24 icon-remove" :title="tooltip.Delete"></td>
                         </tr>
                         <tr class="table__tr--add">
@@ -61,14 +65,12 @@
 <script>
 import Resources from "./../../utils/resources/common";
 import ExemptionResources from "./../../utils/resources/exemption";
-// import MCombo from "./../../components/base/MCombo.vue";
 import MInput from "./../../components/base/MInput.vue";
 import MDropdown from "./../../components/base/MDropdown.vue";
 
 export default {
     name: "ExemptionForm",
     components: {
-        // MCombo,
         MInput,
         MDropdown
     },
@@ -83,7 +85,25 @@ export default {
             errorInputSate: {
                 isError: true,
                 message: "Có lỗi rồi"
-            }
+            },
+            exemptionOfStudent: [
+                {
+                    Fee: "Sữa học đường",
+                    TargetType: "Con hạ sỹ quan, binh sĩ, chiến sĩ",
+                    Level: 100,
+                    Time: "Cả năm",
+                    FromMonth: "08/2021",
+                    ToMonth: "05/2022"
+                },
+                {
+                    Fee: "Tiền ăn bán trú",
+                    TargetType: "Bị tàn tật, khuyết tật thuộc diện hộ nghèo hoặc hộ cận nghèo",
+                    Level: 50,
+                    Time: "Học kỳ I",
+                    FromMonth: "08/2021",
+                    ToMonth: "01/2022"
+                }
+            ]
         }
     },
 
@@ -94,6 +114,13 @@ export default {
          */
         onClose() {
             this.$emit("onClose");
+        },
+
+        onFocusCell(event) {
+            if(event.target.querySelector(".cell__input")) {
+                event.target.querySelector(".cell__input").style.display = "block";
+                event.target.querySelector('input').focus();
+            }   
         }
     },
 }
@@ -119,15 +146,14 @@ export default {
         width: fit-content;
         display: flex;
     }
-
     .form__control .form__input {
-        border-radius: 4px;
+        margin-right: 16px;
     }
 
     .form__table {
         flex: 1;
         border: 1px solid var(--border);
-        margin: 0px 16px;
+        margin: 4px 16px;
         position: relative;
     }
     .form__table table {
@@ -156,5 +182,19 @@ export default {
         position: absolute;
         top: 8px;
         right: 8px;
+    }
+
+    .form__table tr, .form__table td {
+        position: relative;
+        z-index: 0;
+    }
+    .form__table .cell__input {
+        display: none;
+        position: absolute;
+        top: -1px;
+        left: -1px;
+        right: -1px;
+        bottom: -1px;
+        z-index: 1;
     }
 </style>

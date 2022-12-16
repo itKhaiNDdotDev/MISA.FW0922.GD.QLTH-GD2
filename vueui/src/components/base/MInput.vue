@@ -3,7 +3,7 @@
     <label v-if="label" for="">{{label}}
         <span v-if="isRequired" style="color: var(--notice-red);">*</span>
     </label>
-    <input class="m-input text-input" type="text" :readonly="isReadOnly" :disabled="isDisabled"/>
+    <input class="m-input text-input" type="text" :value="value" :readonly="isReadOnly" :disabled="isDisabled"/>
   </div>
 </template>
 
@@ -24,7 +24,8 @@ export default {
       isDisabled: {
         type: Boolean,
         default: false
-      }
+      },
+      value: String
     }
 };
 </script>

@@ -13,13 +13,14 @@
             <tr>
               <th>ID</th>
               <th>Name</th>
+              <th>Test</th>
+              <th>Test</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="(item, index) in optionData" :key="index">
               <td>{{item.id}}</td>
               <td>{{item.name}}</td>
-              <td>Test test test test test</td>
               <td>Test test test test test</td>
               <td>Test test</td>
             </tr>

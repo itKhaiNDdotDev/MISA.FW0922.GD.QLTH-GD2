@@ -2,13 +2,12 @@
     display: flex;
     flex-direction: column;
     /* margin-right: 16px; */
-    background-color: aqua;
     border-radius: inherit;
 }
 
 .m-input-container label {
     color: var(--label-text);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 }
 
 .m-input {
