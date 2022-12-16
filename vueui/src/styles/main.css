@@ -24,3 +24,7 @@ body {
     color: var(--link);
     cursor: pointer;
 }
+
+.border-radius {
+    border-radius: 4px !important;
+}

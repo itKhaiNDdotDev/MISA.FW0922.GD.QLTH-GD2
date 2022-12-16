@@ -3,7 +3,10 @@
         <div class="popup__form exemption-form">
             <div class="form__header">{{formTitle}}</div>
             <div class="form__control">
-                <MCombobox :label="labelText.Student" isRequired="true" :errorState="errorInputSate"/>
+                <!-- <MCombo :label="labelText.Student" isRequired="true" :errorState="errorInputSate"/> -->
+                <MDropdown label="Học sinh" :isRequired="true" :numberColumn="3"/>
+                <MInput class="form__input" label="Ngày sinh" :isDisabled="true"/>
+                <MInput/>
             </div>
             <div class="form__table">
                 <table>
@@ -58,12 +61,16 @@
 <script>
 import Resources from "./../../utils/resources/common";
 import ExemptionResources from "./../../utils/resources/exemption";
-import MCombobox from "./../../components/base/MCombobox.vue";
+// import MCombo from "./../../components/base/MCombo.vue";
+import MInput from "./../../components/base/MInput.vue";
+import MDropdown from "./../../components/base/MDropdown.vue";
 
 export default {
     name: "ExemptionForm",
     components: {
-        MCombobox
+        // MCombo,
+        MInput,
+        MDropdown
     },
 
     data() {
@@ -110,6 +117,11 @@ export default {
         padding: 0px 16px;
         height: 64px;
         width: fit-content;
+        display: flex;
+    }
+
+    .form__control .form__input {
+        border-radius: 4px;
     }
 
     .form__table {

@@ -3,11 +3,11 @@
         <div class="header--left header-title">{{headerText.PageTitle}}</div>
 
         <div class="header--right">
-            <div class="m-input nav-home-app">
+            <div class="m-input nav-home-app border-radius">
                 <div class="m-icon icon-home"></div>
                 {{headerText.SchoolName}}
             </div>
-            <MDropdown value="2021 - 2022" style="width: 124px"/>
+            <MDropdown value="2021 - 2022" style="width: 124px" :numberColumn="1"/>
             <div class="m-button text-button btn-guide">{{buttonText.Guide}}</div>
            
             <div class="hor-line"></div>
@@ -64,6 +64,7 @@ export default {
     align-items: center;
     margin: 0px 16px;
     padding-left: 0px !important;
+    cursor: pointer;
 }
 
 .nav-home-app .icon-home {

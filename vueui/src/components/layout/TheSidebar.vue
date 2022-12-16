@@ -2,7 +2,7 @@
     <div class="sidebar" :class="{sidebarHidden:isHiddenSidebar}">
             <div class="sidebar__head">
                 <div class="sidebar__head--left">
-                   <div class="m-logo m-icon icon-logo-khoanthu"></div>
+                   <div class="m-logo m-icon icon-logo-khoanthu border-radius"></div>
                    <div class="m-title">{{appTitle}}</div>
                 </div>
                 <div class="sidebar__head--right m-icon icon-sidebar" @click="toggleSidebar"></div>
