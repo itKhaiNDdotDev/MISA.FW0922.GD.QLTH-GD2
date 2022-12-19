@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MISA.FW0922GD.QLTH.GD2.Common\MISA.FW0922GD.QLTH.GD2.Common.csproj" />
+    <ProjectReference Include="..\MISA.FW0922GD.QLTH.GD2.DL\MISA.FW0922GD.QLTH.GD2.DL.csproj" />
+  </ItemGroup>
+
 </Project>
