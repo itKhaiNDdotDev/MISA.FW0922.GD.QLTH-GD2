@@ -165,10 +165,6 @@
     <value>Dữ liệu đầu vào không hợp lệ.</value>
     <comment>Thông điệp trả về cho người dùng khi gọi API validate dữ liệu thất bại</comment>
   </data>
-  <data name="Required_Msg" xml:space="preserve">
-    <value>Dữ liệu không được phép để trống.</value>
-    <comment>Thông điệp khi có một trường dữ liệu bắt buộc bị bỏ qua.</comment>
-  </data>
   <data name="UpdateFailed_DevMsg" xml:space="preserve">
     <value>Update to database return 0</value>
     <comment>Thông điệp trả về cho Dev khi gọi API  cập nhật bản ghi thất bại</comment>

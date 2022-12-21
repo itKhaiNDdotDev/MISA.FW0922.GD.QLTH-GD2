@@ -169,15 +169,6 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dữ liệu không được phép để trống..
-        /// </summary>
-        internal static string Required_Msg {
-            get {
-                return ResourceManager.GetString("Required_Msg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Update to database return 0.
         /// </summary>
         internal static string UpdateFailed_DevMsg {
