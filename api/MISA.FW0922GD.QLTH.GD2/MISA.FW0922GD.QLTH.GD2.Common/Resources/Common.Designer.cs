@@ -22,7 +22,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Common {
+    public class Common {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MISA.FW0922GD.QLTH.GD2.Common.Resources.Common", typeof(Common).Assembly);
@@ -51,7 +51,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Delete to database return 0.
         /// </summary>
-        internal static string DeleteFailed_DevMsg {
+        public static string DeleteFailed_DevMsg {
             get {
                 return ResourceManager.GetString("DeleteFailed_DevMsg", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to https://openapi.misa.com.vn/errorcode/6.
         /// </summary>
-        internal static string DeleteFailed_MoreInfo {
+        public static string DeleteFailed_MoreInfo {
             get {
                 return ResourceManager.GetString("DeleteFailed_MoreInfo", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Xóa không thành công..
         /// </summary>
-        internal static string DeleteFailed_UserMsg {
+        public static string DeleteFailed_UserMsg {
             get {
                 return ResourceManager.GetString("DeleteFailed_UserMsg", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Catched an exception..
         /// </summary>
-        internal static string Exception_DevMsg {
+        public static string Exception_DevMsg {
             get {
                 return ResourceManager.GetString("Exception_DevMsg", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to https://openapi.misa.com.vn/errorcode/1.
         /// </summary>
-        internal static string Exception_MoreInfo {
+        public static string Exception_MoreInfo {
             get {
                 return ResourceManager.GetString("Exception_MoreInfo", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Có lỗi xảy ra! Vui lòng liên hệ MISA..
         /// </summary>
-        internal static string Exception_UserMsg {
+        public static string Exception_UserMsg {
             get {
                 return ResourceManager.GetString("Exception_UserMsg", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Insert to database return 0.
         /// </summary>
-        internal static string InsertFailed_DevMsg {
+        public static string InsertFailed_DevMsg {
             get {
                 return ResourceManager.GetString("InsertFailed_DevMsg", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to https://openapi.misa.com.vn/errorcode/4.
         /// </summary>
-        internal static string InsertFailed_MoreInfo {
+        public static string InsertFailed_MoreInfo {
             get {
                 return ResourceManager.GetString("InsertFailed_MoreInfo", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Thêm mới dữ liệu thất bại..
         /// </summary>
-        internal static string InsertFailed_UserMsg {
+        public static string InsertFailed_UserMsg {
             get {
                 return ResourceManager.GetString("InsertFailed_UserMsg", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to One or more validation errors occurred..
         /// </summary>
-        internal static string Invalid_DevMsg {
+        public static string Invalid_DevMsg {
             get {
                 return ResourceManager.GetString("Invalid_DevMsg", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to https://openapi.misa.com.vn/errorcode/3.
         /// </summary>
-        internal static string Invalid_MoreInfo {
+        public static string Invalid_MoreInfo {
             get {
                 return ResourceManager.GetString("Invalid_MoreInfo", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Dữ liệu đầu vào không hợp lệ..
         /// </summary>
-        internal static string Invalid_UserMsg {
+        public static string Invalid_UserMsg {
             get {
                 return ResourceManager.GetString("Invalid_UserMsg", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Update to database return 0.
         /// </summary>
-        internal static string UpdateFailed_DevMsg {
+        public static string UpdateFailed_DevMsg {
             get {
                 return ResourceManager.GetString("UpdateFailed_DevMsg", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to https://openapi.misa.com.vn/errorcode/5.
         /// </summary>
-        internal static string UpdateFailed_MoreInfo {
+        public static string UpdateFailed_MoreInfo {
             get {
                 return ResourceManager.GetString("UpdateFailed_MoreInfo", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cập nhật thông tin thất bại..
         /// </summary>
-        internal static string UpdateFailed_UserMsg {
+        public static string UpdateFailed_UserMsg {
             get {
                 return ResourceManager.GetString("UpdateFailed_UserMsg", resourceCulture);
             }

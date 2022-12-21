@@ -35,7 +35,7 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.BaseDL
         /// <param name="keyword">Từ khóa để tìm kiếm</param>
         /// <returns>Danh sách các bản ghi tìm thấy</returns>
         /// Author: KhaiND (21/12/2022)
-        public IEnumerable<T> GetSearch(string keyword);
+        public IEnumerable<T> GetSearch(string? keyword);
 
         /// <summary>
         /// Thêm mới một bản ghi

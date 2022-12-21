@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\Common.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Common.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
