@@ -1,11 +1,103 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "Dapper/2.0.123": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Dapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Dapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MySqlConnector/2.2.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/MySqlConnector.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/MySqlConnector.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MISA.FW0922GD.QLTH.GD2.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/MISA.FW0922GD.QLTH.GD2.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MISA.FW0922GD.QLTH.GD2.Common.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Dapper/2.0.123": {
+      "sha512": "RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
+      "type": "package",
+      "path": "dapper/2.0.123",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Dapper.png",
+        "dapper.2.0.123.nupkg.sha512",
+        "dapper.nuspec",
+        "lib/net461/Dapper.dll",
+        "lib/net461/Dapper.xml",
+        "lib/net5.0/Dapper.dll",
+        "lib/net5.0/Dapper.xml",
+        "lib/netstandard2.0/Dapper.dll",
+        "lib/netstandard2.0/Dapper.xml"
+      ]
+    },
+    "MySqlConnector/2.2.3": {
+      "sha512": "M/VnsDqY4f6/bnAtrUs1//A6gUhDTojhDTrK6iE8M/zflWTrgiQD6luQhH5SGQH95W0f0MiIWgsvsZFQj633Aw==",
+      "type": "package",
+      "path": "mysqlconnector/2.2.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net461/MySqlConnector.dll",
+        "lib/net461/MySqlConnector.xml",
+        "lib/net471/MySqlConnector.dll",
+        "lib/net471/MySqlConnector.xml",
+        "lib/net6.0/MySqlConnector.dll",
+        "lib/net6.0/MySqlConnector.xml",
+        "lib/net7.0/MySqlConnector.dll",
+        "lib/net7.0/MySqlConnector.xml",
+        "lib/netcoreapp3.1/MySqlConnector.dll",
+        "lib/netcoreapp3.1/MySqlConnector.xml",
+        "lib/netstandard2.0/MySqlConnector.dll",
+        "lib/netstandard2.0/MySqlConnector.xml",
+        "lib/netstandard2.1/MySqlConnector.dll",
+        "lib/netstandard2.1/MySqlConnector.xml",
+        "logo.png",
+        "mysqlconnector.2.2.3.nupkg.sha512",
+        "mysqlconnector.nuspec"
+      ]
+    },
+    "MISA.FW0922GD.QLTH.GD2.Common/1.0.0": {
+      "type": "project",
+      "path": "../MISA.FW0922GD.QLTH.GD2.Common/MISA.FW0922GD.QLTH.GD2.Common.csproj",
+      "msbuildProject": "../MISA.FW0922GD.QLTH.GD2.Common/MISA.FW0922GD.QLTH.GD2.Common.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "Dapper >= 2.0.123",
+      "MISA.FW0922GD.QLTH.GD2.Common >= 1.0.0",
+      "MySqlConnector >= 2.2.3"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\khain\\.nuget\\packages\\": {},
@@ -39,7 +131,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "K:\\2022_MISA\\GD2\\MISA.FW0922.GD.QLTH-GD2\\api\\MISA.FW0922GD.QLTH.GD2\\MISA.FW0922GD.QLTH.GD2.Common\\MISA.FW0922GD.QLTH.GD2.Common.csproj": {
+              "projectPath": "K:\\2022_MISA\\GD2\\MISA.FW0922.GD.QLTH-GD2\\api\\MISA.FW0922GD.QLTH.GD2\\MISA.FW0922GD.QLTH.GD2.Common\\MISA.FW0922GD.QLTH.GD2.Common.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -51,6 +147,16 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
+        "dependencies": {
+          "Dapper": {
+            "target": "Package",
+            "version": "[2.0.123, )"
+          },
+          "MySqlConnector": {
+            "target": "Package",
+            "version": "[2.2.3, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

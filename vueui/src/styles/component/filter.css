@@ -1,0 +1,50 @@
+.m-filter-container {
+    display: flex;
+    position: relative;
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin: 8px auto;
+    z-index: 2 !important;
+}
+
+.filter__input {
+    width: calc(100% - 28px);
+    outline: none;
+    border: none;
+    padding: 0px 12px;
+    border-radius: 4px;
+}
+
+.filter__option {
+    position: absolute;
+    top: calc(100% + 4px);
+    width: 150px;
+    background-color: var(--white);
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px var(--box-shadow);
+    z-index: 3;
+}
+
+.filter__option .option__item {
+    position: relative;
+}
+
+.filter__option .option__item--text {
+    padding: 6px 12px 6px 34px;
+    background-position: 6px center;
+}
+
+.filter__option .option__item input {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.filter__option .option__item input:checked ~ .option__item--text {
+    background-image: url(../../assets/Icons/ic_Check.png);
+}

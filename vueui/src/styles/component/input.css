@@ -1,16 +1,18 @@
 .m-input-container {
     display: flex;
     flex-direction: column;
-    margin-right: 16px;
+    /* margin-right: 16px; */
+    border-radius: inherit;
 }
 
 .m-input-container label {
-    color: var(--label-text)
+    color: var(--label-text);
+    margin-bottom: 4px;
 }
 
 .m-input {
     height: 32px;
-    border-radius: 4px;
+    border-radius: inherit;
     border: 1px solid var(--line-gray);
     outline: none;
     box-sizing: border-box;
@@ -21,8 +23,9 @@
     border-color: var(--border-active);
 }
 
-.text-input:read-only {
+.text-input:disabled {
     background-color: var(--control-light-gray);
+    cursor: not-allowed;
 }
 
 /*Input date icon*/

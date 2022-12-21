@@ -1,57 +1,73 @@
 <template>
-    <div class="sidebar">
+    <div class="sidebar" :class="{sidebarHidden:isHiddenSidebar}">
             <div class="sidebar__head">
                 <div class="sidebar__head--left">
-                   <div class="m-logo m-icon icon-logo-khoanthu"></div>
-                   <div class="m-title">Khoản thu</div>
+                   <div class="m-logo m-icon icon-logo-khoanthu border-radius"></div>
+                   <div class="m-title">{{appTitle}}</div>
                 </div>
-                <div class="sidebar__head--right m-icon icon-sidebar"></div>
+                <div class="sidebar__head--right m-icon icon-sidebar" @click="toggleSidebar"></div>
             </div>
 
             <div class="sidebar__menu">
                 <router-link to="/test" class="menu-item">
                     <div class="menu-item--icon m-icon icon-32 icon-tongquan"></div>
-                    <div class="menu-item--text">Tổng Quan</div>
+                    <div class="menu-item--text">{{menuText.Overview.menu}}</div>
                 </router-link>
-                <router-link to="" class="menu-item">
+                <router-link to="/exemption" class="menu-item">
                     <div class="menu-item--icon m-icon icon-32 icon-kehoachthu"></div>
-                    <div class="menu-item--text">Lập kế hoạch thu</div>
+                    <div class="menu-item--text">{{menuText.FeePlan.menu}}</div>
                 </router-link>
-                <router-link to="" class="menu-item">
+                <router-link to="/" class="menu-item">
                     <div class="menu-item--icon m-icon icon-32 icon-quanlythu"></div>
-                    <div class="menu-item--text">Quản lý thu</div>
+                    <div class="menu-item--text">{{menuText.FeeManage.menu}}</div>
                 </router-link>
-                <router-link to="" class="menu-item">
+                <router-link to="/" class="menu-item">
                     <div class="menu-item--icon m-icon icon-32 icon-hoadon"></div>
-                    <div class="menu-item--text">Quản lý hóa đơn</div>
+                    <div class="menu-item--text">{{menuText.InvoiceManage.menu}}</div>
                 </router-link>
-                <router-link to="" class="menu-item">
+                <router-link to="/" class="menu-item">
                     <div class="menu-item--icon m-icon icon-32 icon-sothu"></div>
-                    <div class="menu-item--text">Số phải thu, phải trả</div>
+                    <div class="menu-item--text">{{menuText.FeeLedger.menu}}</div>
                 </router-link>
-                <router-link to="" class="menu-item">
+                <router-link to="/" class="menu-item">
                     <div class="menu-item--icon m-icon icon-32 icon-baocao"></div>
-                    <div class="menu-item--text">Báo cáo</div>
+                    <div class="menu-item--text">{{menuText.Report.menu}}</div>
                 </router-link>
-                <router-link to="" class="menu-item">
+                <router-link to="/" class="menu-item">
                     <div class="menu-item--icon m-icon icon-32 icon-payment"></div>
-                    <div class="menu-item--text">Thanh toán online</div>
+                    <div class="menu-item--text">{{menuText.OnlinePayment.menu}}</div>
                 </router-link>
-                <router-link to="" class="menu-item">
+                <router-link to="/" class="menu-item">
                     <div class="menu-item--icon m-icon icon-32 icon-hethong"></div>
-                    <div class="menu-item--text">Hệ thống</div>
+                    <div class="menu-item--text">{{menuText.System.menu}}</div>
                 </router-link>
-                <router-link to="" class="menu-item">
-                    <div class="menu-item--icon m-icon icon-32 icon-daotaoemis"></div>
-                    <div class="menu-item--text">Đào tạo MISA EMIS</div>
+                <router-link to="/" class="menu-item">
+                    <div class="menu-item--icon m-icon icon-32 icon-daotaoemis" style="background-size: auto;"></div>
+                    <div class="menu-item--text">{{menuText.EMISTraining.menu}}</div>
                 </router-link>
             </div>
         </div>
 </template>
 
 <script>
+import LayoutResources from "./../../utils/resources/layout"
+
 export default {
     name: 'TheSidebar',
+
+    data() {
+        return {
+            isHiddenSidebar: false,
+            appTitle: LayoutResources.AppName.Fee,
+            menuText: LayoutResources.Tab
+        }
+    },
+
+    methods: {
+        toggleSidebar() {
+            this.isHiddenSidebar = !this.isHiddenSidebar;
+        }
+    },
 }
 </script>
 

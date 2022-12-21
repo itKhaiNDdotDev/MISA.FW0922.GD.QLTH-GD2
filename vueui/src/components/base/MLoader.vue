@@ -5,14 +5,22 @@
       <div class="loading--circle"></div>
       <div class="loading--circle"></div>
       <div class="loading--circle"></div>
-      <div class="loading--text">Đang tải</div>
+      <div class="loading--text">{{loaderText.Loading}}</div>
     </div>
   </div>
 </template>
 
 <script>
+import Resources from "./../../utils/resources/common"
+
 export default {
   name: "MLoader",
+
+  data() {
+    return {
+      loaderText: Resources.Loader
+    }
+  },
 };
 </script>
 
