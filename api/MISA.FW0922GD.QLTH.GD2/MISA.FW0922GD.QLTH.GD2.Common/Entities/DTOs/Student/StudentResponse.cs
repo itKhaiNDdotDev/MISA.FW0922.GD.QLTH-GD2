@@ -12,12 +12,24 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Entities.DTOs.Student
     /// Author: KhaiND (22/12/2022)
     public class StudentResponse
     {
+        /// <summary>
+        /// ID của học sinh
+        /// </summary>
         public Guid StudentID { get; set; }
 
+        /// <summary>
+        /// Họ và tên
+        /// </summary>
         public string StudentName { get; set; }
+        
+        /// <summary>
+        /// Ngày sinh
+        /// </summary>
+        public DateTime? StudentDateOfBirth { get; set; }
 
-        public DateTime StudentDateOfBirth { get; set; }
-
+        /// <summary>
+        /// Tên lớp
+        /// </summary>
         public string BranchName { get; set; }
     }
 }
