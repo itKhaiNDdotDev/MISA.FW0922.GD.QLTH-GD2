@@ -37,19 +37,53 @@ namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
         #region Method
 
         /// <summary>
-        /// API lấy dữ liệu có phân trang danh sách thông tin miễn giảm áp dụng cho các học sinh
+        /// API lấy dữ liệu danh sách thông tin miễn giảm áp dụng cho các học sinh có phân trang theo Học sinh (theo Lớp)
         /// </summary>
         /// <param name="pageIndex">Số trang hiện tại</param>
         /// <param name="pageSize">Số bản ghi trên một trang</param>
         /// <returns>Dữ liệu danh sách thông tin miễn giảm kèm phân trang</returns>
         /// Author: KhaiND (22/12/2022)
         [HttpGet("paging/student")]
-        public IActionResult GetSearchPaging([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 30)
+        public IActionResult GetPagingByStudent([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 30)
         {
             try
             {
                 // Không cần xét các trường hợp đầu vào trống vì đã xét trong Dattabase và DL
                 var result = _studentExemptionBL.GetPagingByStudent(pageIndex, pageSize);
+                if (result == null || result.TotalRecord == 0 || result.Data == null)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound);
+                }
+                return StatusCode(StatusCodes.Status200OK, result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResult
+                {
+                    ErrorCode = GDErrorCode.Exception,
+                    DevMsg = Common.Resources.Common.Exception_DevMsg,
+                    UserMsg = Common.Resources.Common.Exception_UserMsg,
+                    MoreInfo = Common.Resources.Common.Exception_MoreInfo,
+                    TraceId = HttpContext.TraceIdentifier
+                });
+            }
+        }
+
+        /// <summary>
+        /// API lấy dữ liệu danh sách thông tin miễn giảm áp dụng cho các học sinh có phân trang theo khoản thu
+        /// </summary>
+        /// <param name="pageIndex">Số trang hiện tại</param>
+        /// <param name="pageSize">Số bản ghi trên một trang</param>
+        /// <returns>Dữ liệu danh sách thông tin miễn giảm kèm phân trang</returns>
+        /// Author: KhaiND (22/12/2022)
+        [HttpGet("paging/fee")]
+        public IActionResult GetPagingByFee([FromQuery] int pageIndex = 1, [FromQuery] int pageSize = 30)
+        {
+            try
+            {
+                // Không cần xét các trường hợp đầu vào trống vì đã xét trong Dattabase và DL
+                var result = _studentExemptionBL.GetPagingByFee(pageIndex, pageSize);
                 if (result == null || result.TotalRecord == 0 || result.Data == null)
                 {
                     return StatusCode(StatusCodes.Status404NotFound);
