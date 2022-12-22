@@ -107,7 +107,7 @@ namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
         /// <returns>Danh sách các bản ghi tìm thấy theo từ khóa</returns>
         /// Author: KhaiND (21/12/2022)
         [HttpGet("search")]
-        public IActionResult GetSearch([FromQuery] string? keyword)
+        public virtual IActionResult GetSearch([FromQuery] string? keyword)
         {
             try
             {

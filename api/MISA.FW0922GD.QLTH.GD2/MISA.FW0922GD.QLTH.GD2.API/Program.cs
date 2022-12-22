@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MISA.FW0922GD.QLTH.GD2.BL.BaseBL;
+using MISA.FW0922GD.QLTH.GD2.BL.StudentBL;
 using MISA.FW0922GD.QLTH.GD2.DL;
 using MISA.FW0922GD.QLTH.GD2.DL.BaseDL;
+using MISA.FW0922GD.QLTH.GD2.DL.StudentDL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +35,8 @@ builder.Services.AddSwaggerGen();
 // Dependency Injection
 builder.Services.AddScoped(typeof(IBaseDL<>), typeof(BaseDL<>));
 builder.Services.AddScoped(typeof(IBaseBL<>), typeof(BaseBL<>));
+builder.Services.AddScoped<IStudentDL, StudentDL>();
+builder.Services.AddScoped<IStudentBL, StudentBL>();
 
 // Lấy dữ liệu ConnectionString từ file appsettings.Development.json (Author: KhaiND - 21/12/2022)
 DatabaseContext.ConnectionString = builder.Configuration.GetConnectionString("MySql");
