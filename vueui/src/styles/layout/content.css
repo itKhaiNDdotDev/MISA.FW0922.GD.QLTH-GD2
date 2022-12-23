@@ -11,7 +11,7 @@
 
 .content__view {
     flex: 1;
-    /* background-color: var(--white); */
+    background-color: var(--white);
 }
 
 .content__toolbar {
@@ -25,15 +25,18 @@
 }
 
 .content__table {
-    width: 100%;
+    width: calc(100% - 24px);
     position: relative;
     height: calc(100% - 112px);
     box-sizing: border-box;
     background-color: var(--white);
-    padding: 0px 12px;
+    margin: 0px 12px;
+    overflow: scroll;
+    box-sizing: border-box;
 }
 .content__table table {
-    width: calc(100% - 24px);
+    width: 100%;
+    box-sizing: border-box;
 }
 /* .content__table table {
     border-left: 12px solid var(--white);

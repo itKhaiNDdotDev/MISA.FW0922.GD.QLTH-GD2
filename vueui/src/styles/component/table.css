@@ -11,7 +11,7 @@ thead {
 
 tr {
     height: 32px/*40px*/;
-    /* box-sizing: border-box; */
+    box-sizing: border-box;
 }
 
 th {
@@ -24,10 +24,13 @@ th {
 th, td {
     border: 1px solid var(--border);
     vertical-align: middle;
-    padding: 0px 12px;
+    padding: 0px 10px;
     /* box-sizing: border-box; */
     overflow-x: hidden;
     text-overflow: ellipsis;
+}
+th {
+    padding: 7px 10px;
 }
 
 tbody {
@@ -65,4 +68,9 @@ td {
 
 .cell__text--center {
     text-align: center;
+}
+
+/******************************SỬA LẠI****/
+.table-content::-webkit-scrollbar-track {
+    margin-top: 40px;
 }

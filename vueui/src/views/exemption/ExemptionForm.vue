@@ -34,41 +34,41 @@
                                 @click="onFocusCell" @blur="onBlurInputCell"
                             >
                                 {{item.TargetType}}
-                                <!-- <MDropdown class="cell__input" :numberColumn="3"/>                 -->
+                                <MDropdown class="cell__input" :numberColumn="3"/>                
                             </td>
-                            <MDropdown class="cell__input" :numberColumn="3"/>
+                            <!-- <MDropdown class="cell__input" :numberColumn="3"/> -->
 
                             <td class="cell__text--right" style="width: 130px; max-width: 130px;"
                                 @click="onFocusCell" @blur="onBlurInputCell"
                             >
                                 {{item.Level.toFixed(2).replace('.', ',')}}%
-                                <!-- <MInput class="cell__input"/> -->
+                                <MInput class="cell__input"/>
                             </td>
-                            <MInput class="cell__input"/>
+                            <!-- <MInput class="cell__input"/> -->
 
                             <td style="width: 150px; max-width: 150px;" :title="item.Time" @click="onFocusCell"
                                 @blur="onBlurInputCell"
                             >
                                 {{item.Time}}
-                                <!-- <MDropdown class="cell__input" :numberColumn="3"/> -->
+                                <MDropdown class="cell__input" :numberColumn="3"/>
                             </td>
-                            <MDropdown class="cell__input" :numberColumn="3"/>
+                            <!-- <MDropdown class="cell__input" :numberColumn="3"/> -->
 
                             <td class="cell__text--left" style="width: 100px; max-width: 270px;" @click="onFocusCell"
                                 @blur="onBlurInputCell"
                             >
                                 {{item.FromMonth}}
-                                <!-- <MDropdown class="cell__input"/> -->
+                                <MDropdown class="cell__input"/>
                             </td>
-                            <MDropdown class="cell__input"/>
+                            <!-- <MDropdown class="cell__input"/> -->
 
                             <td class="cell__text--left" style="width: 100px; max-width: 270px;" @click="onFocusCell"
                                 @blur="onBlurInputCell"
                             >
                                 {{item.ToMonth}}
-                                <!-- <MDropdown class="cell__input"/> -->
+                                <MDropdown class="cell__input"/>
                             </td>
-                            <MDropdown class="cell__input"/>
+                            <!-- <MDropdown class="cell__input"/> -->
 
                             <td class="m-icon icon-24 icon-remove" :title="tooltip.Delete"></td>
                         </tr>
@@ -145,19 +145,19 @@ export default {
         },
 
         onFocusCell(event) {
-            if(event.target.parentElement.querySelector(".cell__input")) {
-                event.target.style.display = "none";
-                event.target.parentElement.querySelector(".cell__input").style.display = "block";
-                event.target.parentElement.querySelector('input').focus();
+            if(event.target.querySelector(".cell__input")) {
+                // event.target.style.display = "none";
+                event.target.querySelector(".cell__input").style.display = "block";
+                event.target.querySelector('input').focus();
             }   
         },
 
-        onBlurInputCell(event) { // BLUR này cần dùng emit gọi vào input chứ đel phải td
-            console.log(event.target);
-            event.target.parentElement.parentElement.style.display = "none";
-            event.target.parentElement.parentElement.previousSibling.style.display = "table-cell";
-            // event.target.parentElement.querySelector('input').focus();
-        }
+        // onBlurInputCell(event) { // BLUR này cần dùng emit gọi vào input chứ đel phải td
+        //     console.log(event.target);
+        //     event.target.parentElement.parentElement.style.display = "none";
+        //     event.target.parentElement.parentElement.previousSibling.style.display = "table-cell";
+        //     // event.target.parentElement.querySelector('input').focus();
+        // }
     },
 }
 </script>
@@ -220,13 +220,18 @@ export default {
         right: 8px;
     }
 
+    .form__table tbody tr td {
+        position: relative;
+    }
+
+
     .form__table .cell__input {
         display: none;
-        /* position: absolute;
+        position: absolute;
         top: -1px;
         left: -1px;
         right: -1px;
-        bottom: -1px; */
-        background-color: red !important;
+        height: -1px;
+        z-index: 10;
     }
 </style>

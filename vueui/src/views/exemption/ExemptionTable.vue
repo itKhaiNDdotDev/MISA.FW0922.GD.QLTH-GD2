@@ -6,28 +6,28 @@
                     <th style="min-width: 40px; max-width: 40px; padding: 0px">
                         <div class="cell__icon"><MCheckbox/></div>
                     </th>
-                    <th style="min-width: 150px">
-                        {{labelText.Fullname}}
-                        <MFilter class="table__filter test"/>
+                    <th style="min-width: 180px">
+                        <div class="table__headtext">{{labelText.Fullname}}</div>
+                        <MFilter class="table__filter"/>
                         <!-- <div class="table__filter test">AAAAAAA</div> -->
                     </th>
-                    <th style="max-width: 100px">
-                        {{labelText.DateOfBirth}}
-                        <MFilter :isInputDate="false"/>
+                    <th style="min-width: 150px; max-width: 150px;">
+                        <div class="table__headtext">{{labelText.DateOfBirth}}</div>
+                        <MFilter :isInputDate="false" class="table__filter"/>
                     </th>
-                    <th style="max-width: 60px">
-                        {{labelText.Class}}
-                        <MFilter/>
+                    <th style="min-width: 100px; max-width: 100px;">
+                        <div class="table__headtext">{{labelText.Class}}</div>
+                        <MFilter class="table__filter"/>
                     </th>
-                    <th style="max-width: 90px">{{labelText.Level}}</th>
-                    <th style="max-width: 196px">
-                        {{labelText.Fee}}
-                        <MFilter/>
+                    <th style="min-width: 90px; max-width: 100px;">{{labelText.Level}}</th>
+                    <th style="max-width: 200px;">
+                        <div class="table__headtext">{{labelText.Fee}}</div>
+                        <MFilter class="table__filter"/>
                     </th>
-                    <th style="max-width: 100px">{{labelText.Time}}</th>
+                    <th style="min-width: 120px; max-width: 150px">{{labelText.Time}}</th>
                     <th style="max-width: 280px;">
-                        {{labelText.TargetType}}
-                        <MFilter/>
+                        <div class="table__headtext">{{labelText.TargetType}}</div>
+                        <MFilter class="table__filter"/>
                     </th>
                     <th style="width: 64px; min-width: 64px; max-width: 64px; box-sizing: border-box; padding: 0px;"></th>
                 </tr>
@@ -103,11 +103,25 @@ export default {
 </script>
 
 <style scoped>
-.test {
-    /* background-color: aqua; */
-    /* width: 100px;
-    height: 150px; */
+table th {
     position: relative;
+    height: 64px;
+}
+
+table th .table__headtext {
+    position: absolute;
     top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 32px;
+    padding: inherit;
+    box-sizing: border-box;
+}
+
+table th .table__filter {
+    position: absolute;
+    top: 28px;
+    left: 10px;
+    right: 10px;
 }
 </style>
