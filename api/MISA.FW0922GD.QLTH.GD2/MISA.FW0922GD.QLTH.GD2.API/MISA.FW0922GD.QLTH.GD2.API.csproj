@@ -15,8 +15,4 @@
     <ProjectReference Include="..\MISA.FW0922GD.QLTH.GD2.Common\MISA.FW0922GD.QLTH.GD2.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
