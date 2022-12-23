@@ -7,8 +7,6 @@ table {
 
 thead {
     border-bottom: 2px solid var(--border);
-    position: sticky;
-    top: 0px;
 }
 
 tr {
@@ -18,15 +16,25 @@ tr {
 
 th {
     background-color: var(--option-head-bg);
+    /* position: sticky; */
+    /* top: 0px; */
+    /* z-index: 1; */
 }
 
 th, td {
     border: 1px solid var(--border);
     vertical-align: middle;
-    padding: 0px 12px;
-    box-sizing: border-box;
-    overflow: hidden;
+    padding: 0px 10px;
+    /* box-sizing: border-box; */
+    overflow-x: hidden;
     text-overflow: ellipsis;
+}
+th {
+    padding: 7px 10px;
+}
+
+tbody {
+    z-index: 0;
 }
 
 tbody tr:nth-child(even) {
@@ -60,4 +68,9 @@ td {
 
 .cell__text--center {
     text-align: center;
+}
+
+/******************************SỬA LẠI****/
+.table-content::-webkit-scrollbar-track {
+    margin-top: 40px;
 }

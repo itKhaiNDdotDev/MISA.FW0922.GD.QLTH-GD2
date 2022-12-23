@@ -4,10 +4,10 @@
       <div class="dialog__header">{{dialogTitle.Notice}}</div>
       <div class="dialog__content">{{ dialogMsg }}</div>
       <div class="dialog__footer">
-        <div class="m-button text-button btn-light" @click="onClose">Đóng</div>
-        <div class="m-button text-button btn-green">Đồng ý</div>
+        <div class="m-button text-button btn-light" @click="onClose">{{buttonText.Close}}</div>
+        <div class="m-button text-button btn-green">{{buttonText.Confirm}}</div>
       </div>
-      <div title="Đóng" class="m-icon icon-24 icon-close" @click="onClose"></div>
+      <div :title="tooltip.Close" class="m-icon icon-24 icon-close" @click="onClose"></div>
     </div>
   </div>
 </template>
@@ -21,7 +21,9 @@ export default {
 
   data() {
     return {
-      dialogTitle: Resources.DialogTitle
+      dialogTitle: Resources.DialogTitle,
+      buttonText: Resources.Button,
+      tooltip: Resources.ToolTip
     }
   },
 

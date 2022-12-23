@@ -184,6 +184,10 @@
     background-image: url(../../assets/Icons/ic_Help.png);
 }
 
+.icon-guide {
+    background-image: url(../../assets/MyIcons/ic_Guide.svg);
+}
+
 
 /* icon logo của toàn trang, icon ẩn hiện sidebar, icon home */
 
@@ -207,8 +211,7 @@
 }
 
 .icon-home {
-    background-image: url(../../assets/Icons/ic_sprites.svg);
-    background-position: -12px -60px;
+    background-image: url(../../assets/MyIcons/ic_Home.svg);
 }
 
 

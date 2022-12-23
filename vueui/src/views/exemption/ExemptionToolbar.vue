@@ -2,7 +2,7 @@
   <div class="content__toolbar">
     <div class="toolbar--left">
       <label for="" style="margin-right: 18px">{{labelText.ViewMode}}</label>
-      <MRadio name="exemptionViewMode" />
+      <MRadio name="exemptionViewMode" :isChecked="true"/>
       <label class="radio-label" style="margin-right: 8px;" for="">{{labelText.Student}}</label>
       <MRadio name="exemptionViewMode" />
       <label class="radio-label" for="">{{labelText.Fee}}</label>
@@ -73,6 +73,11 @@ export default {
   .content__view .toolbar--right {
     display: flex;
     padding: 0px 12px;
+  }
+
+  .content__view .toolbar--left label {
+    display: flex;
+    align-items: center;
   }
 
   .radio-label {
