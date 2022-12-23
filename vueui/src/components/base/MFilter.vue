@@ -68,4 +68,12 @@ export default {
 
 <style scoped>
 @import url(../../styles/component/filter.css);
+
+.m-filter-container {
+    /* z-index: 5; */
+}
+
+.filter__option {
+    /* z-index: 6; */
+}
 </style>

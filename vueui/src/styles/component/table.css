@@ -7,26 +7,31 @@ table {
 
 thead {
     border-bottom: 2px solid var(--border);
-    position: sticky;
-    top: 0px;
 }
 
 tr {
     height: 32px/*40px*/;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 }
 
 th {
     background-color: var(--option-head-bg);
+    /* position: sticky; */
+    /* top: 0px; */
+    /* z-index: 1; */
 }
 
 th, td {
     border: 1px solid var(--border);
     vertical-align: middle;
     padding: 0px 12px;
-    box-sizing: border-box;
-    overflow: hidden;
+    /* box-sizing: border-box; */
+    overflow-x: hidden;
     text-overflow: ellipsis;
+}
+
+tbody {
+    z-index: 0;
 }
 
 tbody tr:nth-child(even) {

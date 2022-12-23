@@ -8,7 +8,8 @@
                     </th>
                     <th style="min-width: 150px">
                         {{labelText.Fullname}}
-                        <MFilter/>
+                        <MFilter class="table__filter test"/>
+                        <!-- <div class="table__filter test">AAAAAAA</div> -->
                     </th>
                     <th style="max-width: 100px">
                         {{labelText.DateOfBirth}}
@@ -101,5 +102,12 @@ export default {
 }
 </script>
 
-<style scpode>
+<style scoped>
+.test {
+    /* background-color: aqua; */
+    /* width: 100px;
+    height: 150px; */
+    position: relative;
+    top: 0px;
+}
 </style>

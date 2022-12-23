@@ -29,19 +29,47 @@
                     <tbody>
                         <tr v-for="(item, index) in exemptionOfStudent" :key="index">
                             <td class="cell__text--left" style="max-width: 200px;" :title="item.Fee">{{item.Fee}}</td>
-                            <td class="cell__text--left" style="max-width: 270px;" :title="item.TargetType" @click="onFocusCell">
+
+                            <td class="cell__text--left" style="max-width: 270px;" :title="item.TargetType"
+                                @click="onFocusCell" @blur="onBlurInputCell"
+                            >
                                 {{item.TargetType}}
-                                <MDropdown class="cell__input"/>
+                                <!-- <MDropdown class="cell__input" :numberColumn="3"/>                 -->
                             </td>
-                            <td class="cell__text--right" style="width: 130px; max-width: 130px;" @click="onFocusCell">
+                            <MDropdown class="cell__input" :numberColumn="3"/>
+
+                            <td class="cell__text--right" style="width: 130px; max-width: 130px;"
+                                @click="onFocusCell" @blur="onBlurInputCell"
+                            >
                                 {{item.Level.toFixed(2).replace('.', ',')}}%
-                                <MInput class="cell__input"/>
+                                <!-- <MInput class="cell__input"/> -->
                             </td>
-                            <td style="width: 150px; max-width: 150px;" :title="item.Time">
+                            <MInput class="cell__input"/>
+
+                            <td style="width: 150px; max-width: 150px;" :title="item.Time" @click="onFocusCell"
+                                @blur="onBlurInputCell"
+                            >
                                 {{item.Time}}
+                                <!-- <MDropdown class="cell__input" :numberColumn="3"/> -->
                             </td>
-                            <td class="cell__text--left" style="width: 100px; max-width: 270px;">{{item.FromMonth}}</td>
-                            <td class="cell__text--left" style="width: 100px; max-width: 270px;">{{item.ToMonth}}</td>
+                            <MDropdown class="cell__input" :numberColumn="3"/>
+
+                            <td class="cell__text--left" style="width: 100px; max-width: 270px;" @click="onFocusCell"
+                                @blur="onBlurInputCell"
+                            >
+                                {{item.FromMonth}}
+                                <!-- <MDropdown class="cell__input"/> -->
+                            </td>
+                            <MDropdown class="cell__input"/>
+
+                            <td class="cell__text--left" style="width: 100px; max-width: 270px;" @click="onFocusCell"
+                                @blur="onBlurInputCell"
+                            >
+                                {{item.ToMonth}}
+                                <!-- <MDropdown class="cell__input"/> -->
+                            </td>
+                            <MDropdown class="cell__input"/>
+
                             <td class="m-icon icon-24 icon-remove" :title="tooltip.Delete"></td>
                         </tr>
                         <tr class="table__tr--add">
@@ -117,10 +145,18 @@ export default {
         },
 
         onFocusCell(event) {
-            if(event.target.querySelector(".cell__input")) {
-                event.target.querySelector(".cell__input").style.display = "block";
-                event.target.querySelector('input').focus();
+            if(event.target.parentElement.querySelector(".cell__input")) {
+                event.target.style.display = "none";
+                event.target.parentElement.querySelector(".cell__input").style.display = "block";
+                event.target.parentElement.querySelector('input').focus();
             }   
+        },
+
+        onBlurInputCell(event) { // BLUR này cần dùng emit gọi vào input chứ đel phải td
+            console.log(event.target);
+            event.target.parentElement.parentElement.style.display = "none";
+            event.target.parentElement.parentElement.previousSibling.style.display = "table-cell";
+            // event.target.parentElement.querySelector('input').focus();
         }
     },
 }
@@ -184,17 +220,13 @@ export default {
         right: 8px;
     }
 
-    .form__table tr, .form__table td {
-        position: relative;
-        z-index: 0;
-    }
     .form__table .cell__input {
         display: none;
-        position: absolute;
+        /* position: absolute;
         top: -1px;
         left: -1px;
         right: -1px;
-        bottom: -1px;
-        z-index: 1;
+        bottom: -1px; */
+        background-color: red !important;
     }
 </style>
