@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net6.0": {
+      "Dapper/2.0.123": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Dapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Dapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Extensions.ApiDescription.Server/3.0.0": {
         "type": "package",
         "build": {
@@ -23,6 +36,19 @@
         "runtime": {
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {
             "related": ".pdb;.xml"
+          }
+        }
+      },
+      "MySqlConnector/2.2.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/MySqlConnector.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/MySqlConnector.dll": {
+            "related": ".xml"
           }
         }
       },
@@ -88,10 +114,67 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "MISA.FW0922GD.QLTH.GD2.BL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "MISA.FW0922GD.QLTH.GD2.Common": "1.0.0",
+          "MISA.FW0922GD.QLTH.GD2.DL": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/MISA.FW0922GD.QLTH.GD2.BL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MISA.FW0922GD.QLTH.GD2.BL.dll": {}
+        }
+      },
+      "MISA.FW0922GD.QLTH.GD2.Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/MISA.FW0922GD.QLTH.GD2.Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MISA.FW0922GD.QLTH.GD2.Common.dll": {}
+        }
+      },
+      "MISA.FW0922GD.QLTH.GD2.DL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Dapper": "2.0.123",
+          "MISA.FW0922GD.QLTH.GD2.Common": "1.0.0",
+          "MySqlConnector": "2.2.3"
+        },
+        "compile": {
+          "bin/placeholder/MISA.FW0922GD.QLTH.GD2.DL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MISA.FW0922GD.QLTH.GD2.DL.dll": {}
+        }
       }
     }
   },
   "libraries": {
+    "Dapper/2.0.123": {
+      "sha512": "RDFF4rBLLmbpi6pwkY7q/M6UXHRJEOerplDGE5jwEkP/JGJnBauAClYavNKJPW1yOTWRPIyfj4is3EaJxQXILQ==",
+      "type": "package",
+      "path": "dapper/2.0.123",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Dapper.png",
+        "dapper.2.0.123.nupkg.sha512",
+        "dapper.nuspec",
+        "lib/net461/Dapper.dll",
+        "lib/net461/Dapper.xml",
+        "lib/net5.0/Dapper.dll",
+        "lib/net5.0/Dapper.xml",
+        "lib/netstandard2.0/Dapper.dll",
+        "lib/netstandard2.0/Dapper.xml"
+      ]
+    },
     "Microsoft.Extensions.ApiDescription.Server/3.0.0": {
       "sha512": "LH4OE/76F6sOCslif7+Xh3fS/wUUrE5ryeXAMcoCnuwOQGT5Smw0p57IgDh/pHgHaGz/e+AmEQb7pRgb++wt0w==",
       "type": "package",
@@ -134,6 +217,33 @@
         "lib/netstandard2.0/Microsoft.OpenApi.xml",
         "microsoft.openapi.1.2.3.nupkg.sha512",
         "microsoft.openapi.nuspec"
+      ]
+    },
+    "MySqlConnector/2.2.3": {
+      "sha512": "M/VnsDqY4f6/bnAtrUs1//A6gUhDTojhDTrK6iE8M/zflWTrgiQD6luQhH5SGQH95W0f0MiIWgsvsZFQj633Aw==",
+      "type": "package",
+      "path": "mysqlconnector/2.2.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net461/MySqlConnector.dll",
+        "lib/net461/MySqlConnector.xml",
+        "lib/net471/MySqlConnector.dll",
+        "lib/net471/MySqlConnector.xml",
+        "lib/net6.0/MySqlConnector.dll",
+        "lib/net6.0/MySqlConnector.xml",
+        "lib/net7.0/MySqlConnector.dll",
+        "lib/net7.0/MySqlConnector.xml",
+        "lib/netcoreapp3.1/MySqlConnector.dll",
+        "lib/netcoreapp3.1/MySqlConnector.xml",
+        "lib/netstandard2.0/MySqlConnector.dll",
+        "lib/netstandard2.0/MySqlConnector.xml",
+        "lib/netstandard2.1/MySqlConnector.dll",
+        "lib/netstandard2.1/MySqlConnector.xml",
+        "logo.png",
+        "mysqlconnector.2.2.3.nupkg.sha512",
+        "mysqlconnector.nuspec"
       ]
     },
     "Swashbuckle.AspNetCore/6.2.3": {
@@ -216,10 +326,27 @@
         "swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "MISA.FW0922GD.QLTH.GD2.BL/1.0.0": {
+      "type": "project",
+      "path": "../MISA.FW0922GD.QLTH.GD2.BL/MISA.FW0922GD.QLTH.GD2.BL.csproj",
+      "msbuildProject": "../MISA.FW0922GD.QLTH.GD2.BL/MISA.FW0922GD.QLTH.GD2.BL.csproj"
+    },
+    "MISA.FW0922GD.QLTH.GD2.Common/1.0.0": {
+      "type": "project",
+      "path": "../MISA.FW0922GD.QLTH.GD2.Common/MISA.FW0922GD.QLTH.GD2.Common.csproj",
+      "msbuildProject": "../MISA.FW0922GD.QLTH.GD2.Common/MISA.FW0922GD.QLTH.GD2.Common.csproj"
+    },
+    "MISA.FW0922GD.QLTH.GD2.DL/1.0.0": {
+      "type": "project",
+      "path": "../MISA.FW0922GD.QLTH.GD2.DL/MISA.FW0922GD.QLTH.GD2.DL.csproj",
+      "msbuildProject": "../MISA.FW0922GD.QLTH.GD2.DL/MISA.FW0922GD.QLTH.GD2.DL.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "MISA.FW0922GD.QLTH.GD2.BL >= 1.0.0",
+      "MISA.FW0922GD.QLTH.GD2.Common >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
@@ -255,7 +382,14 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "K:\\2022_MISA\\GD2\\MISA.FW0922.GD.QLTH-GD2\\api\\MISA.FW0922GD.QLTH.GD2\\MISA.FW0922GD.QLTH.GD2.BL\\MISA.FW0922GD.QLTH.GD2.BL.csproj": {
+              "projectPath": "K:\\2022_MISA\\GD2\\MISA.FW0922.GD.QLTH-GD2\\api\\MISA.FW0922GD.QLTH.GD2\\MISA.FW0922GD.QLTH.GD2.BL\\MISA.FW0922GD.QLTH.GD2.BL.csproj"
+            },
+            "K:\\2022_MISA\\GD2\\MISA.FW0922.GD.QLTH-GD2\\api\\MISA.FW0922GD.QLTH.GD2\\MISA.FW0922GD.QLTH.GD2.Common\\MISA.FW0922GD.QLTH.GD2.Common.csproj": {
+              "projectPath": "K:\\2022_MISA\\GD2\\MISA.FW0922.GD.QLTH-GD2\\api\\MISA.FW0922GD.QLTH.GD2\\MISA.FW0922GD.QLTH.GD2.Common\\MISA.FW0922GD.QLTH.GD2.Common.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

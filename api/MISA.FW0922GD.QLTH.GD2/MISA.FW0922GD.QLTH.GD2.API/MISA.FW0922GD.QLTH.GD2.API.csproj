@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MISA.FW0922GD.QLTH.GD2.BL\MISA.FW0922GD.QLTH.GD2.BL.csproj" />
+    <ProjectReference Include="..\MISA.FW0922GD.QLTH.GD2.Common\MISA.FW0922GD.QLTH.GD2.Common.csproj" />
+  </ItemGroup>
+
 </Project>

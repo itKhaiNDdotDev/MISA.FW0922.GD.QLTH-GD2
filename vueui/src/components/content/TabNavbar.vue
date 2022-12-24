@@ -1,17 +1,25 @@
 <template>
     <div class="content__navtab">
-        <div class="m-tab">Quy trình</div>
-        <div class="m-tab">Danh sách khoản thu</div>
-        <div class="m-tab">Phụ huynh đăng ký</div>
-        <div class="m-tab">Đăng ký khoản thu</div>
-        <div class="m-tab tab--focus">Danh sách miễn giảm</div>
-        <div class="m-tab">Danh sách áp dụng chính sách giá</div>
+        <div class="m-tab">{{tabText.Process}}</div>
+        <div class="m-tab">{{tabText.FeeList}}</div>
+        <div class="m-tab">{{tabText.RegisterStage}}</div>
+        <div class="m-tab">{{tabText.Register}}</div>
+        <div class="m-tab tab--focus">{{tabText.ExemptionList}}</div>
+        <div class="m-tab">{{tabText.PricePolicy}}</div>
     </div>
 </template>
 
 <script>
+import LayoutResources from "./../../utils/resources/layout"
+
 export default {
-    name: "TabNavbar"
+    name: "TabNavbar",
+
+    data() {
+        return {
+            tabText: LayoutResources.Tab.FeePlan
+        }
+    },
 }
 </script>
 

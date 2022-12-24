@@ -7,6 +7,7 @@
     box-sizing: border-box;
     display: flex;
     align-items: center;
+    text-align: center;
 }
 .m-tab:hover {
     color: var(--border-active);

@@ -18,6 +18,8 @@
             <div class="m-icon icon-40 icon-daotaoemis"></div>
             <div class="m-icon icon-40 icon-sothu"></div>
             <div class="m-icon icon-40 icon-print"></div>
+            <div class="m-icon icon-40 icon-up-next"></div>
+            <div class="m-icon icon-40 icon-down-prev"></div>
             <br>
         </div>
 
@@ -64,16 +66,16 @@
 
         <div>
             <br>
-            <label for="">7. Comnobox kèm error input:</label>
-            <MCombobox label="Họ và tên" isRequired="true" :errorState="errorInputSate"/>
+            <label for="">8. Filter:</label>
+            <MFilter/>
             <br>
         </div>
 
         <div>
             <br>
-            <label for="">8. Loader, Dialog, Toast:</label>
+            <label for="">9. Loader, Dialog, Toast:</label>
             <MLoader/>
-            <MDialog dialogMsg="Chi tiet thong bao tren Dialog"/>
+            <MDialog v-if="isShowDialog" dialogMsg="Chi tiet thong bao tren Dialog" @onClose="onCloseDialog"/>
             <div class="toasts-container">
                 <MToast toastType="1" toastMsg="Chi tiet toast messsage"/>
             </div>
@@ -88,7 +90,7 @@ import MCheckbox from "./base/MCheckbox.vue";
 import MRadio from "./base/MRadio.vue";
 import MInput from "./base/MInput.vue"
 import MDropdown from "./base/MDropdown.vue";
-import MCombobox from "./base/MCombobox.vue";
+import MFilter from "./base/MFilter.vue";
 import MLoader from "./base/MLoader.vue";
 import MDialog from "./base/MDialog.vue";
 import MToast from "./base/MToast.vue";
@@ -100,7 +102,7 @@ export default {
         MRadio,
         MInput,
         MDropdown,
-        MCombobox,
+        MFilter,
         MLoader,
         MDialog,
         MToast
@@ -108,10 +110,17 @@ export default {
 
     data() {
         return {
+            isShowDialog: true,
             errorInputSate: {
                 isError: true,
                 message: "Có lỗi rồi"
             }
+        }
+    },
+
+    methods: {
+        onCloseDialog() {
+            this.isShowDialog = false;
         }
     },
 };

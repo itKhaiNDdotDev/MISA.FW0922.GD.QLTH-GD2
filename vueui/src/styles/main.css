@@ -7,6 +7,7 @@
 
 @import url(component/button.css);
 @import url(component/input.css);
+@import url(component/table.css);
 
 * {
     font-family: OpenSans;
@@ -16,5 +17,14 @@
 body {
     margin: 0px;
     background-color: var(--background);
-    min-width: 1024px;
+    min-width: 1200px;
+}
+
+.text--link {
+    color: var(--link);
+    cursor: pointer;
+}
+
+.border-radius {
+    border-radius: 4px !important;
 }

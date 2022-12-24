@@ -18,7 +18,7 @@
     --grid-line-hover: #E5F3FF; /*Màu nền dòng dữ liệu trong bảng khi hover*/
     --grid-line-focus: #CCE8FF; /*Màu nền dòng dữ liệu trong bảng khi focus*/
     --notice-red: #FA3939; /*màu icon xóa, hủy khi hover, màu border input khi error, màu main toast mesage error*/
-    --grid-header: #F5F6FA; /*Màu nền dòng tiêu đề của bảng, màu chữ tiêu đề toàn ứng dụng*/
+    --grid-header: #F5F6FA; /*Màu chữ dòng tiêu đề của bảng, màu chữ tiêu đề toàn ứng dụng*/
     --grid-line: #D5D8E6; /*Màu dòng chẵn của bảng, màu chữ các menu item*/
     --label-text: #757575; /*Màu text của label input trong form*/
     --popup-wrapper: #0000006A; /*Màu background mask bao ngoài popup (tự bổ sung)*/
@@ -28,4 +28,6 @@
     --scrollbar-hover: #8F8F8F; /*Màu scrollbar thumb khi hover*/
     --tab-unactive: #848484; /*Màu nền tiêu đề các tab đang không active*/
     --box-shadow: #D5D5D5; /*Màu đổ bóng xung quanh các phần tử nổi lên trên*/
+    --option-head-bg: #EEEEEE; /*Màu nền tiêu đề của options list combobox*/
+    --link: #0997EB;
 }

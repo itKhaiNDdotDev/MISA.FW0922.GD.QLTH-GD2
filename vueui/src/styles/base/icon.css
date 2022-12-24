@@ -72,6 +72,10 @@
     background-image: url(../../assets/Icons/ic_Duplicate_24.svg);
 }
 
+.icon-zoom {
+    background-image: url(../../assets/Icons/ic_zoom.png);
+}
+
 .icon-print {
     background-image: url(../../assets/Icons/ic_Print.png);
 }
@@ -114,6 +118,16 @@
 
 .icon-movetolast {
     background-image: url(../../assets/Icons/ic_MoveToLast.png);
+}
+
+.icon-up-next {
+    background-image: url(../../assets/Icons/ic_sprites2.png);
+    background-position: -97px -48px;
+}
+
+.icon-down-prev {
+    background-image: url(../../assets/Icons/ic_sprites2.png);
+    background-position: -145px -51px;
 }
 
 
@@ -170,6 +184,10 @@
     background-image: url(../../assets/Icons/ic_Help.png);
 }
 
+.icon-guide {
+    background-image: url(../../assets/MyIcons/ic_Guide.svg);
+}
+
 
 /* icon logo của toàn trang, icon ẩn hiện sidebar, icon home */
 
@@ -193,8 +211,7 @@
 }
 
 .icon-home {
-    background-image: url(../../assets/Icons/ic_sprites.svg);
-    background-position: -12px -60px;
+    background-image: url(../../assets/MyIcons/ic_Home.svg);
 }
 
 
@@ -243,4 +260,13 @@
 .icon-daotaoemis {
     background-image: url(../../assets/Icons/menu-icon-new.webp);
     background-position: 0px 0px;
+}
+
+
+.icon-plus-blue {
+    background-image: url(../../assets/Icons/ic_Plus_16.svg);
+}
+
+.icon-plus-green {
+    background-image: url(../../assets/Icons/ic_Plus.png);
 }

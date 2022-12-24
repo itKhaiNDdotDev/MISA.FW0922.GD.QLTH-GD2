@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "ODbjCWxkN8y2Rh/rfXCRSDWrIvz07x7x00mQvoX7EysmXMeR4kAE+PAbj91Fp6bQ+hGAGe+f+1vnbBmaoIszaA==",
+  "dgSpecHash": "QtOxLsktYZzw/bS/wR1Sx2H00rztu6chPAZC9zzkyXhG+RUgCGi8UGpWmxDAGE4gUeOlo0JQeaODjJRm0YATuw==",
   "success": true,
   "projectFilePath": "K:\\2022_MISA\\GD2\\MISA.FW0922.GD.QLTH-GD2\\api\\MISA.FW0922GD.QLTH.GD2\\MISA.FW0922GD.QLTH.GD2.BL\\MISA.FW0922GD.QLTH.GD2.BL.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\khain\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\khain\\.nuget\\packages\\mysqlconnector\\2.2.3\\mysqlconnector.2.2.3.nupkg.sha512"
+  ],
   "logs": []
 }

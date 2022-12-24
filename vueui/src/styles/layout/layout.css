@@ -7,18 +7,19 @@
 }
 
 .sidebar {
-    width: 220px;
+    width: 205px; /*220px*/
     height: 100%;
     flex-shrink: 0;
 }
 
 .header {
     height: 48px;
-    width: calc(100% - 220px);
+    width: calc(100% - 205px);
 }
 
 .content {
     flex: 1;
+    width: calc(100% - 205px);
 }
 
 .m-popup-wrapper {
