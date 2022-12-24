@@ -141,7 +141,13 @@ export default {
          * Author: KhaiND (13/12/2022)
          */
         onClose() {
-            this.$emit("onClose");
+            try {
+                this.$emit("onClose");
+            }
+            catch(error) {
+                console.log(error);
+                // Gửi STATE báo lỗi về cha
+            }
         },
 
         onFocusCell(event) {

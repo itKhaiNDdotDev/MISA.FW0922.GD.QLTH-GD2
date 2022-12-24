@@ -11,8 +11,19 @@ export default {
   props: ["name", "isChecked", "value"],
 
   methods: {
+    /**
+     * Sự kiện khi thay đổi giá trị chọn ở radio input thì truyền giá trị đó lên cho Component cha
+     * @param {@event} event - Sự kiện tương ứng ô radio input có tương tác thay đổi giá trị
+     * Author: KhaiND (22/12/2022)
+     */
     onChange(event) {
-      this.$emit("changeViewMode", event.target.value);
+      try {
+        this.$emit("changeViewMode", event.target.value);
+      }
+      catch(error) {
+        console.log(error);
+        //Trả STATE báo lỗi về cha
+      }
     }
   }
 };

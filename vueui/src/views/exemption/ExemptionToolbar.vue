@@ -41,8 +41,7 @@ export default {
       tooltip: Resources.ToolTip,
       labelText: ExemptionResources.Label,
       radioValue: ExemptionResources.RadioValue.TableViewMode,
-      isHideMore: true,
-      tableStudentViewMode: true
+      isHideMore: true
     }
   },
 
@@ -57,7 +56,7 @@ export default {
       }
       catch(error) {
         console.log(error);
-        // Gửi Sate báo lỗi về component cha
+        // Gửi STATE báo lỗi về component cha
       }
     },
 
@@ -71,24 +70,23 @@ export default {
       }
       catch(error) {
         console.log(error);
-        // Gửi Sate báo lỗi về component cha
+        // Gửi STATE báo lỗi về component cha
       }
     },
 
     /**
-     * Set giá trị cho data tableStudentViewMode - mode xem dữ liệu ở bảng là xem theo Học sinh hay không (xem theo Khoản thu)?
-     * @param {value} String - Nhận giá trị value của radio input được chọn tương ứng - Giá trị: "student" (xem theo Học sinh), "fee" (xem theo Khoản thu)
+     * Gọi đến Component cha yêu cầu set giá trị tableStudentViewMode - mode xem dữ liệu ở bảng là xem theo Học sinh hay không (xem theo Khoản thu)?
+     * @param {value} String - Nhận giá trị value của radio input được chọn tương ứng (bind từ emit của component) - Giá trị: "student" (xem theo Học sinh), "fee" (xem theo Khoản thu)
      * Author: KhaiND (23/12/2022)
      */
-    setTableStudentViewMode(value) {
+    setTableStudentViewMode(value) { //Đang dùng cho sự kiện onChange Component MRadio ViewMode
       try {
         if(value == this.radioValue.Student) {
-          this.tableStudentViewMode = true;
+          this.$emit("setTableStudentViewMode", true);
         }
         else {
-          this.tableStudentViewMode = false;
+          this.$emit("setTableStudentViewMode", false);
         }
-        // console.log("STUDENT MODE: " + this.tableStudentViewMode);
       }
       catch(error) {
         console.log(error);
@@ -96,23 +94,6 @@ export default {
       }
     }
   },
-
-  watch: {
-    /**
-   * Theo dõi khi giá trị của tableStudentMode thay đổi thì gọi yêu cầu Component cha load lại dữ liệu theo API tương ứng
-   * @param {Boolean} value - Mode xem dữ liệu phân trang của bảng có phải xem theo Học sinh hay không? - Giá trị: true (xem theo Học sinh), false (xem theo Khoản thu)
-   * Author: KhaiND (23/12/2022)
-   */
-    tableStudentViewMode(value) {
-      try {
-        this.$emit("loadTableData", value);
-      }
-      catch(error) {
-        console.log(error);
-        // Gửi Sate báo lỗi về component cha
-      }
-    }
-  }
 };
 </script>
 

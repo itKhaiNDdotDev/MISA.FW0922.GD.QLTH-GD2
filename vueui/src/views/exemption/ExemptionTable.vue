@@ -102,7 +102,6 @@ export default {
       labelText: ExemptionResources.Label,
       tooltip: Resources.ToolTip,
       studentExemptionList: {},
-      //totalRecord: 0, //CÓ thể ko cần
       curPageIndex: 1,
       isStudentViewMode: true
     };
@@ -122,7 +121,7 @@ export default {
       //this.checkAllEmplyee = false;
       //this.empSelectedIds = [];
       this.studentExemptionList = response.data.data;
-      //this.$emit("getTotal", response.data.totalRecord);
+      this.$emit("setTotalRecord", response.data.totalRecord);
       //this.errorResult = false;
       //// Ẩn Loader
       //this.tableLoadingStatus = false;
@@ -136,19 +135,17 @@ export default {
      */
     onLoadStudentExemptionList(studentViewMode, pageIndex) {
       try {
-        this.isStudentViewMode = studentViewMode;
-        this.curPageIndex = pageIndex;
-        // this.$emit("setPageIndex", this.curPageIndex);
+        //this.isStudentViewMode = studentViewMode; // Tạm thời giữ xem delete trong bảng có cần không
+        //this.curPageIndex = pageIndex; // Tạm thời giữ xem delete trong bảng có cần không
+        // this.$emit("setPageIndex", this.curPageIndex); // Tạm thời giữ xem delete trong bảng có cần không
         // this.tableLoadingStatus = true;
         if (!pageIndex) {
           pageIndex = 1;
         }
-        if(this.isStudentViewMode) {
-          console.log("TABLE VIEW MODE: Student - rec: " + this.isStudentViewMode);
+        if(studentViewMode) {
           var url = BASE_URL + "StudentExemptions/paging/student?pageIndex=" + pageIndex + "&pageSize=" + PAGE_SIZE;
         }
         else {
-          console.log("TABLE VIEW MODE: Fee - rec: ", + this.isStudentViewMode);
           url = BASE_URL + "StudentExemptions/paging/fee?pageIndex=" + pageIndex + "&pageSize=" + PAGE_SIZE;
         }
         axios.get(url).then((response) => this.thenLoadStudentExemptionList(response))
@@ -161,6 +158,8 @@ export default {
         console.log(error);
       }
     },
+
+
   },
 };
 </script>
