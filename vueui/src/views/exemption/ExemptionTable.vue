@@ -53,13 +53,13 @@
             {{item.studentName}}
           </td>
           <td class="cell__text--left" style="max-width: 100px">
-            {{item.studentDateOfBirth}}
+            {{formatDate(item.studentDateOfBirth)}}
           </td>
           <td class="cell__text--left" style="max-width: 60px">
             {{item.branchName}}
           </td>
           <td class="cell__text--right" style="max-width: 90px">
-            {{item.studentExemptionLevel}}%
+            {{item.studentExemptionLevel.toFixed(2).replace('.', ',')}}%
           </td>
           <td class="cell__text--left" style="max-width: 196px" v-if="isStudentViewMode">
             {{item.feeName}}
@@ -89,6 +89,7 @@ import MCheckbox from "./../../components/base/MCheckbox.vue";
 import MFilter from "./../../components/base/MFilter.vue";
 import axios from "axios";
 import { BASE_URL, PAGE_SIZE } from "./../../utils/constants/api";
+import { formatDate } from "./../../utils/format-data"
 
 export default {
   name: "ExemptionTable",
@@ -102,7 +103,7 @@ export default {
       labelText: ExemptionResources.Label,
       tooltip: Resources.ToolTip,
       studentExemptionList: {},
-      curPageIndex: 1,
+      //curPageIndex: 1,
       isStudentViewMode: true
     };
   },
@@ -135,7 +136,7 @@ export default {
      */
     onLoadStudentExemptionList(studentViewMode, pageIndex) {
       try {
-        //this.isStudentViewMode = studentViewMode; // Tạm thời giữ xem delete trong bảng có cần không
+        this.isStudentViewMode = studentViewMode; // Cần để render bảng
         //this.curPageIndex = pageIndex; // Tạm thời giữ xem delete trong bảng có cần không
         // this.$emit("setPageIndex", this.curPageIndex); // Tạm thời giữ xem delete trong bảng có cần không
         // this.tableLoadingStatus = true;
@@ -159,7 +160,15 @@ export default {
       }
     },
 
-
+    /**
+     * Gọi hàm định dạng ngày thành DD/MM/YYYY
+     * @param {String} value - chuỗi giá trị thời gian cần định dạng
+     * @returns chuỗi giá trị ngày đã định dạng
+     * Author: KhaiND (26/12/2022)
+     */
+    formatDate(value) {
+      return formatDate(value);
+    }
   },
 };
 </script>

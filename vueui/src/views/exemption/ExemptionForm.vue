@@ -4,13 +4,13 @@
             <div class="form__header">{{formTitle}}</div>
             <div class="form__control">
                 <MDropdown class="form__input border-radius" style="width: 220px;" :label="labelText.Student" :isRequired="true"
-                    :numberColumn="3"
+                    optionEnpoint="Students" :optionHeader="optionHeaderStudent" @getSelected="getSelectedStudent"
                 />
                 <MInput class="form__input border-radius" style="width: 110px;" :label="labelText.DateOfBirth" :isDisabled="true"
-                    value="30/12/2022"
+                    :value="formatDate(selectedStudent.studentDateOfBirth)"
                 />
                 <MInput class="form__input border-radius" style="width: 150px;" :label="labelText.Class" :isDisabled="true"
-                    value="12/12"
+                    :value="selectedStudent.branchName"
                 />
             </div>
             <div class="form__table">
@@ -95,6 +95,7 @@ import Resources from "./../../utils/resources/common";
 import ExemptionResources from "./../../utils/resources/exemption";
 import MInput from "./../../components/base/MInput.vue";
 import MDropdown from "./../../components/base/MDropdown.vue";
+import { formatDate } from "./../../utils/format-data";
 
 export default {
     name: "ExemptionForm",
@@ -131,7 +132,24 @@ export default {
                     FromMonth: "08/2021",
                     ToMonth: "01/2022"
                 }
-            ]
+            ],
+            //STUDENT
+            optionHeaderStudent: [
+                {
+                propTitle: "Họ và tên",
+                propName: "studentName"
+                },
+                {
+                propTitle: "Ngày sinh",
+                propName: "studentDateOfBirth",
+                propType: Date
+                },
+                {
+                propTitle: "Lớp",
+                propName: "branchName"
+                }
+            ],
+            selectedStudent: {}
         }
     },
 
@@ -164,6 +182,20 @@ export default {
         //     event.target.parentElement.parentElement.previousSibling.style.display = "table-cell";
         //     // event.target.parentElement.querySelector('input').focus();
         // }
+
+        getSelectedStudent(student) {
+            this.selectedStudent = student;
+        },
+
+        /**
+         * Gọi hàm định dạng ngày thành DD/MM/YYYY
+         * @param {String} value - chuỗi giá trị thời gian cần định dạng
+         * @returns chuỗi giá trị ngày đã định dạng
+         * Author: KhaiND (26/12/2022)
+         */
+        formatDate(value) {
+            return formatDate(value);
+        }
     },
 }
 </script>

@@ -5,11 +5,11 @@ table {
     background-color: var(--white);
 }
 
-thead {
+thead, thead tr, th {
     border-bottom: 2px solid var(--border);
-    /* position: sticky !important;
+    position: sticky !important;
     top: -1px;
-    z-index: 1; */
+    /* z-index: 1; */
 }
 
 tr {
