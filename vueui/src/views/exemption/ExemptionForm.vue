@@ -34,7 +34,7 @@
                                 @click="onFocusCell" @blur="onBlurInputCell"
                             >
                                 {{item.TargetType}}
-                                <MDropdown class="cell__input" :numberColumn="3"/>                
+                                <MDropdown class="cell__input" :optionHeader="optionExemptionHeader" :propData="optionExemptionData"/>                
                             </td>
                             <!-- <MDropdown class="cell__input" :numberColumn="3"/> -->
 
@@ -149,7 +149,16 @@ export default {
                 propName: "branchName"
                 }
             ],
-            selectedStudent: {}
+            selectedStudent: {},
+            optionExemptionData: [
+                {itemName: "Option 1"},
+                {itemName: "Option 1"},
+                {itemName: "Option 1"},
+                {itemName: "Option 1"}
+            ],
+            optionExemptionHeader: [
+                { propTitle:"Test", propName: "itemName" }
+            ]
         }
     },
 
@@ -272,5 +281,9 @@ export default {
         right: -1px;
         height: -1px;
         z-index: 10;
+    }
+
+    .form__table td {
+        overflow: unset; /********CAANF XEM XAT LAI CAN THAN */
     }
 </style>

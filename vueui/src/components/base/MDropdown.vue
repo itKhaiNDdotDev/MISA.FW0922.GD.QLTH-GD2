@@ -41,7 +41,7 @@ import { formatDate } from "./../../utils/format-data";
 export default {
   name: "MDropdown",
 
-  props: ["label", "isRequired", "isReadOnly", "optionEnpoint", "optionHeader", "value"],
+  props: ["label", "isRequired", "isReadOnly", "optionEnpoint", "optionHeader", "value", "propData"],
   data() {
     return {
       isShowOption: false,
@@ -72,16 +72,21 @@ export default {
       this.isShowOption = true;
       var url = BASE_URL + this.optionEnpoint + "/search"
       try {
-        if(this.keyword) {
-          url = url + "?keyword=" + this.keyword
+        if(this.propData) {
+          this.optionData = this.propData;
         }
-        axios.get(url).then((response) => {
-          this.optionData = response.data;
-          if(this.optionData.length < 1) {
-            this.isShowOption = false;
+        else {
+          if(this.keyword) {
+            url = url + "?keyword=" + this.keyword
           }
-          
-        });
+          axios.get(url).then((response) => {
+            this.optionData = response.data;
+            if(this.optionData.length < 1) {
+              this.isShowOption = false;
+            }
+            
+          });
+        }
       }
       catch(error) {
         console.log(error);

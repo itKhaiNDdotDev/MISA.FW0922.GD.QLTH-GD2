@@ -61,5 +61,10 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Constants
         /// Procedure lấy danh sách thông tin miễn giảm của các học sinh (StudentExemption - SE) phân trang và sắp xếp theo Khoản thu
         /// </summary>
         public static string SE_GET_PAGING_BY_FEE = "Proc_StudentExemption_GetPagingByFee";
+
+        /// <summary>
+        /// Procedure lấy danh sách thông tin miễn giảm tương ứng với Học sinh thông qua ID học sinh
+        /// </summary>
+        public static string SE_GET_BY_STUDENT = "Proc_StudentExemption_GetByStudentID";
     }
 }

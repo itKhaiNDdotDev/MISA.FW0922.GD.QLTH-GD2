@@ -174,6 +174,10 @@ export default {
 </script>
 
 <style scoped>
+table thead {
+  z-index: 1;
+}
+
 table th {
   position: relative;
   height: 64px;

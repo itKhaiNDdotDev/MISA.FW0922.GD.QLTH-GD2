@@ -9,7 +9,6 @@ thead, thead tr, th {
     border-bottom: 2px solid var(--border);
     position: sticky !important;
     top: -1px;
-    /* z-index: 1; */
 }
 
 tr {
@@ -19,6 +18,8 @@ tr {
 
 th {
     background-color: var(--option-head-bg);
+    overflow: unset !important;
+    padding: 7px 10px !important;
 }
 
 th, td {
@@ -28,9 +29,6 @@ th, td {
     /* box-sizing: border-box; */
     overflow-x: hidden;
     text-overflow: ellipsis;
-}
-th {
-    padding: 7px 10px;
 }
 
 tbody {

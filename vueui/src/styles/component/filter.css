@@ -7,14 +7,21 @@
     margin: 8px auto;
     box-sizing: border-box;
     height: 32px;
-    
+    font-weight: normal;
+    text-align: left;
+}
+
+.m-filter-container .m-icon {
+    background-position: center;
+    width: 30px;
+    height: 30px;
 }
 
 .filter__input {
     width: calc(100% - 28px);
     outline: none;
     border: none;
-    padding: 0px 12px;
+    padding: 0px;
     border-radius: 4px;
 }
 
