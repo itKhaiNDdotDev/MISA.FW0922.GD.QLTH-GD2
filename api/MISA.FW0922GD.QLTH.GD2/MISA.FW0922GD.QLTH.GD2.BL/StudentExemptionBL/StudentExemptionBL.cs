@@ -1,4 +1,5 @@
-﻿using MISA.FW0922GD.QLTH.GD2.Common.Entities.DTOs;
+﻿using MISA.FW0922GD.QLTH.GD2.Common.Entities;
+using MISA.FW0922GD.QLTH.GD2.Common.Entities.DTOs;
 using MISA.FW0922GD.QLTH.GD2.Common.Entities.DTOs.StudentExemption;
 using MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL;
 using System;
@@ -93,6 +94,39 @@ namespace MISA.FW0922GD.QLTH.GD2.BL.StudentExemptionBL
             }
 
             return _studentExemptionDL.GetPagingByFee(offset, limit);
+        }
+
+        /// <summary>
+        /// Lấy danh sách miễn giảm của một học sinh theo ID của học sinh
+        /// </summary>
+        /// <param name="studentID">ID của học sinh muốn lấy thông tin miễn giảm</param>
+        /// <returns>Danh sách các bản ghi thông tin miễn giảm của học sinh tương ứng</returns>
+        /// Author: KhaiND (26/12/2022)
+        public IEnumerable<StudentExemption> GetByStudentID(Guid studentID)
+        {
+            return _studentExemptionDL.GetByStudentID(studentID);
+        }
+
+        /// <summary>
+        /// Xóa một bản ghi thông tin miễn giảm của học sinh thông qua ID bản ghi
+        /// </summary>
+        /// <param name="studentExemptionID">ID của bản ghi muốn xóa</param>
+        /// <returns>ID của bản ghi vừa xóa</returns>
+        /// Author: KhaiND (26/12/2022)
+        public Guid Delete(Guid studentExemptionID)
+        {
+            return _studentExemptionDL.Delete(studentExemptionID);
+        }
+
+        /// <summary>
+        /// Xóa đồng thời nhiều bản ghi thông tin miễn giảm của học sinh thông qua danh sách ID
+        /// </summary>
+        /// <param name="studentExemptionIds">Danh sách ID các bản ghi muốn xóa</param>
+        /// <returns>Danh sách ID các bản ghi vừa xóa</returns>
+        /// Author: KhaiND (26/12/2022)
+        public List<Guid> DeleteMany(List<Guid> studentExemptionIDs)
+        {
+            return _studentExemptionDL.DeleteMany(studentExemptionIDs);
         }
 
         #endregion

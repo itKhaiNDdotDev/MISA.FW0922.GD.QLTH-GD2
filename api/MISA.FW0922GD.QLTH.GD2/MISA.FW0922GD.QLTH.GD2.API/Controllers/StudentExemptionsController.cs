@@ -104,6 +104,111 @@ namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
             }
         }
 
+        /// <summary>
+        /// API thực hiện lấy danh sách thông tin miễn giảm của một học sinh tương ứng thông qua ID học sinh
+        /// </summary>
+        /// <param name="studentID">ID của học sinh muốn lấy thông tin miễn giảm</param>
+        /// <returns>Danh sách thông tin miễn giảm tương ứng với học sinh</returns>
+        /// Author: KhaiND (26/12/2022)
+        [HttpGet("student/{studentID}")]
+        public IActionResult GetByStudentID([FromRoute] Guid studentID)
+        {
+            try
+            {
+                var studentExemptions = _studentExemptionBL.GetByStudentID(studentID);
+                if (studentExemptions == null || studentExemptions.Count() <= 0)
+                {
+                    return StatusCode(StatusCodes.Status404NotFound);
+                }
+                return StatusCode(StatusCodes.Status200OK, studentExemptions);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResult
+                {
+                    ErrorCode = GDErrorCode.Exception,
+                    DevMsg = Common.Resources.Common.Exception_DevMsg,
+                    UserMsg = Common.Resources.Common.Exception_UserMsg,
+                    MoreInfo = Common.Resources.Common.Exception_MoreInfo,
+                    TraceId = HttpContext.TraceIdentifier
+                });
+            }
+        }
+
+        /// <summary>
+        /// API xóa một bản ghi thông tin miễn giảm thông qua ID
+        /// </summary>
+        /// <param name="studentExemptionID">ID của bản ghi muốn xóa</param>
+        /// <returns>ID của bản ghi vừa xóa</returns>
+        /// Author: KhaiND (26/12/2022)
+        [HttpDelete("{studentExemptionID}")]
+        public IActionResult Delete([FromRoute] Guid studentExemptionID)
+        {
+            try
+            {
+                // Xét trường hợp không tìm thấy
+                //var record = _studentExemptionBL.GetByID(studentExemptionID);
+                //if (record == null)
+                //{
+                //    return StatusCode(StatusCodes.Status404NotFound);
+                //}
+
+                return StatusCode(StatusCodes.Status200OK, _studentExemptionBL.Delete(studentExemptionID));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResult
+                {
+                    ErrorCode = GDErrorCode.Exception,
+                    DevMsg = Common.Resources.Common.Exception_DevMsg,
+                    UserMsg = Common.Resources.Common.Exception_UserMsg,
+                    MoreInfo = Common.Resources.Common.Exception_MoreInfo,
+                    TraceId = HttpContext.TraceIdentifier
+                });
+            }
+        }
+
+        /// <summary>
+        /// API thực hiện xóa đồng thời danh sách nhiều bản ghi thông tin miễn giảm đối với học sinh thông qua ID của các bản ghi
+        /// </summary>
+        /// <param name="studentExemptionIDs">ID của các bản ghi</param>
+        /// <returns>Danh sách ID các bản ghi đã xóa thành công</returns>
+        [HttpPost("deleteMany")]
+        public IActionResult DeleteMany([FromBody] List<Guid> studentExemptionIDs)
+        {
+            try
+            {
+                var deletedIDs = _studentExemptionBL.DeleteMany(studentExemptionIDs);
+                if (deletedIDs != null && deletedIDs.Count > 0)
+                {
+                    return StatusCode(StatusCodes.Status200OK, deletedIDs);
+                }
+                return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResult
+                {
+                    ErrorCode = GDErrorCode.DeleteFailed,
+                    DevMsg = Common.Resources.Common.DeleteFailed_DevMsg,
+                    UserMsg = Common.Resources.Common.DeleteFailed_UserMsg,
+                    MoreInfo = Common.Resources.Common.DeleteFailed_MoreInfo,
+                    TraceId = HttpContext.TraceIdentifier
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResult
+                {
+                    ErrorCode = GDErrorCode.Exception,
+                    DevMsg = Common.Resources.Common.Exception_DevMsg,
+                    UserMsg = Common.Resources.Common.Exception_UserMsg,
+                    MoreInfo = Common.Resources.Common.Exception_MoreInfo,
+                    TraceId = HttpContext.TraceIdentifier
+                });
+            }
+        }
+
         #endregion
     }
 }

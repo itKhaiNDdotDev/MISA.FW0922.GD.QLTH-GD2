@@ -203,7 +203,7 @@ namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
         /// <param name="recordID">ID của bản ghi muốn xóa</param>
         /// <returns>ID của bản ghi vừa xóa</returns>
         /// Created By: KhaiND (19/11/2022)
-        [HttpDelete("{recordID}")]
+        [HttpDelete("int/{recordID}")]
         public IActionResult Delete([FromRoute] int recordID)
         {
             try

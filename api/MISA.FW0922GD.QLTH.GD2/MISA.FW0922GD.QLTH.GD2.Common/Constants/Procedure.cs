@@ -50,7 +50,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Constants
         /// <summary>
         /// Các Procedure xóa một bản ghi
         /// </summary>
-        public static string DELETE_MANY = "Proc_{0}_DeleteMany";
+        public static string DELETE_MANY = "Proc_{0}_DeleteManyByIDs";
 
         /// <summary>
         /// Procedure lấy danh sách thông tin miễn giảm của các học sinh (StudentExemption - SE) phân trang và sắp xếp theo Học sinh (Lớp)

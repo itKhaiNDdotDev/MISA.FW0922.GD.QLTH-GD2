@@ -171,7 +171,7 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL
             string storedProcedureName = String.Format(Procedure.DELETE_MANY, "StudentExemption"); ;
 
             // Khởi tọa kết nối đến Database MySQL
-            var affactedRecordCount = 0;
+            int affactedRecordCount = 0;
             using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
             {
                 mySqlConnection.Open();
@@ -181,7 +181,7 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL
                     try
                     {
                         // Thực hiện gọi truy vấn xóa nhiều vào Database
-                        affactedRecordCount = mySqlConnection.Execute(storedProcedureName, parameters, transaction, commandType: CommandType.StoredProcedure);
+                        affactedRecordCount += mySqlConnection.Execute(storedProcedureName, parameters, transaction, commandType: System.Data.CommandType.StoredProcedure);
 
                         transaction.Commit();
                         mySqlConnection.Close();
