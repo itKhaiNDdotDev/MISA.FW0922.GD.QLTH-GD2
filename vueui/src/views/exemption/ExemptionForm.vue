@@ -18,7 +18,7 @@
                     <thead>
                         <tr>
                             <th style="min-width: 160px; max-width: 200px;">{{labelText.Fee}}</th>
-                            <th style="max-width: 270px;">{{labelText.TargetType}}</th>
+                            <th style="min-width: 270px; max-width: 270px;">{{labelText.TargetType}}</th>
                             <th style="width: 130px; max-width: 130px;">{{labelText.Level}}</th>
                             <th style="width: 150px; max-width: 150px;">{{labelText.Time}}</th>
                             <th style="width: 100px; max-width: 100px;">{{labelText.FromMonth}}</th>
@@ -28,20 +28,20 @@
                     </thead>
                     <tbody>
                         <tr v-for="(item, index) in exemptionOfStudent" :key="index">
-                            <td class="cell__text--left" style="max-width: 200px;" :title="item.Fee">{{item.Fee}}</td>
+                            <td class="cell__text--left" style="max-width: 200px;" :title="item.Fee">{{item.feeName}}</td>
 
                             <td class="cell__text--left" style="max-width: 270px;" :title="item.TargetType"
                                 @click="onFocusCell" @blur="onBlurInputCell"
                             >
-                                {{item.TargetType}}
-                                <MDropdown class="cell__input" :optionHeader="optionExemptionHeader" :propData="optionExemptionData"/>                
+                                {{item.exemptionName}}
+                                <MDropdown class="cell__input" :optionHeader="optionHeaderExemption" optionEnpoint="Exemptions"/>                
                             </td>
                             <!-- <MDropdown class="cell__input" :numberColumn="3"/> -->
 
                             <td class="cell__text--right" style="width: 130px; max-width: 130px;"
                                 @click="onFocusCell" @blur="onBlurInputCell"
                             >
-                                {{item.Level.toFixed(2).replace('.', ',')}}%
+                                {{item.studentExemptionLevel.toFixed(2).replace('.', ',')}}%
                                 <MInput class="cell__input"/>
                             </td>
                             <!-- <MInput class="cell__input"/> -->
@@ -49,7 +49,7 @@
                             <td style="width: 150px; max-width: 150px;" :title="item.Time" @click="onFocusCell"
                                 @blur="onBlurInputCell"
                             >
-                                {{item.Time}}
+                                {{item.studentExemptionTime}}
                                 <MDropdown class="cell__input" :numberColumn="3"/>
                             </td>
                             <!-- <MDropdown class="cell__input" :numberColumn="3"/> -->
@@ -96,6 +96,8 @@ import ExemptionResources from "./../../utils/resources/exemption";
 import MInput from "./../../components/base/MInput.vue";
 import MDropdown from "./../../components/base/MDropdown.vue";
 import { formatDate } from "./../../utils/format-data";
+import { BASE_URL } from '@/utils/constants/api';
+import axios from 'axios';
 
 export default {
     name: "ExemptionForm",
@@ -111,56 +113,43 @@ export default {
             labelText: ExemptionResources.Label,
             buttonText: Resources.Button,
             tooltip: Resources.ToolTip,
-            errorInputSate: {
+            errorInputSate: { /// TEST
                 isError: true,
                 message: "Có lỗi rồi"
             },
-            exemptionOfStudent: [
-                {
-                    Fee: "Sữa học đường",
-                    TargetType: "Con hạ sỹ quan, binh sĩ, chiến sĩ",
-                    Level: 100,
-                    Time: "Cả năm",
-                    FromMonth: "08/2021",
-                    ToMonth: "05/2022"
-                },
-                {
-                    Fee: "Tiền ăn bán trú",
-                    TargetType: "Bị tàn tật, khuyết tật thuộc diện hộ nghèo hoặc hộ cận nghèo",
-                    Level: 50,
-                    Time: "Học kỳ I",
-                    FromMonth: "08/2021",
-                    ToMonth: "01/2022"
-                }
-            ],
+            studentID: this.selectedStudentID, ///
+            exemptionOfStudent: [],
             //STUDENT
             optionHeaderStudent: [
                 {
-                propTitle: "Họ và tên",
-                propName: "studentName"
+                    propTitle: "Họ và tên",
+                    propName: "studentName"
                 },
                 {
-                propTitle: "Ngày sinh",
-                propName: "studentDateOfBirth",
-                propType: Date
+                    propTitle: "Ngày sinh",
+                    propName: "studentDateOfBirth",
+                    propType: Date
                 },
                 {
-                propTitle: "Lớp",
-                propName: "branchName"
+                    propTitle: "Lớp",
+                    propName: "branchName"
                 }
             ],
             selectedStudent: {},
-            optionExemptionData: [
-                {itemName: "Option 1"},
-                {itemName: "Option 1"},
-                {itemName: "Option 1"},
-                {itemName: "Option 1"}
-            ],
-            optionExemptionHeader: [
-                { propTitle:"Test", propName: "itemName" }
+            //EXEMPTION
+            optionHeaderExemption: [
+                {
+                    propTitle: "Diện miễn giảm",
+                    propName: "exemptionName"
+                },
+                {
+                    propTitle: "Mức miễn giảm",
+                    propName: "exemptionFixLevel"
+                }
             ]
         }
     },
+    props: ["selectedStudentID"],
 
     methods: {
         /**
@@ -204,8 +193,28 @@ export default {
          */
         formatDate(value) {
             return formatDate(value);
+        },
+
+        onLoadExemptionOfStudent(id) {
+            try {
+                var url = BASE_URL + "StudentExemptions/student/" + id;
+                axios.get(url)
+                    .then((response) => {
+                        this.exemptionOfStudent = response.data;
+                        console.log(this.exemptionOfStudent);
+                        //this.selectedStudent = 
+                        // Xử lý Dropdown bind dữ liệu
+                    });
+            }
+            catch(error) {
+                console.log(error);
+            }
         }
     },
+
+    created() {
+        this.onLoadExemptionOfStudent(this.selectedStudentID);
+    }
 }
 </script>
 
@@ -280,7 +289,6 @@ export default {
         left: -1px;
         right: -1px;
         height: -1px;
-        z-index: 10;
     }
 
     .form__table td {

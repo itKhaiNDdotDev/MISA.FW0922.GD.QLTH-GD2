@@ -19,6 +19,11 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Entities.DTOs.StudentExemption
         public Guid StudentExemptionID { get; set; }
 
         /// <summary>
+        /// ID của học sinh
+        /// </summary>
+        public Guid StudentID { get; set; }
+
+        /// <summary>
         /// Họ và tên học sinh
         /// </summary>
         public string StudentName { get; set; }

@@ -10,7 +10,10 @@
     <div class="toolbar--right">
         <div class="m-button text-button btn-green" @click="onOpenForm">{{buttonText.Add}}</div>
         <div class="m-button text-button btn-green">{{buttonText.QuickAdd}}</div>
-        <div class="m-button icon-button btn-light m-icon icon-delete-32" :title="tooltip.Delete"></div>
+        <div class="m-button icon-button btn-light m-icon icon-delete-32" :title="tooltip.Delete"
+          @click="onClickDeleteMany"
+        >
+        </div>
         <div class="m-button icon-button btn-light m-icon icon-print" :title="tooltip.Print"></div>
         <div class="m-button icon-button btn-light" @click="toggleMore">
           <div class="m-icon icon-32 icon-more" :title="tooltip.More"></div>
@@ -21,6 +24,7 @@
           </div>
         </div>
     </div>
+    <!-- <MDialog v-if="isShowDialog" :dialogMsg="dialogMsg"/> -->
   </div>
 </template>
 
@@ -28,11 +32,13 @@
 import Resources from "./../../utils/resources/common";
 import ExemptionResources from "./../../utils/resources/exemption"
 import MRadio from "./../../components/base/MRadio.vue";
+// import MDialog from "./../../components/base/MDialog.vue"
 
 export default {
   name: "ExemptionToolbar",
   components: {
     MRadio,
+    // MDialog
   },
 
   data() {
@@ -41,7 +47,9 @@ export default {
       tooltip: Resources.ToolTip,
       labelText: ExemptionResources.Label,
       radioValue: ExemptionResources.RadioValue.TableViewMode,
-      isHideMore: true
+      isHideMore: true,
+      isShowDialog: false,
+      dialogMsg: "Bạn có xóa hết không?"
     }
   },
 
@@ -92,7 +100,16 @@ export default {
         console.log(error);
         // Gửi Sate báo lỗi về component cha
       }
-    }
+    },
+
+    /**
+     * Sự kiện khi click vào lựa chọn xóa nhiều thì gửi yêu cầu về Component cha để thực thi tương ứng
+     * Author: KhaiND (28/12/20222)
+     */
+    onClickDeleteMany() {
+      //this.isShowDialog = true;
+      this.$emit("onClickDeleteMany")
+    } 
   },
 };
 </script>
@@ -129,7 +146,7 @@ export default {
     background-color: var(--white);
     box-shadow: 4px 0px 10px var(--box-shadow);
     border-radius: 4px;
-    z-index: 1;
+    z-index: 2;
   }
   .toolbar__more .more__item {
     padding: 8px 16px 8px 36px;

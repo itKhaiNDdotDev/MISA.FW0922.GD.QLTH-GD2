@@ -1,9 +1,12 @@
 <template>
     <div class="content__view">
-        <ExemptionToolbar @onOpenForm="setShowForm(true)" @setTableStudentViewMode="setTableStudentViewMode"/>
-        <ExemptionTable ref="table" @setTotalRecord="setTotalRecord"/>
-        <ExemptionPaging :totalRecord="totalRecord" @setPageIndex="setPageIndex"/>
-        <ExemptionForm v-if="isShowForm" @onClose="setShowForm(false)"/>
+        <ExemptionToolbar @onOpenForm="setShowForm(true)" @setTableStudentViewMode="setTableStudentViewMode"
+            @onClickDeleteMany="onClickDeleteMany"
+        />
+        <ExemptionTable ref="table" @setTotalRecord="setTotalRecord" @setCurPageIndex="setPageIndex" @onOpenForm="setShowForm"/>
+        <ExemptionPaging ref="paging" :totalRecord="totalRecord" @setPageIndex="setPageIndex"/>
+        <ExemptionForm v-if="isShowForm" @onClose="setShowForm(false)" :selectedStudentID="selectedStudentID"/>
+        <MDialog v-if="isShowDialog" :haveBtnClose="haveCloseDialog" :dialogMsg="dialogMsg" @onClose="isShowDialog=false" @onConfirm="onConfirmDialog"/>
     </div>
 </template>
 
@@ -11,7 +14,9 @@
 import ExemptionToolbar from "./exemption/ExemptionToolbar.vue";
 import ExemptionTable from "./exemption/ExemptionTable.vue";
 import ExemptionPaging from "./exemption/ExemptionPaging.vue";
-import ExemptionForm from "./exemption/ExemptionForm.vue"
+import ExemptionForm from "./exemption/ExemptionForm.vue";
+import MDialog from "./../components/base/MDialog.vue";
+import ExemptionResources from "./../utils/resources/exemption"
 
 export default {
     name: "ExemptionList",
@@ -19,15 +24,22 @@ export default {
         ExemptionToolbar,
         ExemptionTable,
         ExemptionPaging,
-        ExemptionForm
+        ExemptionForm,
+        MDialog
     },
 
     data() {
         return {
+            confirmMessage: ExemptionResources.ConfirmMessage,
             isShowForm: false,
             isTableStudentViewMode: true,
             pageIndex: 1,
-            totalRecord: 0
+            totalRecord: 0,
+            isShowDialog: false,
+            deleteManyMode: 0,
+            dialogMsg: "",
+            selectedStudentID: null,
+            haveCloseDialog: true
         }
     },
 
@@ -37,9 +49,10 @@ export default {
          * @param {Boolean} value - Có mở Form hay ngược lại (đóng Form)?
          * Author: KhaiND (13/12/2022)
          */
-        setShowForm(value) {
+        setShowForm(value, studentID) {
             try {
                 this.isShowForm = value;
+                this.selectedStudentID = studentID;
             }
             catch(error) {
                 console.log(error);
@@ -91,6 +104,49 @@ export default {
                 // Gửi STATE báo lỗi về cha
             }
         },
+
+        /**
+         * Sự kiện khi người dùng bấm nút xóa nhiều thì kiểm tra danh sách chọn và hiển thị Dialog tương ứng
+         * Author: KhaiND (28/12/2022)
+         */
+        onClickDeleteMany() {
+            try {
+                // Kiểm tra danh sách chọn
+                if (this.$refs.table.getSlectedIDs() == null || this.$refs.table.getSlectedIDs().length <= 0) {
+                    this.dialogMsg = this.confirmMessage.NotSelected;
+                    this.haveCloseDialog = false;
+                    this.isShowDialog = true;
+                    this.deleteManyMode = 0;
+                }
+                else {
+                    // Hiển thị Dialog
+                    this.dialogMsg = this.confirmMessage.DeleteMany;
+                    this.haveCloseDialog = true;
+                    this.isShowDialog = true;
+                    // Gọi đúng API
+                    this.deleteManyMode = 1;
+                }
+            }
+            catch(error) {
+                console.log(error);
+                //this.$emit("showToast", this.toastMsg.Error500, ResultStatus.FAIL);
+            }
+        },
+
+        /**
+         * Sự kiện khi bấm Confirm ở Dialog (Xét trường hợp xóa nhiều)
+         * Author: KhaiND (28/12/2022)
+         */
+        onConfirmDialog() {
+            // Nếu là confirm xóa nhiều
+            if(this.deleteManyMode) {
+                this.$refs.table.onDeleteManyExemption();
+                this.isShowDialog = false;
+            } // Nếu không thì đóng Dialog
+            else {
+                this.isShowDialog = false;
+            }
+        }
     },
 
     watch: {
@@ -117,6 +173,7 @@ export default {
         pageIndex(value) {
             try {
                 this.$refs.table.onLoadStudentExemptionList(this.isTableStudentViewMode, value);
+                this.$refs.paging.getPageIndex(value);
             }
             catch(error) {
                 console.log(error);

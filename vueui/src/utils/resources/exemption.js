@@ -31,5 +31,10 @@ export default {
         List: "Danh sách miễn giảm",
         Page: "Trang",
         onTotalPage: "Trên tổng số"
+    },
+    ConfirmMessage: {
+        Delete: "Bạn có chắc chắn muốn xóa danh sách miễn giảm đã chọn?",
+        DeleteMany: "Bạn có chắc chắn muốn xóa những danh sách miễn giảm đã chọn?",
+        NotSelected: "Chưa chọn bản ghi nào để xóa."
     }
 }

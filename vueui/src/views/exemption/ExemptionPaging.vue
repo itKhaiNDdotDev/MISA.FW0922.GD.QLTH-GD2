@@ -40,8 +40,6 @@ export default {
     },
 
     methods: {
-
-
         /**
          * Gọi đến Component cha yêu cầu set giá trị số trang hiện tại tương ứng từ ô input pageIndex
          * Author: KhaiND (24/12/2022)
@@ -63,6 +61,14 @@ export default {
                 //this.$emit('searchEmployee', "", 1);
                 //Gửi STATE báo lỗi về cha
             }
+        },
+
+        /**
+         * Khi nhận được giá trị PageIndex có thay đổi thì set lại giá trị để hiện thị đúng lên ô input
+         * Author: KhaiND (28/12/2022)
+         */
+        getPageIndex(value) {
+            this.pageIndex = value;
         },
 
         /**

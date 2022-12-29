@@ -1,5 +1,5 @@
 <template>
-  <div class="m-input-container">
+  <div class="m-input-container" ref="element">
     <label v-if="label" for="">
       {{label}}
       <span v-if="isRequired" style="color: var(--notice-red);">*</span>
@@ -9,7 +9,8 @@
       <button class="m-icon icon-28 icon-down"></button>
       <input v-if="isReadOnly" type="text" class="m-input" ref="input" :readonly="true" :value="value"/> <!-- CHỈ DÙNG CHO Ô NĂM HỌC -->
       <input v-else type="text" class="m-input" ref="input" :readonly="isReadonly" v-model="keyword" @input ="onGetAPIData"/>
-      <div class="dropdown__option border-radius" v-if="isShowOption">
+      
+      <div class="dropdown__option border-radius" ref="options" v-if="isShowOption">
         <table v-if="optionHeader.length > 1" class="border-radius">
           <thead>
             <tr>
@@ -25,8 +26,9 @@
             </tr>
           </tbody>
         </table>
+        
         <div class="option__item" v-else v-for="(item, index) in optionData" :key="index" @click="onToggleDropdown(item)">
-          {{item.name}}
+          {{item[optionHeader[0].propName]}}
         </div>
       </div>
     </div>
@@ -63,7 +65,14 @@ export default {
       this.isShowOption = !this.isShowOption;
       if(this.isShowOption) {
         this.$refs.input.focus();
+        console.log(this.$refs.input);
         this.onGetAPIData();
+        
+        // console.log(this.$refs.options);
+        // var el = this.$refs.options;
+        // console.log(el);
+        // el.style.position = 'fixed !importtant';
+        // this.$refs.options.style.top = '0px';
       }
     },
 
@@ -104,6 +113,13 @@ export default {
         return formatDate(value);
     }
   },
+
+  // mounted() {
+  //   const left = this.$refs.element.getBoundingClientRect().left;
+  //   const top = this.$refs.element.getBoundingClientRect().top;
+  //   console.log(left);
+  //   console.log(top);
+  // }
 };
 </script>
 
