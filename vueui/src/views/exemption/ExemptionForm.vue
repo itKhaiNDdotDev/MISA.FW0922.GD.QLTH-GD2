@@ -1,10 +1,10 @@
 <template>
-    <div class="m-popup-wrapper">
+    <div class="m-popup-wrapper" @keyup.esc="onClose">
         <div class="popup__form exemption-form">
             <div class="form__header">{{formTitle}}</div>
             <div class="form__control">
                 <MDropdown class="form__input border-radius" style="width: 220px;" :label="labelText.Student" :isRequired="true"
-                    optionEnpoint="Students" :optionHeader="optionHeaderStudent" @getSelected="getSelectedStudent"
+                    ref="student" optionEnpoint="Students" :optionHeader="optionHeaderStudent" @getSelected="getSelectedStudent"
                 />
                 <MInput class="form__input border-radius" style="width: 110px;" :label="labelText.DateOfBirth" :isDisabled="true"
                     :value="formatDate(selectedStudent.studentDateOfBirth)"
@@ -33,8 +33,10 @@
                             <td class="cell__text--left" style="max-width: 270px;" :title="item.TargetType"
                                 @click="onFocusCell" @blur="onBlurInputCell"
                             >
-                                {{item.exemptionName}}
-                                <MDropdown class="cell__input" :optionHeader="optionHeaderExemption" optionEnpoint="Exemptions"/>                
+                                <span class="cell__text">{{item.exemptionName}}</span>
+                                <MDropdown class="cell__input" :optionHeader="optionHeaderExemption" optionEnpoint="Exemptions" :value="item.exemptionName"
+                                    v-click-outside="onBlurCellInput"
+                                /> 
                             </td>
                             <!-- <MDropdown class="cell__input" :numberColumn="3"/> -->
 
@@ -42,15 +44,14 @@
                                 @click="onFocusCell" @blur="onBlurInputCell"
                             >
                                 {{item.studentExemptionLevel.toFixed(2).replace('.', ',')}}%
-                                <MInput class="cell__input"/>
+                                <MInput class="cell__input" :value="item.studentExemptionLevel.toFixed(2).replace('.', ',')"/>
                             </td>
                             <!-- <MInput class="cell__input"/> -->
 
                             <td style="width: 150px; max-width: 150px;" :title="item.Time" @click="onFocusCell"
-                                @blur="onBlurInputCell"
                             >
                                 {{item.studentExemptionTime}}
-                                <MDropdown class="cell__input" :numberColumn="3"/>
+                                <MDropdown class="cell__input" :value="item.studentExemptionTime"/>
                             </td>
                             <!-- <MDropdown class="cell__input" :numberColumn="3"/> -->
 
@@ -70,9 +71,9 @@
                             </td>
                             <!-- <MDropdown class="cell__input"/> -->
 
-                            <td class="m-icon icon-24 icon-remove" :title="tooltip.Delete"></td>
+                            <td class="m-icon icon-24 icon-remove" :title="tooltip.Delete" @click="onRemoveRow"></td>
                         </tr>
-                        <tr class="table__tr--add">
+                        <tr class="table__tr--add" @click="onInsertRow">
                             <td colspan="7">
                                 <div class="m-icon icon-plus-blue text--link">{{labelText.Insert}}</div>
                             </td>          
@@ -98,6 +99,7 @@ import MDropdown from "./../../components/base/MDropdown.vue";
 import { formatDate } from "./../../utils/format-data";
 import { BASE_URL } from '@/utils/constants/api';
 import axios from 'axios';
+import ClickOutside from 'vue-click-outside';
 
 export default {
     name: "ExemptionForm",
@@ -168,7 +170,9 @@ export default {
 
         onFocusCell(event) {
             if(event.target.querySelector(".cell__input")) {
-                // event.target.style.display = "none";
+                // console.log(event.target);
+                // event.target.querySelector('.cell__text').imerHTML = "";
+                event.target.style.overflow = 'unset';
                 event.target.querySelector(".cell__input").style.display = "block";
                 event.target.querySelector('input').focus();
             }   
@@ -183,6 +187,7 @@ export default {
 
         getSelectedStudent(student) {
             this.selectedStudent = student;
+            this.onLoadExemptionOfStudent(student.studentID);
         },
 
         /**
@@ -195,31 +200,69 @@ export default {
             return formatDate(value);
         },
 
-        onLoadExemptionOfStudent(id) {
+        onLoadExemptionOfStudent(studentID) {
             try {
-                var url = BASE_URL + "StudentExemptions/student/" + id;
+                var url = BASE_URL + "StudentExemptions/student/" + studentID;
                 axios.get(url)
                     .then((response) => {
                         this.exemptionOfStudent = response.data;
-                        console.log(this.exemptionOfStudent);
-                        //this.selectedStudent = 
-                        // Xử lý Dropdown bind dữ liệu
                     });
             }
             catch(error) {
                 console.log(error);
             }
+        },
+
+        onLoadStudent(studentID) {
+            try {
+                var url = BASE_URL + "Students/" + studentID;
+                axios.get(url)
+                    .then((response) => {
+                        this.selectedStudent = response.data;
+                        this.$refs.student.setKeyword(this.selectedStudent.studentName);
+                    });
+            }
+            catch(error) {
+                console.log(error);
+            }
+        },
+
+        onBlurCellInput(event) {
+            console.log("HERE");
+            console.log(event.target.parentElement);
+            event.target.parentElement.parentElement.parentElement.imerText = "TEST TEXT";
+            event.target.parentElement.parentElement.style.display = 'none';
+        },
+
+        onRemoveRow(event) {
+            event.target.parentElement.style.display = 'none';
+            // Đánh flag xóa vào object
+        },
+
+        onInsertRow(event) {
+            let targetTr = event.target.parentElement.parentElement;
+            console.log(targetTr);
+            var newTr = document.createElement("tr");
+            newTr.innerHTML = '<tr> <td><MDropdown class="cell__input"/></td> <td><MDropdown class="cell__input"/></td> <td></td> <td></td><td></td><td></td><td></td></tr>';
+            targetTr.parentElement.insertBefore(newTr, targetTr);
         }
     },
 
     created() {
         this.onLoadExemptionOfStudent(this.selectedStudentID);
-    }
+        // Lấy thông tin Student
+        this.onLoadStudent(this.selectedStudentID);
+    },
+
+    // do not forget this section
+  directives: {
+    ClickOutside
+  }
 }
 </script>
 
 <style>
-    .popup__form {
+    .exemption-form {
         width: 1024px;
         height: 512px;
         display: flex;
@@ -248,8 +291,9 @@ export default {
         border: 1px solid var(--border);
         margin: 4px 16px;
         position: relative;
+        overflow: scroll;
     }
-    .form__table table {
+    .form__table > table {
         position: absolute;
         top: -1px;
         left: -1px;
@@ -277,6 +321,10 @@ export default {
         right: 8px;
     }
 
+    .form__table table thead {
+        z-index: 1;
+    }
+
     .form__table tbody tr td {
         position: relative;
     }
@@ -292,6 +340,6 @@ export default {
     }
 
     .form__table td {
-        overflow: unset; /********CAANF XEM XAT LAI CAN THAN */
+        overflow: hidden; /********CAANF XEM XAT LAI CAN THAN */
     }
 </style>

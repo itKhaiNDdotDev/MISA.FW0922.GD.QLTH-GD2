@@ -1,16 +1,11 @@
 <template>
-  <div class="m-input-container">
-    <label v-if="label" for="">
-      {{label}}
-      <span v-if="isRequired" style="color: var(--notice-red);">*</span>
-    </label>
-    <div class="m-dropdown" @click="onToggleDropdown(null)" ref="element">
-      <!-- SỰ KIỆN BLUR -->
+  <div class="m-input-container" ref="element">
+    <label v-if="label" for="">TEST</label>
+    <div class="m-dropdown" @click="onToggleDropdown(null)">
       <button class="m-icon icon-28 icon-down"></button>
-      <input v-if="isReadOnly" type="text" class="m-input" ref="input" :readonly="true" :value="value"/> <!-- CHỈ DÙNG CHO Ô NĂM HỌC -->
-      <input v-else type="text" class="m-input" ref="input" :readonly="isReadonly" v-model="keyword" @input ="onGetAPIData" @blur="onBlur"/>
+      <input type="text" class="m-input" ref="input" :readonly="isReadonly" v-model="keyword" @input ="onGetAPIData"/>
       
-      <div class="dropdown__option border-radius">
+      <div class="dropdown__option border-radius" ref="options">
         <table class="border-radius">
           <thead>
             <tr>
@@ -26,10 +21,6 @@
             </tr>
           </tbody>
         </table>
-        
-        <!-- <div class="option__item" v-else v-for="(item, index) in optionData" :key="index" @click="onToggleDropdown(item)">
-          {{item[optionHeader[0].propName]}}
-        </div> -->
       </div>
     </div>
   </div>
@@ -48,7 +39,7 @@ export default {
     return {
       isShowOption: false,
       optionData: [],
-      keyword: this.value
+      keyword: ""
     }
   },
 
@@ -63,18 +54,15 @@ export default {
         this.$emit("getSelected", item);
       }
       this.isShowOption = !this.isShowOption;
-      var el = this.$refs.element;
       if(this.isShowOption) {
         this.$refs.input.focus();
         this.onGetAPIData();
-        el.querySelector(".dropdown__option").style.display = 'block';
-        const left = el.getBoundingClientRect().left - 170;
-        const top = el.getBoundingClientRect().top - 24;
-        el.querySelector(".dropdown__option").style.top = top+'px';
+        
+        var el = this.$refs.element;
+        const left = el.getBoundingClientRect().left;
+        //const top = el.getBoundingClientRect().top;
+        el.querySelector(".dropdown__option").style.top = "40px";
         el.querySelector(".dropdown__option").style.left = left+'px';
-      }
-      else {
-        el.querySelector(".dropdown__option").style.display = 'none';
       }
     },
 
@@ -95,6 +83,7 @@ export default {
             if(this.optionData.length < 1) {
               this.isShowOption = false;
             }
+            
           });
         }
       }
@@ -112,24 +101,15 @@ export default {
      */
     formatDate(value) {
         return formatDate(value);
-    },
-
-    setKeyword(value) {
-      this.keyword = value;
-    },
-
-    onBlur(event) {
-      this.$emit("onBlur", event);
     }
   },
 
-  mounted() {
-    // const left = this.$refs.element.getBoundingClientRect().left;
-    // const top = this.$refs.element.getBoundingClientRect().top;
-    // console.log(left);
-    // console.log(top);
-    //this.keyword = this.$emit("getSelected", null);
-  }
+  // mounted() {
+  //   const left = this.$refs.element.getBoundingClientRect().left;
+  //   const top = this.$refs.element.getBoundingClientRect().top;
+  //   console.log(left);
+  //   console.log(top);
+  // }
 };
 </script>
 
@@ -138,11 +118,7 @@ export default {
 
 .dropdown__option {
   position: fixed !important;
-  display: none;
-  z-index: 2;
-}
-
-.dropdown__option table thead {
-  z-index: 1;
+  background-color: brown;
+  display: block;
 }
 </style>

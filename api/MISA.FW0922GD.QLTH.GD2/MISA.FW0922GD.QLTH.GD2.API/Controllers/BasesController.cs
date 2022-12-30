@@ -72,7 +72,7 @@ namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
         /// <param name="recordID">ID của bản ghi</param>
         /// <returns>Thông tin chi tiết của bản ghi</returns>
         /// Author: KhaiND (21/12/2022)
-        [HttpGet("{recordID}")]
+        [HttpGet("int/{recordID}")]
         public IActionResult GetByID([FromRoute] int recordID)
         {
             try

@@ -18,7 +18,7 @@
         <div class="m-button icon-button btn-light" @click="toggleMore">
           <div class="m-icon icon-32 icon-more" :title="tooltip.More"></div>
           <div class="toolbar__more" :class="{moreHidden:isHideMore}">
-            <div class="more__item m-icon icon-nhapkhau">{{buttonText.Import}}</div>
+            <div class="more__item m-icon icon-nhapkhau" @click="onOpenImport">{{buttonText.Import}}</div>
             <div class="more__item m-icon icon-duplicate">{{buttonText.Coppy + " " + labelText.List.toLowerCase()}}</div>
             <div class="more__item m-icon icon-zoom">{{buttonText.Zoom}}</div>
           </div>
@@ -55,12 +55,26 @@ export default {
 
   methods: {
     /**
-     * Sự kiện yêu cầu gọi đến Component cha để hiển thị Form
+     * Sự kiện yêu cầu gọi đến Component cha để hiển thị Form chi tiết
      * Author: KhaiND (13/12/2022)
      */
     onOpenForm() {
       try {
         this.$emit("onOpenForm");
+      }
+      catch(error) {
+        console.log(error);
+        // Gửi STATE báo lỗi về component cha
+      }
+    },
+
+    /**
+     * Sự kiện yêu cầu gọi đến Component cha để hiển thị Form Nhập khẩu
+     * Author: KhaiND (30/12/2022)
+     */
+    onOpenImport() {
+      try {
+        this.$emit("onOpenImport");
       }
       catch(error) {
         console.log(error);

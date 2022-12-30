@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     text-align: center;
+    cursor: pointer;
 }
 .m-tab:hover {
     color: var(--border-active);

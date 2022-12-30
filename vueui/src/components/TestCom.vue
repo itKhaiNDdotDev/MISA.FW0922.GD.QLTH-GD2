@@ -81,6 +81,13 @@
             </div>
             <br>
         </div>
+
+        <div>
+            <br>
+            <label for="">10. TEST:</label>
+            <TestDropdown/>
+            <br>
+        </div>
     </div>
 </template>
 
@@ -94,6 +101,7 @@ import MFilter from "./base/MFilter.vue";
 import MLoader from "./base/MLoader.vue";
 import MDialog from "./base/MDialog.vue";
 import MToast from "./base/MToast.vue";
+import TestDropdown from "./base/TestDropdown.vue";
 
 export default {
     name: "TestCom",
@@ -105,7 +113,8 @@ export default {
         MFilter,
         MLoader,
         MDialog,
-        MToast
+        MToast,
+        TestDropdown
     },
 
     data() {
@@ -114,7 +123,22 @@ export default {
             errorInputSate: {
                 isError: true,
                 message: "Có lỗi rồi"
-            }
+            },
+            optionHeader: [
+                {
+                    propTitle: "Họ và tên",
+                    propName: "studentName"
+                },
+                {
+                    propTitle: "Ngày sinh",
+                    propName: "studentDateOfBirth",
+                    propType: Date
+                },
+                {
+                    propTitle: "Lớp",
+                    propName: "branchName"
+                }
+            ],
         }
     },
 

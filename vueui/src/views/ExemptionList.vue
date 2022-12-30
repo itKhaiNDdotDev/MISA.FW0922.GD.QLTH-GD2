@@ -1,11 +1,12 @@
 <template>
     <div class="content__view">
-        <ExemptionToolbar @onOpenForm="setShowForm(true)" @setTableStudentViewMode="setTableStudentViewMode"
+        <ExemptionToolbar @onOpenForm="setShowForm(true)" @onOpenImport="setShowImport(true)" @setTableStudentViewMode="setTableStudentViewMode"
             @onClickDeleteMany="onClickDeleteMany"
         />
         <ExemptionTable ref="table" @setTotalRecord="setTotalRecord" @setCurPageIndex="setPageIndex" @onOpenForm="setShowForm"/>
         <ExemptionPaging ref="paging" :totalRecord="totalRecord" @setPageIndex="setPageIndex"/>
         <ExemptionForm v-if="isShowForm" @onClose="setShowForm(false)" :selectedStudentID="selectedStudentID"/>
+        <ExemptionImport v-if="isShowImport" @onClose="setShowImport(false)"/>
         <MDialog v-if="isShowDialog" :haveBtnClose="haveCloseDialog" :dialogMsg="dialogMsg" @onClose="isShowDialog=false" @onConfirm="onConfirmDialog"/>
     </div>
 </template>
@@ -15,6 +16,7 @@ import ExemptionToolbar from "./exemption/ExemptionToolbar.vue";
 import ExemptionTable from "./exemption/ExemptionTable.vue";
 import ExemptionPaging from "./exemption/ExemptionPaging.vue";
 import ExemptionForm from "./exemption/ExemptionForm.vue";
+import ExemptionImport from "./exemption/ExemptionImport.vue"
 import MDialog from "./../components/base/MDialog.vue";
 import ExemptionResources from "./../utils/resources/exemption"
 
@@ -25,6 +27,7 @@ export default {
         ExemptionTable,
         ExemptionPaging,
         ExemptionForm,
+        ExemptionImport,
         MDialog
     },
 
@@ -32,6 +35,7 @@ export default {
         return {
             confirmMessage: ExemptionResources.ConfirmMessage,
             isShowForm: false,
+            isShowImport: false,
             isTableStudentViewMode: true,
             pageIndex: 1,
             totalRecord: 0,
@@ -45,8 +49,9 @@ export default {
 
     methods: {
         /**
-         * Khi có sự kiện yêu cầu đóng/mở Form thì tiến hành set giá trị isShowForm tương ứng tạo/hủy DOM của Form (bằng v-if)
+         * Khi có sự kiện yêu cầu đóng/mở Form chi tiết miễn giảm thì tiến hành set giá trị isShowForm tương ứng tạo/hủy DOM của Form (bằng v-if)
          * @param {Boolean} value - Có mở Form hay ngược lại (đóng Form)?
+         * @param {Guid} studentID - ID của Học sinh muốn xem chi tiết
          * Author: KhaiND (13/12/2022)
          */
         setShowForm(value, studentID) {
@@ -59,6 +64,22 @@ export default {
                 // Gửi STATE lỗi về cha
             }
         },
+
+        /**
+         * Khi có sự kiện yêu cầu đóng/mở Form Nhập khẩu thì tiến hành set giá trị isShowImport tương ứng tạo/hủy DOM của Form Nhập khẩu (bằng v-if)
+         * @param {Boolean} value - Có mở Form Nhập khẩu hay ngược lại (đóng Form)?
+         * Author: KhaiND (30/12/2022)
+         */
+        setShowImport(value) {
+            try {
+                this.isShowImport = value;
+            }
+            catch(error) {
+                console.log(error);
+                // Gửi STATE lỗi về cha
+            }
+        },
+
 
         /**
          * Thực hiện set giá trị cho data isTableStudentViewMode dùng chung - mode dữ liệu bảng danh sách phân trang thoogn tin miễn giảm có phải là xem theo Học sinh hay không (xem theo Khoản thu)?

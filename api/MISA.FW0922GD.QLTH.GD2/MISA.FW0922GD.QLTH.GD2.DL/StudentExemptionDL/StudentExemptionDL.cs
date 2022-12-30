@@ -93,7 +93,7 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL
         /// <param name="studentID">ID của học sinh muốn lấy thông tin miễn giảm</param>
         /// <returns>Danh sách các bản ghi thông tin miễn giảm của học sinh tương ứng</returns>
         /// Author: KhaiND (26/12/2022)
-        public IEnumerable<StudentExemption> GetByStudentID(Guid studentID)
+        public IEnumerable<StudentExemptionDetail> GetByStudentID(Guid studentID)
         {
             // Chuẩn bị tham số đầu vào
             var parameter = new DynamicParameters();
@@ -106,7 +106,7 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL
             using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
             {
                 // Thực hiện gọi truy vấn vào Database
-                var studentExemptions = (List<StudentExemption>)mySqlConnection.Query<StudentExemption>(storedProcedureName, parameter, commandType: CommandType.StoredProcedure);
+                var studentExemptions = (List<StudentExemptionDetail>)mySqlConnection.Query<StudentExemptionDetail>(storedProcedureName, parameter, commandType: CommandType.StoredProcedure);
 
                 // Xử lý kết quả trả về
                 return studentExemptions;

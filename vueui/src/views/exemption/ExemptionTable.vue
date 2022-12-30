@@ -339,11 +339,15 @@ export default {
 </script>
 
 <style scoped>
-table thead {
+.content__table table thead {
   z-index: 1;
 }
 
-table th {
+.content__table table tbody {
+  z-index: 0;
+}
+
+.content__table table th {
   position: relative;
   height: 64px;
 }

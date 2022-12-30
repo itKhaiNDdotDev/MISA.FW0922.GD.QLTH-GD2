@@ -24,6 +24,7 @@ body {
 .text--link {
     color: var(--link);
     cursor: pointer;
+    text-decoration: none;
 }
 
 .border-radius {

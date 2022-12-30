@@ -42,6 +42,17 @@ namespace MISA.FW0922GD.QLTH.GD2.BL.StudentBL
             return _studentDL.GetSearch(keyword);
         }
 
+        /// <summary>
+        /// Lấy thông tin chi tiết một học sinh thông qua ID
+        /// </summary>
+        /// <param name="studentID">ID của học sinh</param>
+        /// <returns>Thông tin chi tiết học sinh</returns>
+        /// Author: KhaiND (28/12/2022)
+        public StudentResponse GetByID(Guid studentID)
+        {
+            return _studentDL.GetByID(studentID);
+        }
+
         #endregion
     }
 }

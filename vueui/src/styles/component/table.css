@@ -5,7 +5,7 @@ table {
     background-color: var(--white);
 }
 
-thead, thead tr, th {
+thead {
     border-bottom: 2px solid var(--border);
     position: sticky !important;
     top: -1px;
@@ -31,9 +31,9 @@ th, td {
     text-overflow: ellipsis;
 }
 
-tbody {
+/* tbody {
     z-index: 0;
-}
+} */
 
 tbody tr:nth-child(even) {
     background-color: var(--grid-header);

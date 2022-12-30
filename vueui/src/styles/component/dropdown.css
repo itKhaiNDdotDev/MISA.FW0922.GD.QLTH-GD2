@@ -31,15 +31,14 @@
 
 .dropdown__option {
     position: absolute;
-    top: calc(100% + 2px);
-    left: 0px;
-    min-width: 100%;
+    /* top: calc(100% + 2px); */
+    /* left: 0px; */
+    /* min-width: 100%; */
     max-height: 150px;
     /* border-radius: 4px; */
     box-shadow: 0px 0px 10px var(--box-shadow);
     background-color: var(--white);
     overflow: auto;
-    overflow-x: hidden;
     z-index: 1;
 }
 
@@ -69,9 +68,12 @@
 .dropdown__option table th, .dropdown__option table td {
     border: none;
     height: 28px;
-    max-width: 100px; /*RỘNG HƠN*/
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.dropdown__option table th, .dropdown__option table td {
+    max-width: 300px;
 }
 
 .dropdown__option table tbody tr {

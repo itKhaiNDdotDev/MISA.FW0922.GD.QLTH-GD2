@@ -11,7 +11,9 @@ export default {
         Refuse: "Không",
         Guide: "Hướng dẫn",
         Coppy: "Sao chép",
-        Zoom: "Phóng to/thu nhỏ màn hình (F11)"
+        Zoom: "Phóng to/thu nhỏ màn hình (F11)",
+        Back: "Quay lại",
+        ConfirmImport: "Nhập khẩu bản ghi hợp lệ"
     },
 
     DialogTitle: {

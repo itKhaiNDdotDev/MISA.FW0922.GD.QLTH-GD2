@@ -39,7 +39,7 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL
         /// <param name="studentID">ID của học sinh muốn lấy thông tin miễn giảm</param>
         /// <returns>Danh sách các bản ghi thông tin miễn giảm của học sinh tương ứng</returns>
         /// Author: KhaiND (26/12/2022)
-        public IEnumerable<StudentExemption> GetByStudentID(Guid studentID);
+        public IEnumerable<StudentExemptionDetail> GetByStudentID(Guid studentID);
 
         /// <summary>
         /// Xóa một bản ghi thông tin miễn giảm của học sinh thông qua ID bản ghi
