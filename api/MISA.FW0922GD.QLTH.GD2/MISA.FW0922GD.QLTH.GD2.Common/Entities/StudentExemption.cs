@@ -52,11 +52,14 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Entities
         public LevelUnit StudentExemptionLevelIsUnitByPercent { get; set; }
 
         /// <summary>
-        /// Thời gian áp dụng miễn giảm
-        /// Giá trị: (Fix trên Frontend) - "Cả năm", "Học kỳ I", "Học kỳ II", hoặc tùy chọn từ tháng - đến tháng ví dụ như "09/2021 - 01/2023"
-        /// Giá trị mặc định: "Cả năm"
+        /// Ngày (tháng) bắt đầu áp dụng miễn giảm
         /// </summary>
-        public string StudentExemptionTime { get; set; }
+        public string StudentExemptionFromDate { get; set; }
+
+        /// <summary>
+        /// Ngày (tháng) kết thúc áp dụng miễn giảm
+        /// </summary>
+        public string StudentExemptionToDate { get; set; }
 
         #endregion
     }

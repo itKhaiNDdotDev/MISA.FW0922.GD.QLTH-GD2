@@ -65,7 +65,7 @@
             {{item.feeName}}
           </td>
           <td class="cell__text--left" style="max-width: 100px">
-            {{item.studentExemptionTime}}
+            {{formatExemptionTime(item.studentExemptionFromDate, item.studentExemptionToDate)}}
           </td>
           <td class="cell__text--left" style="max-width: 280px">
             {{item.exemptionName}}
@@ -142,6 +142,8 @@ export default {
       //this.errorResult = false;
       // Ẩn Loader
       this.isTableLoading = false;
+
+      console.log(this.studentExemptionList);
     },
 
     /**
@@ -184,6 +186,35 @@ export default {
      */
     formatDate(value) {
       return formatDate(value);
+    },
+
+    formatExemptionTime(fromDate, toDate) {
+      fromDate = new Date(fromDate);
+      toDate = new Date(toDate);
+      var fromMonth = fromDate.getMonth() + 1;
+      var fromYear = fromDate.getFullYear();
+      var toMonth = toDate.getMonth() + 1;
+      var toYear = toDate.getFullYear();
+      console.log(fromMonth+"/"+fromYear+" - "+toMonth+"/"+toYear);
+
+      if(fromMonth == 8 && fromYear == 2021 && toMonth == 5 && toYear == 2022) {     
+          return "Cả năm";
+      }
+      else if(fromMonth == 8 && fromYear == 2021 && toMonth == 12 && toYear == 2021) {
+          return "Học kỳ I";
+      }
+      else if(fromMonth == 1 && fromYear == 2022 && toMonth == 5 && toYear == 2022) {
+        return "Học kỳ II";
+      }
+      else {
+        if(fromMonth < 10) {
+          fromMonth = "0"+fromMonth;
+        }
+        if(toMonth < 10) {
+          toMonth = "0"+toMonth;
+        }
+        return fromMonth+"/"+fromYear+" - "+toMonth+"/"+toYear;
+      }
     },
 
     /**

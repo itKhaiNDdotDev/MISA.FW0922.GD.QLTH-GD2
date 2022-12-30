@@ -17,14 +17,14 @@ export default {
     data() {
         return {
             recState: [
-                {
-                    type: 1,
-                    msg: "Có lỗi xảy ra"
-                },
-                {
-                    type: 2,
-                    msg: "Hê hê hê"
-                }
+                // {
+                //     type: 1,
+                //     msg: "Có lỗi xảy ra"
+                // },
+                // {
+                //     type: 2,
+                //     msg: "Hê hê hê"
+                // }
             ]
         }
     },

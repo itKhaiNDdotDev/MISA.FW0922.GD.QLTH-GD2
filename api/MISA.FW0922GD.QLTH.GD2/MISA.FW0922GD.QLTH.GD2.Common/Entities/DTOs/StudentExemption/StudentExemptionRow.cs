@@ -54,9 +54,14 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Entities.DTOs.StudentExemption
         public string FeeName { get; set; }
 
         /// <summary>
-        /// Thời gian áp dụng miễn giảm
+        /// Ngày (tháng) bắt đầu áp dụng miễn giảm
         /// </summary>
-        public string StudentExemptionTime { get; set; }
+        public string StudentExemptionFromDate { get; set; }
+
+        /// <summary>
+        /// Ngày (tháng) kết thúc áp dụng miễn giảm
+        /// </summary>
+        public string StudentExemptionToDate { get; set; }
 
         /// <summary>
         /// Tên diện miễn giảm
