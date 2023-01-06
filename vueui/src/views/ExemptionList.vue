@@ -1,11 +1,15 @@
 <template>
     <div class="content__view">
         <ExemptionToolbar @onOpenForm="setShowForm(true)" @onOpenImport="setShowImport(true)" @setTableStudentViewMode="setTableStudentViewMode"
-            @onClickDeleteMany="onClickDeleteMany"
+            @onClickDeleteMany="onClickDeleteMany" @onRequestToast="onRequestToast"
         />
-        <ExemptionTable ref="table" @setTotalRecord="setTotalRecord" @setCurPageIndex="setPageIndex" @onOpenForm="setShowForm"/>
+        <ExemptionTable ref="table" @setTotalRecord="setTotalRecord" @setCurPageIndex="setPageIndex" @onOpenForm="setShowForm"
+            @onRequestToast="onRequestToast"
+        />
         <ExemptionPaging ref="paging" :totalRecord="totalRecord" @setPageIndex="setPageIndex"/>
-        <ExemptionForm v-if="isShowForm" @onClose="setShowForm(false)" :selectedStudentID="selectedStudentID"/>
+        <ExemptionForm v-if="isShowForm" :isInsertMode="isInsertFormMode" @onClose="setShowForm(false)" :selectedStudentID="selectedStudentID"
+            @onRequestToast="onRequestToast" @onReload="onReloadCurrentPageData"
+        />
         <ExemptionImport v-if="isShowImport" @onClose="setShowImport(false)"/>
         <MDialog v-if="isShowDialog" :haveBtnClose="haveCloseDialog" :dialogMsg="dialogMsg" @onClose="isShowDialog=false" @onConfirm="onConfirmDialog"/>
     </div>
@@ -43,7 +47,8 @@ export default {
             deleteManyMode: 0,
             dialogMsg: "",
             selectedStudentID: null,
-            haveCloseDialog: true
+            haveCloseDialog: true,
+            isInsertFormMode: true
         }
     },
 
@@ -57,7 +62,14 @@ export default {
         setShowForm(value, studentID) {
             try {
                 this.isShowForm = value;
-                this.selectedStudentID = studentID;
+                if(studentID) {
+                    this.selectedStudentID = studentID;
+                    this.isInsertFormMode = false;
+                }
+                else {
+                    this.selectedStudentID = null;
+                    this.isInsertFormMode = true;
+                }
             }
             catch(error) {
                 console.log(error);
@@ -167,6 +179,18 @@ export default {
             else {
                 this.isShowDialog = false;
             }
+        },
+
+        /**
+         * Gọi emit yêu cầu push một Toast Message lên màn hình tương ứng
+         * Author: KhaiND (31/12/2022)
+         */
+        onRequestToast(toastType, toastMsg) {
+            this.$emit("onRequestToast", toastType, toastMsg);
+        },
+
+        onReloadCurrentPageData() {
+            this.$refs.table.onLoadStudentExemptionList(this.isTableStudentViewMode, this.pageIndex);
         }
     },
 

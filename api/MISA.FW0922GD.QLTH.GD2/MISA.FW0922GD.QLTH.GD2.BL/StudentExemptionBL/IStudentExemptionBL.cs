@@ -56,5 +56,13 @@ namespace MISA.FW0922GD.QLTH.GD2.BL.StudentExemptionBL
         /// <returns>Danh sách ID các bản ghi vừa xóa</returns>
         /// Author: KhaiND (26/12/2022)
         public List<Guid> DeleteMany(List<Guid> studentExemptionIDs);
+
+        /// <summary>
+        /// Thực hiện lưu dữ liệu thay đổi khi thêm, sửa, xóa đồng thời nhiều bản ghi thông tin miễn giảm
+        /// </summary>
+        /// <param name="studentExemptions">Đối tượng danh sách dữ liệu đầu vào cho các bản ghi miễn giảm</param>
+        /// <returns>Số bản ghi đã affact</returns>
+        /// Author: KhaiND (03/01/2022)
+        public int InsertUpdateDelete(List<StudentExemptionRequest> studentExemptions);
     }
 }

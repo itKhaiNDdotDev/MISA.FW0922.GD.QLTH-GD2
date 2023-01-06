@@ -9,6 +9,7 @@
     grid-template-rows: 34px auto;
     margin: 0px 0px 18px 0px;
     background-color: var(--white);
+    z-index: 999;
 }
 
 .m-toast .toast-icon {

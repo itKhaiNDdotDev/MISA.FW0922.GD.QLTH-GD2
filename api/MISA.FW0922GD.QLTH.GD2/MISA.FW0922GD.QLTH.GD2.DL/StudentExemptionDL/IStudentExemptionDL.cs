@@ -56,5 +56,16 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL
         /// <returns>Danh sách ID các bản ghi vừa xóa</returns>
         /// Author: KhaiND (26/12/2022)
         public List<Guid> DeleteMany(List<Guid> studentExemptionIDs);
+
+        /// <summary>
+        /// Lưu dữ liệu thêm, sửa, xóa các bản ghi miễn giảm tương ứng
+        /// </summary>
+        /// <param name="insertListString">Danh sách bản ghi muốn thêm mới đã format thành String</param>
+        /// <param name="updateListString">Danh sách bản ghi muốn cập nhật đã format thành String</param>
+        /// <param name="deleteListIDString">Danh sách bản ghi muốn xóa đã format thành String</param>
+        /// <returns>Tổng số bản ghi đã affact</returns>
+        /// Author: KhaiND (03/01/2023)
+        //public int InsertUpdateDelete(string insertListString, string updateListString, string deleteListIDString);
+        public int InsertUpdateDelete(string listObjectString);
     }
 }

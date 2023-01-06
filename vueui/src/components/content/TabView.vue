@@ -1,5 +1,5 @@
 <template>
-    <router-view></router-view>
+    <router-view @onRequestToast="onShowToast"></router-view>
     <div class="toast-container">
         <MToast v-for="(item, index) in recState" :key="index" :toastType="item.type" :toastMsg="item.msg"/>
     </div>
@@ -16,30 +16,29 @@ export default {
 
     data() {
         return {
-            recState: [
-                // {
-                //     type: 1,
-                //     msg: "Có lỗi xảy ra"
-                // },
-                // {
-                //     type: 2,
-                //     msg: "Hê hê hê"
-                // }
-            ]
+            recState: []
         }
     },
 
     methods: {
-        
+        onShowToast(toastType, toastMsg) {
+            var state = {
+                type: toastType,
+                msg: toastMsg
+            };
+            this.recState.push(state);
+            setTimeout(() => {
+                this.recState.pop();
+            }, 3000);
+        }
     },
 
     mounted() {
         var obj = { type: 3, msg: "abc"};
         this.recState.push(obj);
-            setTimeout(() => {
-                this.recState.pop();
-            }, 3000);
-       
+        setTimeout(() => {
+            this.recState.pop();
+        }, 3000);   
     },
 }
 </script>

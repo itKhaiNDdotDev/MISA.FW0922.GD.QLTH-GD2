@@ -1,18 +1,28 @@
 <template>
-  <div class="m-input-container">
+  <div class="m-input-container" id="elDropdown">
     <label v-if="label" for="">
       {{label}}
       <span v-if="isRequired" style="color: var(--notice-red);">*</span>
     </label>
     <div class="m-dropdown" @click="onToggleDropdown(null)" ref="element">
       <!-- SỰ KIỆN BLUR -->
-      <button class="m-icon icon-28 icon-down"></button>
-      <input v-if="isReadOnly" type="text" class="m-input" ref="input" :readonly="true" :value="value"/> <!-- CHỈ DÙNG CHO Ô NĂM HỌC -->
-      <input v-else type="text" class="m-input" ref="input" :readonly="isReadonly" v-model="keyword" @input ="onGetAPIData" @blur="onBlur"/>
+      <button class="m-icon icon-28 icon-down" v-if="!isDisabled"></button>
+      <input v-if="isReadOnly" type="text" class="m-input" :readonly="true" :value="value"/> <!-- CHỈ DÙNG CHO Ô NĂM HỌC -->
+      <input v-else type="text" class="m-input" ref="input"
+        :readonly="isReadonly" :disabled="isDisabled" v-model="keyword"
+        :class="{errorInput:isError}"
+        @input ="onGetAPIData"
+        @blur="onBlur"
+      />
       
-      <div class="dropdown__option border-radius">
-        <table class="border-radius">
-          <thead>
+      <div class="m-error-message" v-if="isError">
+        <div class="error-text">{{errorMsg}}</div>
+        <div class="error-arrow"></div>
+      </div>
+
+      <div class="dropdown__option border-radius" v-if="!isDisabled&&isShowOption" id="dropdownOption">
+        <table class="border-radius" v-if="!propData">
+          <thead v-if="optionHeader.length > 1">
             <tr>
               <th v-for="(item, index) in optionHeader" :key="index">{{item.propTitle}}</th>
             </tr>
@@ -27,9 +37,9 @@
           </tbody>
         </table>
         
-        <!-- <div class="option__item" v-else v-for="(item, index) in optionData" :key="index" @click="onToggleDropdown(item)">
-          {{item[optionHeader[0].propName]}}
-        </div> -->
+        <div class="option__item" v-else v-for="(item, index) in propData" :key="index" @click="onToggleDropdown(item)">
+          {{item}}
+        </div>
       </div>
     </div>
   </div>
@@ -42,8 +52,21 @@ import { formatDate } from "./../../utils/format-data";
 
 export default {
   name: "MDropdown",
+  el: "elDropdown",
 
-  props: ["label", "isRequired", "isReadOnly", "optionEnpoint", "optionHeader", "value", "propData"],
+  props: {
+    label: String,
+    isRequired: Boolean,
+    isReadOnly: Boolean,
+    isDisabled: Boolean,
+    optionEnpoint: Object,
+    optionHeader: Object,
+    value: String,
+    propData: Object,
+    isAutoFocus: Boolean,
+    isError: Boolean,
+    errorMsg: String
+  },
   data() {
     return {
       isShowOption: false,
@@ -59,22 +82,15 @@ export default {
      */
     onToggleDropdown(item) {
       if(item != undefined) {
-        this.keyword = item[this.optionHeader[0].propName];
+        this.keyword = this.propData ? item : item[this.optionHeader[0].propName];
+        console.log(item);
         this.$emit("getSelected", item);
+        this.isShowOption = false;
       }
       this.isShowOption = !this.isShowOption;
-      var el = this.$refs.element;
       if(this.isShowOption) {
         this.$refs.input.focus();
         this.onGetAPIData();
-        el.querySelector(".dropdown__option").style.display = 'block';
-        const left = el.getBoundingClientRect().left - 170;
-        const top = el.getBoundingClientRect().top - 24;
-        el.querySelector(".dropdown__option").style.top = top+'px';
-        el.querySelector(".dropdown__option").style.left = left+'px';
-      }
-      else {
-        el.querySelector(".dropdown__option").style.display = 'none';
       }
     },
 
@@ -120,15 +136,38 @@ export default {
 
     onBlur(event) {
       this.$emit("onBlur", event);
+    },
+
+    onFocus() {
+      this.$refs.input.focus();
     }
   },
 
+  created() {
+     window.addEventListener("click", (event) => {
+          if (!this.$el.contains(event.target)) {
+            this.isShowOption = false;
+            this.$emit("onFocusOut");
+          }
+        });
+  },
+
   mounted() {
-    // const left = this.$refs.element.getBoundingClientRect().left;
-    // const top = this.$refs.element.getBoundingClientRect().top;
-    // console.log(left);
-    // console.log(top);
-    //this.keyword = this.$emit("getSelected", null);
+    if(this.isAutoFocus) {
+      this.$refs.input.focus();
+    }
+  },
+
+  watch: {
+    value(value) {
+      //alert(value);
+      this.keyword = value;
+      console.log(value);
+    },
+
+    keyword(value) {
+      this.$emit("getKeyword", value);
+    }
   }
 };
 </script>
@@ -137,12 +176,50 @@ export default {
 @import url(../../styles/component/dropdown.css);
 
 .dropdown__option {
-  position: fixed !important;
-  display: none;
   z-index: 2;
+  width: max-content;
+  min-width: 100%;
 }
 
 .dropdown__option table thead {
   z-index: 1;
 }
+
+.errorInput {
+    border-color: var(--notice-red) !important;
+  }
+  .m-error-message {
+      background-color: var(--notice-red);
+      color: var(--white);
+      opacity: 90%;
+      padding: 4px 8px;
+      width: max-content;
+      border-radius: 4px;
+      position: absolute;
+      left: calc(100% + 4px);
+      top: 50%;
+      transform: translate(0%, -50%);
+      z-index: 1;
+      display: none;
+  }
+  .m-input:hover ~ .m-error-message {
+      display: block;
+  }
+  .m-input:focus ~ .m-error-message {
+      display: block;
+  }
+  .m-error-message .error-arrow {
+      width: 6px;
+      height: 6px;
+      position: absolute;
+      background-color: inherit;
+      top: 50%;
+      left: 0;
+      transform: translate(-50%, -50%) rotate(45deg);
+      z-index: 0;
+  }
+  .m-error-message .error-text {
+      position: relative;
+      z-index: 1;
+  }
 </style>

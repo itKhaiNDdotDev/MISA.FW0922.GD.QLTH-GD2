@@ -4,6 +4,7 @@ using MISA.FW0922GD.QLTH.GD2.BL.BaseBL;
 using MISA.FW0922GD.QLTH.GD2.BL.StudentExemptionBL;
 using MISA.FW0922GD.QLTH.GD2.Common.Entities;
 using MISA.FW0922GD.QLTH.GD2.Common.Entities.DTOs;
+using MISA.FW0922GD.QLTH.GD2.Common.Entities.DTOs.StudentExemption;
 using MISA.FW0922GD.QLTH.GD2.Common.Enums;
 using System.Resources;
 
@@ -194,6 +195,36 @@ namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
                     MoreInfo = Common.Resources.Common.DeleteFailed_MoreInfo,
                     TraceId = HttpContext.TraceIdentifier
                 });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResult
+                {
+                    ErrorCode = GDErrorCode.Exception,
+                    DevMsg = Common.Resources.Common.Exception_DevMsg,
+                    UserMsg = Common.Resources.Common.Exception_UserMsg,
+                    MoreInfo = Common.Resources.Common.Exception_MoreInfo,
+                    TraceId = HttpContext.TraceIdentifier
+                });
+            }
+        }
+
+        [HttpPost("save")]
+        public IActionResult InsertUpdateDelete([FromBody] List<StudentExemptionRequest> studentExemptions)
+        {
+            try
+            {
+                if(studentExemptions == null)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest, studentExemptions);
+                }
+                int affacted = _studentExemptionBL.InsertUpdateDelete(studentExemptions);
+                //if(affacted <= 0)
+                //{
+                //    return StatusCode(StatusCodes.Status500InternalServerError, affacted);
+                //}
+                return StatusCode(StatusCodes.Status200OK, affacted);
             }
             catch (Exception ex)
             {

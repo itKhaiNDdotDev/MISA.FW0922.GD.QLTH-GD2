@@ -10,7 +10,7 @@
             <div class="page-index">
                 <button class="page--up m-icon icon-up-next" @click="onClickPageUp"></button>
                 <button class="page--down m-icon icon-down-prev" @click="onClickPageDown"></button>
-                <input type="text" class="m-input" v-model="pageIndex" @keyup.enter="setPageIndex">
+                <input type="number" class="m-input" v-model="pageIndex" @keyup.enter="setPageIndex">
             </div>
             <span>&nbsp; {{pagingText.onTotalPage.toLowerCase()}}&nbsp;</span>
             <span class="paging__number">{{Math.ceil(totalRecord/pageSize)}}</span>

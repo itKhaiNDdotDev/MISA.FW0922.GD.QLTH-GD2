@@ -6,34 +6,33 @@
           <th style="min-width: 32px; max-width: 32px;  padding: 0px !important;">
             <div class="cell__icon"><MCheckbox @onCheck="onCheckAll" :isChecked="checkAllRecord"/></div>
           </th>
-          <th style="max-width: 200px" v-if="!isStudentViewMode">
+          <th style="max-width: 190px;" v-if="!isStudentViewMode">
             <div class="table__headtext">{{ labelText.Fee }}</div>
             <MFilter class="table__filter" />
           </th>
-          <th style="min-width: 180px">
+          <th style="min-width: 140px; max-width: 200px;">
             <div class="table__headtext">{{ labelText.Fullname }}</div>
             <MFilter class="table__filter" />
-            <!-- <div class="table__filter test">AAAAAAA</div> -->
           </th>
           <th style="min-width: 128px; max-width: 128px">
             <div class="table__headtext">{{ labelText.DateOfBirth }}</div>
-            <MFilter :isInputDate="false" class="table__filter" />
+            <MFilter :isInputDate="true" class="table__filter" />
           </th>
           <th style="min-width: 80px; max-width: 80px">
             <div class="table__headtext">{{ labelText.Class }}</div>
             <MFilter class="table__filter" />
           </th>
-          <th style="min-width: 90px; max-width: 100px">
+          <th style="min-width: 80px; max-width: 80px">
             {{ labelText.Level }}
           </th>
-          <th style="max-width: 200px" v-if="isStudentViewMode">
+          <th style="max-width: 190px" v-if="isStudentViewMode">
             <div class="table__headtext">{{ labelText.Fee }}</div>
             <MFilter class="table__filter" />
           </th>
           <th style="min-width: 120px; max-width: 150px">
             {{ labelText.Time }}
           </th>
-          <th style="max-width: 280px">
+          <th style="max-width: 200px">
             <div class="table__headtext">{{ labelText.TargetType }}</div>
             <MFilter class="table__filter" />
           </th>
@@ -46,28 +45,28 @@
           <td style="min-width: 32px; max-width: 32px; padding: 0px !important;">
             <div class="cell__icon"><MCheckbox @onCheck="onSelectRecord(item.studentExemptionID)" :isChecked="checkSelected(item.studentExemptionID)"/></div>
           </td>
-          <td class="cell__text--left" style="max-width: 196px" v-if="!isStudentViewMode">
+          <td class="cell__text--left" style="max-width: 190px;" v-if="!isStudentViewMode" :title="item.feeName">
             {{item.feeName}}
           </td>
-          <td class="cell__text--left text--link" style="min-width: 150px" @click="onClickEdit(item.studentID)">
+          <td class="cell__text--left text--link" style="min-width: 140px; max-width: 200px;" @click="onClickEdit(item.studentID)" :title="item.studentName">
             {{item.studentName}}
           </td>
-          <td class="cell__text--center" style="max-width: 100px">
+          <td class="cell__text--center" style="max-width: 90px;">
             {{formatDate(item.studentDateOfBirth)}}
           </td>
-          <td class="cell__text--left" style="max-width: 60px">
+          <td class="cell__text--left" style="max-width: 50px" :title="item.branchName">
             {{item.branchName}}
           </td>
-          <td class="cell__text--right" style="max-width: 90px">
+          <td class="cell__text--right" style="max-width: 80px">
             {{item.studentExemptionLevel.toFixed(2).replace('.', ',')}}%
           </td>
-          <td class="cell__text--left" style="max-width: 196px" v-if="isStudentViewMode">
+          <td class="cell__text--left" style="max-width: 190px;" v-if="isStudentViewMode" :title="item.feeName">
             {{item.feeName}}
           </td>
           <td class="cell__text--left" style="max-width: 100px">
             {{formatExemptionTime(item.studentExemptionFromDate, item.studentExemptionToDate)}}
           </td>
-          <td class="cell__text--left" style="max-width: 280px">
+          <td class="cell__text--left" style="max-width: 120px" :title="item.exemptionName">
             {{item.exemptionName}}
           </td>
           <td style="width: 64px; min-width: 64px; max-width: 64px; box-sizing: border-box; padding: 0px;">
@@ -82,6 +81,9 @@
     <MDialog v-if="isShowDialog" :haveBtnClose="true" :dialogMsg="dialogMsg" @onClose="onCloseDialog" @onConfirm="onDeleteExemption"/>
     <MLoader v-if="isTableLoading"/>
   </div>
+  <div class="m-popup-wrapper" v-if="isLoading">
+    <MLoader/>
+  </div>
 </template>
 
 <script>
@@ -94,6 +96,7 @@ import MLoader from "./../../components/base/MLoader.vue";
 import axios from "axios";
 import { BASE_URL, PAGE_SIZE } from "./../../utils/constants/api";
 import { formatDate } from "./../../utils/format-data";
+import { ResultStatus } from "./../../utils/enums/status"
 
 export default {
   name: "ExemptionTable",
@@ -109,12 +112,14 @@ export default {
       labelText: ExemptionResources.Label,
       tooltip: Resources.ToolTip,
       confirmMessage: ExemptionResources.ConfirmMessage,
+      toastMsg: ExemptionResources.ToastMessage,
       studentExemptionList: {},
       curPageIndex: 1,
       isStudentViewMode: true,
       isShowDialog: false,
       dialogMsg: "",
       selectedRecordID: null,
+      isLoading: false,
       isTableLoading: false,
       selectedIDs: [],
       checkAllRecord: false,
@@ -123,14 +128,19 @@ export default {
   },
 
   created() {
-    this.isTableLoading = true;
+    this.isLoading = true;
     this.onLoadStudentExemptionList(true);
+  },
+
+  mounted() {
+    this.isLoading = false;
+    this.isTableLoading = true;
   },
 
   methods: {
     /**
      * Xử lý khi gọi API load dữ liệu danh sách miễn giảm thành công
-     * PARAM=========================
+     * @param {Object} response dữ liệu trả về từ request API
      * Author: KhaiND (23/11/2022)
      */
     thenLoadStudentExemptionList(response) {
@@ -139,25 +149,32 @@ export default {
       this.studentExemptionList = response.data.data;
       this.totalRecord = response.data.totalRecord;
       this.$emit("setTotalRecord", this.totalRecord);
-      //this.errorResult = false;
+      //FOCUS DÒNG ĐẦU TIÊN
       // Ẩn Loader
       this.isTableLoading = false;
 
-      console.log(this.studentExemptionList);
+      this.$emit("onRequestToast", 1, "Load thành công");
+      setTimeout(this.$emit("onRequestToast", 2, "Thử delay"), 20000);
+      this.$emit("onRequestToast", 2, "Thử cái nưax");
     },
 
     /**
      * Gọi API lấy (GET) dữ liệu danh sách miễn giảm (phân trang)
-     * PARAM=================================
+     * @param {Boolean} studentViewMode có phải xem danh sách phân trang theo Học sinh hay không? - True: phân trang theo học sinh, False: phân trang theo khoản thu
+     * @param {Number} pageIndex số trang hiện tại muốn lấy dữ liệu danh sách
      * Author: KhaiND (23/12/2022)
      */
     onLoadStudentExemptionList(studentViewMode, pageIndex) {
       try {
-        this.isStudentViewMode = studentViewMode; // Cần để render bảng
+        // Hiển thị mask Loading
+        this.isTableLoading = true;
+
+        // Đặt mode cho radio và số trang hiện tại (Xem lại cần không)
+        this.isStudentViewMode = studentViewMode;
         this.curPageIndex = pageIndex;
         this.curStudentViewMode = studentViewMode;
-        // this.$emit("setPageIndex", this.curPageIndex); // Tạm thời giữ xem delete trong bảng có cần không
-        // this.tableLoadingStatus = true;
+
+        // Kiểm tra các giá trị và thiết lập URL
         if (!pageIndex) {
           pageIndex = 1;
         }
@@ -167,13 +184,15 @@ export default {
         else {
           url = BASE_URL + "StudentExemptions/paging/fee?pageIndex=" + pageIndex + "&pageSize=" + PAGE_SIZE;
         }
+
+        // Gọi API
         axios.get(url).then((response) => this.thenLoadStudentExemptionList(response))
           .catch((response) => {
             console.log(response);
         });
       } catch (error) {
-        // this.employeeList = null;
-        // this.$emit("showToast", this.errorResultText.Error500, ResultStatus.FAIL);
+        this.studentExemptionList = null;
+        this.$emit("onRequestToast", ResultStatus.FAIL, this.toastMsg.ErrorDefault);
         console.log(error);
       }
     },
@@ -188,32 +207,44 @@ export default {
       return formatDate(value);
     },
 
+    /**
+     * Định dạng dữ liệu Thời gian miễn giảm trên bảng danh sách miễn giảm
+     * @param {DateTime} fromDate Ngày bắt đầu áp dụng miễn giảm
+     * @param {DateTime} toDate Ngày kết thúc áp dụng miễn giảm
+     * @returns thời gian miễn giảm theo định dạng giá trị: "Cả năm", "Học kỳ I", "Học kỳ II" hoặc "MM/YYYY - MM/YYYY"
+     */
     formatExemptionTime(fromDate, toDate) {
-      fromDate = new Date(fromDate);
-      toDate = new Date(toDate);
-      var fromMonth = fromDate.getMonth() + 1;
-      var fromYear = fromDate.getFullYear();
-      var toMonth = toDate.getMonth() + 1;
-      var toYear = toDate.getFullYear();
-      console.log(fromMonth+"/"+fromYear+" - "+toMonth+"/"+toYear);
+      try {
+        fromDate = new Date(fromDate);
+        toDate = new Date(toDate);
+        var fromMonth = fromDate.getMonth() + 1;
+        var fromYear = fromDate.getFullYear();
+        var toMonth = toDate.getMonth() + 1;
+        var toYear = toDate.getFullYear();
 
-      if(fromMonth == 8 && fromYear == 2021 && toMonth == 5 && toYear == 2022) {     
-          return "Cả năm";
-      }
-      else if(fromMonth == 8 && fromYear == 2021 && toMonth == 12 && toYear == 2021) {
-          return "Học kỳ I";
-      }
-      else if(fromMonth == 1 && fromYear == 2022 && toMonth == 5 && toYear == 2022) {
-        return "Học kỳ II";
-      }
-      else {
-        if(fromMonth < 10) {
-          fromMonth = "0"+fromMonth;
+        if(fromMonth == 8 && fromYear == 2021 && toMonth == 5 && toYear == 2022) {     
+            return "Cả năm";
         }
-        if(toMonth < 10) {
-          toMonth = "0"+toMonth;
+        else if(fromMonth == 8 && fromYear == 2021 && toMonth == 12 && toYear == 2021) {
+            return "Học kỳ I";
         }
-        return fromMonth+"/"+fromYear+" - "+toMonth+"/"+toYear;
+        else if(fromMonth == 1 && fromYear == 2022 && toMonth == 5 && toYear == 2022) {
+          return "Học kỳ II";
+        }
+        else {
+          if(fromMonth < 10) {
+            fromMonth = "0"+fromMonth;
+          }
+          if(toMonth < 10) {
+            toMonth = "0"+toMonth;
+          }
+          return fromMonth+"/"+fromYear+" - "+toMonth+"/"+toYear;
+        }
+      }
+      catch(error) {
+        console.log(error);
+        this.$emit("onRequestToast", ResultStatus.FAIL, this.toastMsg.ErrorDefault);
+        return "";
       }
     },
 
@@ -223,9 +254,15 @@ export default {
      * Author: KhaiND (28/12/2022)
      */
     onClickDeleteRow(id) {
-      this.isShowDialog = true;
-      this.dialogMsg = this.confirmMessage.Delete;
-      this.selectedRecordID = id;
+      try {
+        this.isShowDialog = true;
+        this.dialogMsg = this.confirmMessage.Delete;
+        this.selectedRecordID = id;
+      }
+      catch(error) {
+        console.log(error);
+        this.$emit("onRequestToast", ResultStatus.FAIL, this.toastMsg.ErrorDefault);
+      }
     },
 
     /**
@@ -247,13 +284,15 @@ export default {
         //Call API
         var url = BASE_URL + "StudentExemptions/" + this.selectedRecordID;
         await axios.delete(url);
+
         // Reset lại Id và đóng Dialog
         this.isShowDialog = false; // Có thể gọi this.Method
         this.selectedRecordID = null;
-        // Ẩn Loader
+
+        // Hiển thị Toast Message và Ẩn Loader
         this.isTableLoading = false;
-        // Reload va toast
-        //this.$emit("showToast", this.toastMsg.Employee.DeleteSuccess, ResultStatus.OK);
+        this.$emit("onRequestToast", ResultStatus.OK, this.toastMsg.DeleteSuccess);
+        
         // Đặt lại pageIndex nếu dữ liệu trang hiện tại bị xóa hết thì trở về trang trước
         if(this.studentExemptionList.length == 1 && this.curPageIndex > 1) {
           this.curPageIndex -= 1;
@@ -262,8 +301,9 @@ export default {
       }
       catch(error) {
         console.log(error);
-        //this.$emit("showToast", this.toastMsg.Error500, ResultStatus.FAIL);
-        // Gửi STATE lỗi
+        // Hiển thị Toast Message và Ẩn Loader
+        this.isTableLoading = false;
+        this.$emit("onRequestToast", ResultStatus.FAIL, this.toastMsg.ErrorDefault);
       }
     },
 
@@ -303,6 +343,7 @@ export default {
       }
       catch(error) {
         console.log(error);
+        this.$emit("onRequestToast", ResultStatus.FAIL, this.toastMsg.ErrorDefault);
       }
     },
 
@@ -319,22 +360,22 @@ export default {
     },
 
     /**
-     * Chức năng xóa nhiều bản ghi đồng thời
+     * Chức năng xóa đồng thời nhiều bản ghi đang được chọn
      * Author: KhaiND (28/12/2022)
      */
     async onDeleteManyExemption() {
       try {
         var me = this;
         // Hiển thị Loader
-        //this.loadingStatus = true;
+        this.isLoading = true;
         //Call API
         await axios.post(BASE_URL + "StudentExemptions/deleteMany", me.selectedIDs);
-        // Đóng Dialog
-        //this.isShowDialog = false;
+        
         // Ẩn Loader
-        //this.loadingStatus = false;
-        // Reload va toast
-        //this.$emit("showToast", this.toastMsg.Employee.DeleteManySucessPre + this.empSelectedIds.length + this.toastMsg.Employee.DeleteManySucessSfx, ResultStatus.OK);
+        this.isLoading = false;
+
+        // Reload va Toast
+        this.$emit("onRequestToast", ResultStatus.OK, this.toastMsg.DeleteSuccess);
         this.selectedIDs = [];
         if(this.checkAllRecord && this.curPageIndex > 1 && this.curPageIndex == Math.ceil(this.totalRecord/PAGE_SIZE)) { // Chỉ trang cuối mới lùi thôi
           this.curPageIndex -= 1;
@@ -344,7 +385,8 @@ export default {
       }
       catch(error) {
         console.log(error);
-        //this.$emit("showToast", this.toastMsg.Error500, ResultStatus.FAIL);
+        this.isLoading = false;
+        this.$emit("onRequestToast", ResultStatus.FAIL, this.toastMsg.ErrorDefault);
       }
     },
 

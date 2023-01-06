@@ -66,5 +66,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Constants
         /// Procedure lấy danh sách thông tin miễn giảm tương ứng với Học sinh thông qua ID học sinh
         /// </summary>
         public static string SE_GET_BY_STUDENT = "Proc_StudentExemption_GetByStudentID";
+
+        public static string SE_INSERT_UPDATE_DELETE = "Proc_StudentExemption_InsertUpdateDelete";
     }
 }

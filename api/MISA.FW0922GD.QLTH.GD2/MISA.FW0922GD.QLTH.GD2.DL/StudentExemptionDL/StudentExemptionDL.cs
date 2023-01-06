@@ -168,7 +168,7 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL
             parameters.Add("ListSEIDString", listIDString);
 
             // Chuẩn bị câu lệnh truy vấn
-            string storedProcedureName = String.Format(Procedure.DELETE_MANY, "StudentExemption"); ;
+            string storedProcedureName = String.Format(Procedure.DELETE_MANY, "StudentExemption");
 
             // Khởi tọa kết nối đến Database MySQL
             int affactedRecordCount = 0;
@@ -203,6 +203,58 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL
                 deletedIDs = studentExemptionIDs;
             }
             return deletedIDs;
+        }
+
+        /// <summary>
+        /// Lưu dữ liệu thêm, sửa, xóa các bản ghi miễn giảm tương ứng
+        /// </summary>
+        /// <param name="insertListString">Danh sách bản ghi muốn thêm mới đã format thành String</param>
+        /// <param name="updateListString">Danh sách bản ghi muốn cập nhật đã format thành String</param>
+        /// <param name="deleteListIDString">Danh sách bản ghi muốn xóa đã format thành String</param>
+        /// <returns>Tổng số bản ghi đã affact</returns>
+        /// Author: KhaiND (03/01/2023)
+        //public int InsertUpdateDelete(string insertListString, string updateListString, string deleteListIDString)
+        public int InsertUpdateDelete(string listObjectString)
+        {
+            // Chuẩn bị tham số đầu vào
+            var parameters = new DynamicParameters();
+            parameters.Add("ListObjectString", listObjectString);
+            //parameters.Add("InsertListString", insertListString);
+            //parameters.Add("UpdateListString", updateListString);
+            //parameters.Add("DeleteListIDString", deleteListIDString);
+
+            // Chuẩn bị câu lệnh truy vấn
+            string storedProcedureName = Procedure.SE_INSERT_UPDATE_DELETE;
+
+            // Khởi tọa kết nối đến Database MySQL
+            int affactedRecordCount = 0;
+            using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
+            {
+                mySqlConnection.Open();
+                // Sử dụng Transaction
+                using (var transaction = mySqlConnection.BeginTransaction())
+                {
+                    try
+                    {
+                        // Thực hiện gọi truy vấn xóa nhiều vào Database
+                        affactedRecordCount += mySqlConnection.Execute(storedProcedureName, parameters, transaction, commandType: CommandType.StoredProcedure);
+
+                        transaction.Commit();
+                        mySqlConnection.Close();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        mySqlConnection.Close();
+                        Console.WriteLine(ex.Message);
+                        affactedRecordCount = 0;
+                    }
+                }
+            }
+
+            // Xử lý kết quả trả về
+            return affactedRecordCount;
         }
     }
 }

@@ -54,12 +54,12 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Entities
         /// <summary>
         /// Ngày (tháng) bắt đầu áp dụng miễn giảm
         /// </summary>
-        public string StudentExemptionFromDate { get; set; }
+        public DateTime StudentExemptionFromDate { get; set; }
 
         /// <summary>
         /// Ngày (tháng) kết thúc áp dụng miễn giảm
         /// </summary>
-        public string StudentExemptionToDate { get; set; }
+        public DateTime StudentExemptionToDate { get; set; }
 
         #endregion
     }
