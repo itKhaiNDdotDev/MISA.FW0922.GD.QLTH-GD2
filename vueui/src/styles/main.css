@@ -2,6 +2,7 @@
 @import url(base/font.css);
 @import url(base/icon.css);
 @import url(base/scrollbar.css);
+@import url(base/zindex.css);
 
 @import url(layout/layout.css);
 
@@ -23,6 +24,7 @@ body {
 .text--link {
     color: var(--link);
     cursor: pointer;
+    text-decoration: none;
 }
 
 .border-radius {

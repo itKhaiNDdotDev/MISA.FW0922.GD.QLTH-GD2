@@ -72,7 +72,7 @@ namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
         /// <param name="recordID">ID của bản ghi</param>
         /// <returns>Thông tin chi tiết của bản ghi</returns>
         /// Author: KhaiND (21/12/2022)
-        [HttpGet("{recordID}")]
+        [HttpGet("int/{recordID}")]
         public IActionResult GetByID([FromRoute] int recordID)
         {
             try
@@ -203,7 +203,7 @@ namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
         /// <param name="recordID">ID của bản ghi muốn xóa</param>
         /// <returns>ID của bản ghi vừa xóa</returns>
         /// Created By: KhaiND (19/11/2022)
-        [HttpDelete("{recordID}")]
+        [HttpDelete("int/{recordID}")]
         public IActionResult Delete([FromRoute] int recordID)
         {
             try

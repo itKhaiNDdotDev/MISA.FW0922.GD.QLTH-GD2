@@ -17,7 +17,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Entities
         /// <summary>
         /// Thời gian tọa bản ghi
         /// </summary>
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         /// <summary>
         /// Người tạo bản ghi
@@ -27,7 +27,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Entities
         /// <summary>
         /// Thời gian chỉnh sửa bản ghi lần gần nhất
         /// </summary>
-        public DateTime ModifiedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
 
         /// <summary>
         /// Người chỉnh sửa bản ghi lần gần nhất

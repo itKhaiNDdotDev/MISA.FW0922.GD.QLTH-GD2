@@ -70,6 +70,40 @@ namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
             }
         }
 
+        /// <summary>
+        /// API lấy thông tin một học sinh thông qua ID
+        /// </summary>
+        /// <param name="studentID">ID của học sinh</param>
+        /// <returns>Thông tin chi tiết học sinh</returns>
+        /// Author: KhaiND (28/12/2022)
+        [HttpGet("{studentID}")]
+        public IActionResult GetByID([FromRoute] Guid studentID)
+        {
+            try
+            {
+                var student = _studentBL.GetByID(studentID);
+
+                if (student != null)
+                {
+                    return StatusCode(StatusCodes.Status200OK, student);
+                }
+
+                return StatusCode(StatusCodes.Status404NotFound);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResult
+                {
+                    ErrorCode = GDErrorCode.Exception,
+                    DevMsg = Common.Resources.Common.Exception_DevMsg,
+                    UserMsg = Common.Resources.Common.Exception_UserMsg,
+                    MoreInfo = Common.Resources.Common.Exception_MoreInfo,
+                    TraceId = HttpContext.TraceIdentifier
+                });
+            }
+        }
+
         #endregion
     }
 }

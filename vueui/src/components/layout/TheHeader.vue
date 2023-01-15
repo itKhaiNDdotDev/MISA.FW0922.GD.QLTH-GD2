@@ -7,7 +7,7 @@
                 <div class="m-icon icon-home"></div>
                 {{headerText.SchoolName}}
             </div>
-            <MDropdown class="border-radius" value="2021 - 2022" style="width: 124px; margin-right: 16px;" :numberColumn="1"/>
+            <MDropdown class="border-radius" value="2021 - 2022" style="width: 124px; margin-right: 16px;" :isReadOnly="true"/>
             <div class="m-button text-button btn-guide">{{buttonText.Guide}}</div>
            
             <div class="hor-line"></div>

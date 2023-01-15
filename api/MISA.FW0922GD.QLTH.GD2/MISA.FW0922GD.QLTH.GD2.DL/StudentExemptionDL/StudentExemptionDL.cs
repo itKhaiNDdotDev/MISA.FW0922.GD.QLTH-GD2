@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using MISA.FW0922GD.QLTH.GD2.Common.Constants;
+using MISA.FW0922GD.QLTH.GD2.Common.Entities;
 using MISA.FW0922GD.QLTH.GD2.Common.Entities.DTOs;
 using MISA.FW0922GD.QLTH.GD2.Common.Entities.DTOs.StudentExemption;
 using MySqlConnector;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -84,6 +86,202 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL
                     Data = studentExemptions
                 };
             }
+        }
+
+        /// <summary>
+        /// Lấy danh sách miễn giảm của một học sinh theo ID của học sinh
+        /// </summary>
+        /// <param name="studentID">ID của học sinh muốn lấy thông tin miễn giảm</param>
+        /// <returns>Danh sách các bản ghi thông tin miễn giảm của học sinh tương ứng</returns>
+        /// Author: KhaiND (26/12/2022)
+        public IEnumerable<StudentExemptionDetail> GetByStudentID(Guid studentID)
+        {
+            // Chuẩn bị tham số đầu vào
+            var parameter = new DynamicParameters();
+            parameter.Add("StudentID", studentID);
+
+            // Chuẩn bị câu lệnh SQL
+            string storedProcedureName = Procedure.SE_GET_BY_STUDENT;
+
+            //Khởi tọa kết nối đến Database MySQL
+            using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
+            {
+                // Thực hiện gọi truy vấn vào Database
+                var studentExemptions = (List<StudentExemptionDetail>)mySqlConnection.Query<StudentExemptionDetail>(storedProcedureName, parameter, commandType: CommandType.StoredProcedure);
+
+                // Xử lý kết quả trả về
+                return studentExemptions;
+            }    
+        }
+
+        /// <summary>
+        /// Xóa một bản ghi thông tin miễn giảm của học sinh thông qua ID bản ghi
+        /// </summary>
+        /// <param name="studentExemptionID">ID của bản ghi muốn xóa</param>
+        /// <returns>ID của bản ghi vừa xóa</returns>
+        /// Author: KhaiND (26/12/2022)
+        public Guid Delete(Guid studentExemptionID)
+        {
+            // Chuẩn bị tham số đầu vào
+            var parameters = new DynamicParameters();
+            parameters.Add("StudentExemptionID", studentExemptionID);
+
+            // Chuẩn bị câu lệnh SQL
+            string storedProcedureName = String.Format(Procedure.DELETE, "StudentExemption");
+
+            // Khởi tạo kết nối đến Database MySQL
+            int affactedRecordCount = 0;
+            using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
+            {
+                // Thực hiện gọi truy vấn vào Database
+                affactedRecordCount = mySqlConnection.Execute(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+            }
+
+            // Xử lý kết quả trả về
+            if (affactedRecordCount > 0)
+            {
+                return studentExemptionID;
+            }
+            else
+            {
+                return Guid.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Xóa đồng thời nhiều bản ghi thông tin miễn giảm của học sinh thông qua danh sách ID
+        /// </summary>
+        /// <param name="studentExemptionIds">Danh sách ID các bản ghi muốn xóa</param>
+        /// <returns>Danh sách ID các bản ghi vừa xóa</returns>
+        /// Author: KhaiND (26/12/2022)
+        public List<Guid> DeleteMany(List<Guid> studentExemptionIDs)
+        {
+            // Kiểm tra đầu vào
+            var deletedIDs = new List<Guid>();
+            if (studentExemptionIDs == null || studentExemptionIDs.Count <= 0)
+            {
+                return deletedIDs;
+            }
+
+            // Chuẩn bị tham số đầu vào
+            var parameters = new DynamicParameters();
+            string listIDString = $"('{String.Join("','", studentExemptionIDs)}')";
+            parameters.Add("ListSEIDString", listIDString);
+
+            // Chuẩn bị câu lệnh truy vấn
+            string storedProcedureName = String.Format(Procedure.DELETE_MANY, "StudentExemption");
+
+            // Khởi tọa kết nối đến Database MySQL
+            int affactedRecordCount = 0;
+            using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
+            {
+                mySqlConnection.Open();
+                // Sử dụng Transaction
+                using (var transaction = mySqlConnection.BeginTransaction())
+                {
+                    try
+                    {
+                        // Thực hiện gọi truy vấn xóa nhiều vào Database
+                        affactedRecordCount += mySqlConnection.Execute(storedProcedureName, parameters, transaction, commandType: System.Data.CommandType.StoredProcedure);
+
+                        transaction.Commit();
+                        mySqlConnection.Close();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        mySqlConnection.Close();
+                        Console.WriteLine(ex.Message);
+                        affactedRecordCount = 0;
+                    }
+                }
+            }
+
+            // Xử lý kết quả trả về
+            if (affactedRecordCount > 0)
+            {
+                deletedIDs = studentExemptionIDs;
+            }
+            return deletedIDs;
+        }
+
+        /// <summary>
+        /// Lưu dữ liệu thêm, sửa, xóa các bản ghi miễn giảm tương ứng
+        /// </summary>
+        /// <param name="insertListString">Danh sách bản ghi muốn thêm mới đã format thành String</param>
+        /// <param name="updateListString">Danh sách bản ghi muốn cập nhật đã format thành String</param>
+        /// <param name="deleteListIDString">Danh sách bản ghi muốn xóa đã format thành String</param>
+        /// <returns>Tổng số bản ghi đã affact</returns>
+        /// Author: KhaiND (03/01/2023)
+        //public int InsertUpdateDelete(string insertListString, string updateListString, string deleteListIDString)
+        public int InsertUpdateDelete(string listObjectString)
+        {
+            // Chuẩn bị tham số đầu vào
+            var parameters = new DynamicParameters();
+            parameters.Add("ListObjectString", listObjectString);
+            //parameters.Add("InsertListString", insertListString);
+            //parameters.Add("UpdateListString", updateListString);
+            //parameters.Add("DeleteListIDString", deleteListIDString);
+
+            // Chuẩn bị câu lệnh truy vấn
+            string storedProcedureName = Procedure.SE_INSERT_UPDATE_DELETE;
+
+            // Khởi tọa kết nối đến Database MySQL
+            int affactedRecordCount = 0;
+            using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
+            {
+                mySqlConnection.Open();
+                // Sử dụng Transaction
+                using (var transaction = mySqlConnection.BeginTransaction())
+                {
+                    try
+                    {
+                        // Thực hiện gọi truy vấn xóa nhiều vào Database
+                        affactedRecordCount += mySqlConnection.Execute(storedProcedureName, parameters, transaction, commandType: CommandType.StoredProcedure);
+
+                        transaction.Commit();
+                        mySqlConnection.Close();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        mySqlConnection.Close();
+                        Console.WriteLine(ex.Message);
+                        affactedRecordCount = 0;
+                    }
+                }
+            }
+
+            // Xử lý kết quả trả về
+            return affactedRecordCount;
+        }
+
+        /// <summary>
+        /// Lấy thông tin miễn giảm (ngày bắt đầu và kết thúc áp dụng miễn giảm) theo khoản thu tương ứng học sinh
+        /// Phục vụ validate dữ liệu
+        /// </summary>
+        /// <param name="studentID">ID học sinh</param>
+        /// <param name="feeID">ID khoản thu</param>
+        /// <returns>Danh sách miễn giảm tương ứng</returns>
+        /// Author: KhainD (06/01/2022)
+        public IEnumerable<StudentExemptionDetail> GetByStudentFee(Guid studentID, int feeID)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("StudentID", studentID);
+            parameters.Add("FeeID", feeID);
+
+            string storedProcedureName = Procedure.SE_GET_BY_STUDENT_FEE;
+
+            using(var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
+            {
+                // Thực hiện gọi truy vấn vào Database
+                var studentExemptions = (List<StudentExemptionDetail>)mySqlConnection.Query<StudentExemptionDetail>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+
+                // Xử lý kết quả trả về
+                return studentExemptions;
+            }    
         }
     }
 }

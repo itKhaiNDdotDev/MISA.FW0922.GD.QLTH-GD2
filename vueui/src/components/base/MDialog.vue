@@ -4,8 +4,8 @@
       <div class="dialog__header">{{dialogTitle.Notice}}</div>
       <div class="dialog__content">{{ dialogMsg }}</div>
       <div class="dialog__footer">
-        <div class="m-button text-button btn-light" @click="onClose">{{buttonText.Close}}</div>
-        <div class="m-button text-button btn-green">{{buttonText.Confirm}}</div>
+        <div class="m-button text-button btn-light" v-if="haveBtnClose" @click="onClose">{{buttonText.Close}}</div>
+        <div class="m-button text-button btn-green" @click="onConfirm">{{buttonText.Confirm}}</div>
       </div>
       <div :title="tooltip.Close" class="m-icon icon-24 icon-close" @click="onClose"></div>
     </div>
@@ -17,7 +17,7 @@ import Resources from "./../../utils/resources/common";
 
 export default {
   name: "MDialog",
-  props: ["dialogMsg"],
+  props: ["dialogMsg", "haveBtnClose"],
 
   data() {
     return {
@@ -34,6 +34,14 @@ export default {
      */
     onClose() {
       this.$emit("onClose");
+    },
+
+    /**
+     * Sự kiện khi người dùng bấm Đồng ý thì thực hiện action tương ứng được component cha yêu cầu
+     * Author: KhaiND (26/12/2022)
+     */
+    onConfirm() {
+      this.$emit("onConfirm");
     }
   },
 };

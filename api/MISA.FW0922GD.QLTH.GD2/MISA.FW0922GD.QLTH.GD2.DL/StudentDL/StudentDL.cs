@@ -40,5 +40,29 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.StudentDL
                 return records;
             }
         }
+
+        /// <summary>
+        /// Lấy thông tin một học sinh thông qua ID
+        /// </summary>
+        /// <param name="studentID">ID của học sinh</param>
+        /// <returns>Thông tin chi tiết học sinh</returns>
+        /// Author: KhaiND (28/12/2022)
+        public StudentResponse GetByID(Guid studentID)
+        {
+            // Chuẩn bị tham số đầu vào
+            var parameter = new DynamicParameters();
+            parameter.Add("StudentID", studentID);
+
+            // Chuẩn bị câu lệnh SQL
+            string storedProcedureName = String.Format(Procedure.GET_BY_ID, "Student");
+
+            // Khởi tạo kết nối đến Database MySQL
+            using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
+            {
+                // Thực hiện gọi truy vấn vào Database
+                var student = mySqlConnection.QueryFirstOrDefault<StudentResponse>(storedProcedureName, parameter, commandType: CommandType.StoredProcedure);
+                return student;
+            }
+        }
     }
 }

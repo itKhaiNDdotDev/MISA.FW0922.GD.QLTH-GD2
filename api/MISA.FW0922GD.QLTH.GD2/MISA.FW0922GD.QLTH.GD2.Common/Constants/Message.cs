@@ -31,5 +31,14 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Constants
         /// Thông điệp khi bỏ qua trường thông tin bắt buộc StudentName (Họ và tên Học sinh)
         /// </summary>
         public const string STUDENT_REQUIRED_NAME = "Họ và tên không được phép bỏ trống.";
+
+        /// <summary>
+        /// Thông điệp khi thêm, sửa dữ liệu mà không có ID học sinh trong bản ghi
+        /// </summary>
+        public const string STUDENT_REQUIRED = "Bạn chưa chọn học sinh nào! Vui lòng kiểm tra lại.";
+
+        public const string EXEMPTION_TIME_INCORRECT = "Thời gian miễn giảm Từ tháng - Đến tháng không đúng! Vui lòng kiểm tra lại.";
+
+        public static string EXEMPTION_DUPLICATE_TIME = "Khoản thu với \"FeeID = {0}\" đang bị trùng thời gian miễn giảm! Vui lòng kiểm tra lại.";
     }
 }

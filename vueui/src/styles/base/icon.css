@@ -122,14 +122,13 @@
 
 .icon-up-next {
     background-image: url(../../assets/Icons/ic_sprites2.png);
-    background-position: -97px -48px;
+    background-position: -95px -48px;
 }
 
 .icon-down-prev {
     background-image: url(../../assets/Icons/ic_sprites2.png);
-    background-position: -145px -51px;
+    background-position: -143px -51px;
 }
-
 
 /* icon tick v check trạng thái true, icon down cho dropdown, icon chuông thông báo */
 
@@ -269,4 +268,13 @@
 
 .icon-plus-green {
     background-image: url(../../assets/Icons/ic_Plus.png);
+}
+
+.icon-file {
+    background-image: url(../../assets/Icons/ic_sprites2.png);
+    background-position: -618px 5px !important;
+}
+
+.icon-arrow-download {
+    background-image: url(../../assets/Icons/arrow-bar-to-down.webp);
 }

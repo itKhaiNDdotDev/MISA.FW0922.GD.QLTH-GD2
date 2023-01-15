@@ -10,17 +10,21 @@
     <div class="toolbar--right">
         <div class="m-button text-button btn-green" @click="onOpenForm">{{buttonText.Add}}</div>
         <div class="m-button text-button btn-green">{{buttonText.QuickAdd}}</div>
-        <div class="m-button icon-button btn-light m-icon icon-delete-32" :title="tooltip.Delete"></div>
+        <div class="m-button icon-button btn-light m-icon icon-delete-32" :title="tooltip.Delete"
+          @click="onClickDeleteMany"
+        >
+        </div>
         <div class="m-button icon-button btn-light m-icon icon-print" :title="tooltip.Print"></div>
         <div class="m-button icon-button btn-light" @click="toggleMore">
           <div class="m-icon icon-32 icon-more" :title="tooltip.More"></div>
           <div class="toolbar__more" :class="{moreHidden:isHideMore}">
-            <div class="more__item m-icon icon-nhapkhau">{{buttonText.Import}}</div>
+            <div class="more__item m-icon icon-nhapkhau" @click="onOpenImport">{{buttonText.Import}}</div>
             <div class="more__item m-icon icon-duplicate">{{buttonText.Coppy + " " + labelText.List.toLowerCase()}}</div>
             <div class="more__item m-icon icon-zoom">{{buttonText.Zoom}}</div>
           </div>
         </div>
     </div>
+    <!-- <MDialog v-if="isShowDialog" :dialogMsg="dialogMsg"/> -->
   </div>
 </template>
 
@@ -28,11 +32,13 @@
 import Resources from "./../../utils/resources/common";
 import ExemptionResources from "./../../utils/resources/exemption"
 import MRadio from "./../../components/base/MRadio.vue";
+// import MDialog from "./../../components/base/MDialog.vue"
 
 export default {
   name: "ExemptionToolbar",
   components: {
     MRadio,
+    // MDialog
   },
 
   data() {
@@ -42,13 +48,14 @@ export default {
       labelText: ExemptionResources.Label,
       radioValue: ExemptionResources.RadioValue.TableViewMode,
       isHideMore: true,
-      tableStudentViewMode: true
+      isShowDialog: false,
+      dialogMsg: "Bạn có xóa hết không?"
     }
   },
 
   methods: {
     /**
-     * Sự kiện yêu cầu gọi đến Component cha để hiển thị Form
+     * Sự kiện yêu cầu gọi đến Component cha để hiển thị Form chi tiết
      * Author: KhaiND (13/12/2022)
      */
     onOpenForm() {
@@ -57,7 +64,21 @@ export default {
       }
       catch(error) {
         console.log(error);
-        // Gửi Sate báo lỗi về component cha
+        // Gửi STATE báo lỗi về component cha
+      }
+    },
+
+    /**
+     * Sự kiện yêu cầu gọi đến Component cha để hiển thị Form Nhập khẩu
+     * Author: KhaiND (30/12/2022)
+     */
+    onOpenImport() {
+      try {
+        this.$emit("onOpenImport");
+      }
+      catch(error) {
+        console.log(error);
+        // Gửi STATE báo lỗi về component cha
       }
     },
 
@@ -71,48 +92,39 @@ export default {
       }
       catch(error) {
         console.log(error);
+        // Gửi STATE báo lỗi về component cha
+      }
+    },
+
+    /**
+     * Gọi đến Component cha yêu cầu set giá trị tableStudentViewMode - mode xem dữ liệu ở bảng là xem theo Học sinh hay không (xem theo Khoản thu)?
+     * @param {value} String - Nhận giá trị value của radio input được chọn tương ứng (bind từ emit của component) - Giá trị: "student" (xem theo Học sinh), "fee" (xem theo Khoản thu)
+     * Author: KhaiND (23/12/2022)
+     */
+    setTableStudentViewMode(value) { //Đang dùng cho sự kiện onChange Component MRadio ViewMode
+      try {
+        if(value == this.radioValue.Student) {
+          this.$emit("setTableStudentViewMode", true);
+        }
+        else {
+          this.$emit("setTableStudentViewMode", false);
+        }
+      }
+      catch(error) {
+        console.log(error);
         // Gửi Sate báo lỗi về component cha
       }
     },
 
     /**
-     * Set giá trị cho data tableStudentViewMode - mode xem dữ liệu ở bảng là xem theo Học sinh hay không (xem theo Khoản thu)?
-     * @param {value} String - Nhận giá trị value của radio input được chọn tương ứng - Giá trị: "student" (xem theo Học sinh), "fee" (xem theo Khoản thu)
-     * Author: KhaiND (23/12/2022)
+     * Sự kiện khi click vào lựa chọn xóa nhiều thì gửi yêu cầu về Component cha để thực thi tương ứng
+     * Author: KhaiND (28/12/20222)
      */
-    setTableStudentViewMode(value) {
-      try {
-        if(value == this.radioValue.Student) {
-          this.tableStudentViewMode = true;
-        }
-        else {
-          this.tableStudentViewMode = false;
-        }
-        // console.log("STUDENT MODE: " + this.tableStudentViewMode);
-      }
-      catch(error) {
-        console.log(error);
-        // Gửi Sate báo lỗi về component cha
-      }
-    }
+    onClickDeleteMany() {
+      //this.isShowDialog = true;
+      this.$emit("onClickDeleteMany")
+    } 
   },
-
-  watch: {
-    /**
-   * Theo dõi khi giá trị của tableStudentMode thay đổi thì gọi yêu cầu Component cha load lại dữ liệu theo API tương ứng
-   * @param {Boolean} value - Mode xem dữ liệu phân trang của bảng có phải xem theo Học sinh hay không? - Giá trị: true (xem theo Học sinh), false (xem theo Khoản thu)
-   * Author: KhaiND (23/12/2022)
-   */
-    tableStudentViewMode(value) {
-      try {
-        this.$emit("loadTableData", value);
-      }
-      catch(error) {
-        console.log(error);
-        // Gửi Sate báo lỗi về component cha
-      }
-    }
-  }
 };
 </script>
 
@@ -148,7 +160,7 @@ export default {
     background-color: var(--white);
     box-shadow: 4px 0px 10px var(--box-shadow);
     border-radius: 4px;
-    z-index: 1;
+    z-index: 2;
   }
   .toolbar__more .more__item {
     padding: 8px 16px 8px 36px;
