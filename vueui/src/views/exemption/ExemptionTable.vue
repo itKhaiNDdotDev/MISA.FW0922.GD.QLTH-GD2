@@ -1,7 +1,51 @@
 <template>
+  <!-- <div class="content__table--head">
+  <table>
+      <thead>
+        <tr>
+          <th style="min-width: 32px; max-width: 32px;  padding: 0px !important;">
+            <div class="cell__icon"><MCheckbox @onCheck="onCheckAll" :isChecked="checkAllRecord"/></div>
+          </th>
+          <th style="min-width: 190px; max-width: 190px;" v-if="!isStudentViewMode">
+            <div class="table__headtext">{{ labelText.Fee }}</div>
+            <MFilter class="table__filter" />
+          </th>
+          <th style="min-width: 140px; max-width: 200px;">
+            <div class="table__headtext">{{ labelText.Fullname }}</div>
+            <MFilter class="table__filter" />
+          </th>
+          <th style="min-width: 128px; max-width: 128px">
+            <div class="table__headtext">{{ labelText.DateOfBirth }}</div>
+            <MFilter :isInputDate="true" class="table__filter" />
+          </th>
+          <th style="min-width: 80px; max-width: 80px">
+            <div class="table__headtext">{{ labelText.Class }}</div>
+            <MFilter class="table__filter" />
+          </th>
+          <th style="min-width: 80px; max-width: 80px">
+            {{ labelText.Level }}
+          </th>
+          <th style="min-width: 190px; max-width: 190px;" v-if="isStudentViewMode">
+            <div class="table__headtext">{{ labelText.Fee }}</div>
+            <MFilter class="table__filter" />
+          </th>
+          <th style="min-width: 140px; max-width: 140px">
+            {{ labelText.Time }}
+          </th>
+          <th style="min-width:120px; max-width: 120px;">
+            <div class="table__headtext">{{ labelText.TargetType }}</div>
+            <MFilter class="table__filter" />
+          </th>
+          <th style="width: 64px; min-width: 64px; max-width: 64px; box-sizing: border-box; padding: 0px;"></th>
+        </tr>
+      </thead>
+  </table>
+  </div> -->
   <div class="content__table">
     <table>
+      <div class="thead__no-scroll"></div>
       <thead>
+        <div class="thead__border-top"></div>
         <tr>
           <th style="min-width: 32px; max-width: 32px;  padding: 0px !important;">
             <div class="cell__icon"><MCheckbox @onCheck="onCheckAll" :isChecked="checkAllRecord"/></div>
@@ -38,14 +82,20 @@
           </th>
           <th style="width: 64px; min-width: 64px; max-width: 64px; box-sizing: border-box; padding: 0px;"></th>
         </tr>
+        <div class="thead__border-bot"></div>
       </thead>
 
       <tbody>
-        <tr v-for="(item) in studentExemptionList" :key="item.studentExemptionID" @dblclick="onClickEdit(item.studentID)">
-          <td style="min-width: 32px; max-width: 32px; padding: 0px !important;">
+        <tr
+          v-for="(item) in studentExemptionList" :key="item.studentExemptionID"
+          @dblclick="onClickEdit(item.studentID)"
+          selected="false"
+          :id="item.studentExemptionID"
+        >
+          <td style="min-width: 32px; max-width: 32px;  padding: 0px !important;">
             <div class="cell__icon"><MCheckbox @onCheck="onSelectRecord(item.studentExemptionID)" :isChecked="checkSelected(item.studentExemptionID)"/></div>
           </td>
-          <td class="cell__text--left" style="max-width: 190px;" v-if="!isStudentViewMode" :title="item.feeName">
+          <td class="cell__text--left" style="min-width: 190px; max-width: 190px;" v-if="!isStudentViewMode" :title="item.feeName">
             {{item.feeName}}
           </td>
           <td class="cell__text--left text--link" style="min-width: 140px; max-width: 200px;" @click="onClickEdit(item.studentID)" :title="item.studentName">
@@ -135,6 +185,9 @@ export default {
   mounted() {
     this.isLoading = false;
     this.isTableLoading = true;
+    // Cần nghĩ cách focus dòng dầu bằng cách checked checkbox đầu học ơusst ID đàu vào selectedIDs===========================
+    //===========================================================================================================================
+    console.log(document.getElementsByClassName("content__table")[0].getElementsByClassName("checkbox--real")[1]);
   },
 
   methods: {
@@ -149,13 +202,10 @@ export default {
       this.studentExemptionList = response.data.data;
       this.totalRecord = response.data.totalRecord;
       this.$emit("setTotalRecord", this.totalRecord);
-      //FOCUS DÒNG ĐẦU TIÊN
       // Ẩn Loader
       this.isTableLoading = false;
-
-      this.$emit("onRequestToast", 1, "Load thành công");
-      setTimeout(this.$emit("onRequestToast", 2, "Thử delay"), 20000);
-      this.$emit("onRequestToast", 2, "Thử cái nưax");
+      //FOCUS DÒNG ĐẦU TIÊN
+      //this.selectedIDs.push(this.studentExemptionList[0].studentExemptionID); // Chưa render xong DOM
     },
 
     /**
@@ -309,14 +359,18 @@ export default {
 
     /**
      * Mỗi lần check/uncheck vào chekcbox đầu dàng dữ liệu tương ứng của bảng thì thêm/bỏ Id tương ứng trong danh sách chọn
+     * @param {Guid} id ID của bản ghi được check/uncheck
      * Author: KhaiND (28/12/2022)
      */
     onSelectRecord(id) {
       if (this.selectedIDs.includes(id) && this.selectedIDs != undefined) {
         this.selectedIDs.splice(this.selectedIDs.indexOf(id), 1);
+        // Set lại atribute khi uncheck
+        event.target.parentElement.parentElement.parentElement.parentElement.setAttribute("selected", "false");
       }
       else {
         this.selectedIDs.push(id);
+        //event.target.parentElement.parentElement.parentElement.parentElement.setAttribute("selected", "true");
       }
       // Kiểm tra xem nếu đã check hết các lựa chọn thì tự động tick ô Tất cả
       if (this.selectedIDs.length == this.studentExemptionList.length) {
@@ -336,8 +390,15 @@ export default {
         this.checkAllRecord = !this.checkAllRecord;
         this.selectedIDs = [];
         if (this.checkAllRecord) {
-          for (var i = 0; i < this.studentExemptionList.length; i++) {
+          for (let i = 0; i < this.studentExemptionList.length; i++) {
             this.selectedIDs.push(this.studentExemptionList[i].studentExemptionID);
+          }
+        }
+        else {
+          var rows = document.getElementsByTagName("tr");
+          for(let i = 0; i < rows.length; i++)
+          {
+            rows[i].setAttribute("selected","false");
           }
         }
       }
@@ -355,8 +416,14 @@ export default {
     checkSelected(id) {
       if (this.selectedIDs == undefined) {
         return false;
-      }   
-      return this.selectedIDs.includes(id);
+      }
+      var isCHecked = this.selectedIDs.includes(id);
+      if(isCHecked) {
+        console.log(document.getElementById(id));
+        document.getElementById(id).setAttribute("selected", "true");
+      }
+      
+      return isCHecked;
     },
 
     /**
@@ -397,6 +464,19 @@ export default {
      */
     onClickEdit(studentID) {
       this.$emit("onOpenForm", true, studentID);
+      event.target.parentElement.setAttribute("selected", "true");
+      if(event.target.parentElement.parentNode) {
+        let sibling = event.target.parentElement.parentNode.firstChild;
+        while (sibling) {
+          if (sibling.nodeType === 1 && sibling !== event.target.parentElement) {
+            sibling.setAttribute("selected", "false");
+            console.log(sibling);
+          }
+          sibling = sibling.nextSibling;
+        }
+      }
+      
+
     },
 
     /**
@@ -423,6 +503,7 @@ export default {
 .content__table table th {
   position: relative;
   height: 64px;
+  box-sizing: border-box;
 }
 
 table th .table__headtext {
@@ -440,5 +521,27 @@ table th .table__filter {
   top: 28px;
   left: 10px;
   right: 10px;
+}
+
+.content__table, .content__table--head {
+    width: calc(100% - 24px);
+    position: relative;
+    box-sizing: border-box;
+    background-color: var(--white);
+    margin: 0px 12px;
+    /* overflow: scroll; */
+}
+.content__table table, .content__table--head table {
+    width: 100%;
+    box-sizing: border-box;
+}
+.content__table--head {
+  height: 80px;
+}
+.content__table {
+  height: calc(100% - 112px);
+  overflow: auto;
+  /* border-left: 1px solid var(--border); */
+  border-right: 1px solid var(--border);
 }
 </style>

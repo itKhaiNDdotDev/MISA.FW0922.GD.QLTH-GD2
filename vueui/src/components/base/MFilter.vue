@@ -1,9 +1,9 @@
 <template>
     <div class="m-filter-container">
         <div class="m-icon icon-24 icon-filter" @click="toggleFilter"></div>
-        <input v-if="isInputDate" class="filter__input" />
-        <input v-else class="filter__input" type="text"/>
-        <div class="filter__option" v-if="isShowOption">
+        <input v-if="isInputDate" class="filter__input" type="date" placeholder="" />
+        <input v-else class="filter__input" type="text" value=""/>
+        <!-- <div class="filter__option" v-if="isShowOption">
             <div class="option__item">
                 <input type="radio" name="filterOption">
                 <div class="option__item--text m-icon">{{filterOption.ClearOption}}</div>
@@ -36,7 +36,7 @@
                 <input type="radio" name="filterOption">
                 <div class="option__item--text m-icon">{{filterOption.NotBlank}}</div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -75,5 +75,12 @@ export default {
 
 .filter__option {
     /* z-index: 6; */
+}
+input[type=date]::-webkit-datetime-edit {
+    color: transparent;
+}
+input[type=date]:focus::-webkit-datetime-edit {
+    color: black !important;
+    font-size: 12px;
 }
 </style>

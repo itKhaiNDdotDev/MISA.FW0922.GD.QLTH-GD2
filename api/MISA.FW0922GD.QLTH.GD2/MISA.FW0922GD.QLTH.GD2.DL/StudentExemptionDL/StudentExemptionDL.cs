@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -255,6 +256,32 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL
 
             // Xử lý kết quả trả về
             return affactedRecordCount;
+        }
+
+        /// <summary>
+        /// Lấy thông tin miễn giảm (ngày bắt đầu và kết thúc áp dụng miễn giảm) theo khoản thu tương ứng học sinh
+        /// Phục vụ validate dữ liệu
+        /// </summary>
+        /// <param name="studentID">ID học sinh</param>
+        /// <param name="feeID">ID khoản thu</param>
+        /// <returns>Danh sách miễn giảm tương ứng</returns>
+        /// Author: KhainD (06/01/2022)
+        public IEnumerable<StudentExemptionDetail> GetByStudentFee(Guid studentID, int feeID)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("StudentID", studentID);
+            parameters.Add("FeeID", feeID);
+
+            string storedProcedureName = Procedure.SE_GET_BY_STUDENT_FEE;
+
+            using(var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
+            {
+                // Thực hiện gọi truy vấn vào Database
+                var studentExemptions = (List<StudentExemptionDetail>)mySqlConnection.Query<StudentExemptionDetail>(storedProcedureName, parameters, commandType: CommandType.StoredProcedure);
+
+                // Xử lý kết quả trả về
+                return studentExemptions;
+            }    
         }
     }
 }

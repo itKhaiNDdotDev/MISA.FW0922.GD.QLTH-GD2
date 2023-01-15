@@ -67,5 +67,15 @@ namespace MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL
         /// Author: KhaiND (03/01/2023)
         //public int InsertUpdateDelete(string insertListString, string updateListString, string deleteListIDString);
         public int InsertUpdateDelete(string listObjectString);
+
+        /// <summary>
+        /// Lấy thông tin miễn giảm (ngày bắt đầu và kết thúc áp dụng miễn giảm) theo khoản thu tương ứng học sinh
+        /// Phục vụ validate dữ liệu
+        /// </summary>
+        /// <param name="studentID">ID học sinh</param>
+        /// <param name="feeID">ID khoản thu</param>
+        /// <returns>Danh sách miễn giảm tương ứng</returns>
+        /// Author: KhainD (06/01/2022)
+        public IEnumerable<StudentExemptionDetail> GetByStudentFee(Guid studentID, int feeID);
     }
 }

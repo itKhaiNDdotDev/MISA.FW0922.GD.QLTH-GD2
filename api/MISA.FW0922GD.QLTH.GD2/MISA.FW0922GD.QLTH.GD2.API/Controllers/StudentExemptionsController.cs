@@ -6,6 +6,7 @@ using MISA.FW0922GD.QLTH.GD2.Common.Entities;
 using MISA.FW0922GD.QLTH.GD2.Common.Entities.DTOs;
 using MISA.FW0922GD.QLTH.GD2.Common.Entities.DTOs.StudentExemption;
 using MISA.FW0922GD.QLTH.GD2.Common.Enums;
+using MISA.FW0922GD.QLTH.GD2.DL.StudentExemptionDL;
 using System.Resources;
 
 namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
@@ -155,8 +156,27 @@ namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
                 //    return StatusCode(StatusCodes.Status404NotFound);
                 //}
 
-                return StatusCode(StatusCodes.Status200OK, _studentExemptionBL.Delete(studentExemptionID));
+                // Kiểm tra đầu vào rỗng
+                if (studentExemptionID == null || studentExemptionID == Guid.Empty)
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest);
+                }
 
+                var result = _studentExemptionBL.Delete(studentExemptionID);
+                if (!result.IsSuccess)
+                {
+                    var errorRes = (ErrorResult)result.Data;
+                    errorRes.TraceId = HttpContext.TraceIdentifier;
+                    if (errorRes.ErrorCode == GDErrorCode.InvalidData)
+                    {
+                        return StatusCode(StatusCodes.Status400BadRequest, errorRes);
+                    }
+                    else
+                    {
+                        return StatusCode(StatusCodes.Status500InternalServerError, errorRes);
+                    }
+                }
+                return StatusCode(StatusCodes.Status200OK, result.Data);
             }
             catch (Exception ex)
             {
@@ -182,19 +202,27 @@ namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
         {
             try
             {
-                var deletedIDs = _studentExemptionBL.DeleteMany(studentExemptionIDs);
-                if (deletedIDs != null && deletedIDs.Count > 0)
+                // Kiểm tra đầu vào rỗng
+                if (studentExemptionIDs == null || studentExemptionIDs.Count <= 0)
                 {
-                    return StatusCode(StatusCodes.Status200OK, deletedIDs);
+                    return StatusCode(StatusCodes.Status400BadRequest);
                 }
-                return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResult
+
+                var result = _studentExemptionBL.DeleteMany(studentExemptionIDs);
+                if (!result.IsSuccess)
                 {
-                    ErrorCode = GDErrorCode.DeleteFailed,
-                    DevMsg = Common.Resources.Common.DeleteFailed_DevMsg,
-                    UserMsg = Common.Resources.Common.DeleteFailed_UserMsg,
-                    MoreInfo = Common.Resources.Common.DeleteFailed_MoreInfo,
-                    TraceId = HttpContext.TraceIdentifier
-                });
+                    var errorRes = (ErrorResult)result.Data;
+                    errorRes.TraceId = HttpContext.TraceIdentifier;
+                    if (errorRes.ErrorCode == GDErrorCode.InvalidData)
+                    {
+                        return StatusCode(StatusCodes.Status400BadRequest, errorRes);
+                    }
+                    else
+                    {
+                        return StatusCode(StatusCodes.Status500InternalServerError, errorRes);
+                    }
+                }
+                return StatusCode(StatusCodes.Status200OK, result.Data);
             }
             catch (Exception ex)
             {
@@ -210,21 +238,38 @@ namespace MISA.FW0922GD.QLTH.GD2.API.Controllers
             }
         }
 
+        /// <summary>
+        /// API lưu dữ liệu thêm, sửa, xóa đồng thời nhiều bản ghi danh sách miễn giảm của học sinh từ form
+        /// </summary>
+        /// <param name="studentExemptions">Các bản ghi thêm, sửa, xóa</param>
+        /// <returns>Kết quả cập nhật vào Database</returns>
+        /// Author: KhaiND (02/01/2023)
         [HttpPost("save")]
         public IActionResult InsertUpdateDelete([FromBody] List<StudentExemptionRequest> studentExemptions)
         {
             try
             {
+                // Kiểm tra đầu vào rỗng
                 if(studentExemptions == null)
                 {
                     return StatusCode(StatusCodes.Status400BadRequest, studentExemptions);
                 }
-                int affacted = _studentExemptionBL.InsertUpdateDelete(studentExemptions);
-                //if(affacted <= 0)
-                //{
-                //    return StatusCode(StatusCodes.Status500InternalServerError, affacted);
-                //}
-                return StatusCode(StatusCodes.Status200OK, affacted);
+
+                var result = _studentExemptionBL.InsertUpdateDelete(studentExemptions);
+                if(!result.IsSuccess)
+                {
+                    var errorRes = (ErrorResult)result.Data;
+                    errorRes.TraceId = HttpContext.TraceIdentifier;
+                    if(errorRes.ErrorCode == GDErrorCode.InvalidData)
+                    {
+                        return StatusCode(StatusCodes.Status400BadRequest, errorRes);
+                    }    
+                    else
+                    {
+                        return StatusCode(StatusCodes.Status500InternalServerError, errorRes);
+                    }
+                }
+                return StatusCode(StatusCodes.Status200OK, result.Data);
             }
             catch (Exception ex)
             {

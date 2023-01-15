@@ -21,6 +21,12 @@ export default {
     },
 
     methods: {
+        /**
+         * Hiển thị toast message tương ứng trong vòng 3s
+         * @param {Number} toastType loại toast tương ứng Ebum Status.js
+         * @param {String} toastMsg thông điệp tương ứng hiển thị trên content của toast
+         * Author: KhaiND (24/12/2022)
+         */
         onShowToast(toastType, toastMsg) {
             var state = {
                 type: toastType,
@@ -33,13 +39,13 @@ export default {
         }
     },
 
-    mounted() {
-        var obj = { type: 3, msg: "abc"};
-        this.recState.push(obj);
-        setTimeout(() => {
-            this.recState.pop();
-        }, 3000);   
-    },
+    // mounted() {
+    //     var obj = { type: 3, msg: "abc"};
+    //     this.recState.push(obj);
+    //     setTimeout(() => {
+    //         this.recState.pop();
+    //     }, 3000);   
+    // },
 }
 </script>
 
@@ -48,5 +54,6 @@ export default {
     position: fixed;
     bottom: 8px;
     right: 16px;
+    z-index: 10;
 }
 </style>

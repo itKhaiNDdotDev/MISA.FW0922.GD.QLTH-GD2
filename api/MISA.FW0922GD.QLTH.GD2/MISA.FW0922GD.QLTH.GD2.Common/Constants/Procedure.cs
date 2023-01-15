@@ -68,5 +68,7 @@ namespace MISA.FW0922GD.QLTH.GD2.Common.Constants
         public static string SE_GET_BY_STUDENT = "Proc_StudentExemption_GetByStudentID";
 
         public static string SE_INSERT_UPDATE_DELETE = "Proc_StudentExemption_InsertUpdateDelete";
+
+        public static string SE_GET_BY_STUDENT_FEE = "Proc_StudentExemption_GetByStudentFee";
     }
 }

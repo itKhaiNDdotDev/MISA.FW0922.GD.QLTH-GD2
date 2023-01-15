@@ -11,6 +11,7 @@
       <input v-else type="text" class="m-input" ref="input"
         :readonly="isReadonly" :disabled="isDisabled" v-model="keyword"
         :class="{errorInput:isError}"
+        :tabindex="tabIndex"
         @input ="onGetAPIData"
         @blur="onBlur"
       />
@@ -65,7 +66,8 @@ export default {
     propData: Object,
     isAutoFocus: Boolean,
     isError: Boolean,
-    errorMsg: String
+    errorMsg: String,
+    tabIndex: Number
   },
   data() {
     return {

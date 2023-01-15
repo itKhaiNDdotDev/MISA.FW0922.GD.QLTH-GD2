@@ -47,7 +47,7 @@ namespace MISA.FW0922GD.QLTH.GD2.BL.StudentExemptionBL
         /// <param name="studentExemptionID">ID của bản ghi muốn xóa</param>
         /// <returns>ID của bản ghi vừa xóa</returns>
         /// Author: KhaiND (26/12/2022)
-        public Guid Delete(Guid studentExemptionID);
+        public ServiceResult Delete(Guid studentExemptionID);
 
         /// <summary>
         /// Xóa đồng thời nhiều bản ghi thông tin miễn giảm của học sinh thông qua danh sách ID
@@ -55,7 +55,7 @@ namespace MISA.FW0922GD.QLTH.GD2.BL.StudentExemptionBL
         /// <param name="studentExemptionIds">Danh sách ID các bản ghi muốn xóa</param>
         /// <returns>Danh sách ID các bản ghi vừa xóa</returns>
         /// Author: KhaiND (26/12/2022)
-        public List<Guid> DeleteMany(List<Guid> studentExemptionIDs);
+        public ServiceResult DeleteMany(List<Guid> studentExemptionIDs);
 
         /// <summary>
         /// Thực hiện lưu dữ liệu thay đổi khi thêm, sửa, xóa đồng thời nhiều bản ghi thông tin miễn giảm
@@ -63,6 +63,6 @@ namespace MISA.FW0922GD.QLTH.GD2.BL.StudentExemptionBL
         /// <param name="studentExemptions">Đối tượng danh sách dữ liệu đầu vào cho các bản ghi miễn giảm</param>
         /// <returns>Số bản ghi đã affact</returns>
         /// Author: KhaiND (03/01/2022)
-        public int InsertUpdateDelete(List<StudentExemptionRequest> studentExemptions);
+        public ServiceResult InsertUpdateDelete(List<StudentExemptionRequest> studentExemptions);
     }
 }
