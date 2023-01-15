@@ -1,0 +1,32 @@
+@import url(base/color.css);
+@import url(base/font.css);
+@import url(base/icon.css);
+@import url(base/scrollbar.css);
+@import url(base/zindex.css);
+
+@import url(layout/layout.css);
+
+@import url(component/button.css);
+@import url(component/input.css);
+@import url(component/table.css);
+
+* {
+    font-family: OpenSans;
+    font-size: 13px;
+}
+
+body {
+    margin: 0px;
+    background-color: var(--background);
+    min-width: 1200px;
+}
+
+.text--link {
+    color: var(--link);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.border-radius {
+    border-radius: 4px !important;
+}

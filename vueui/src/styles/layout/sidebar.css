@@ -1,0 +1,99 @@
+.sidebar {
+    background-color: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar__head {
+    flex-shrink: 0;
+    height: 48px;
+    position: relative;
+    display: flex;  
+    justify-content: space-between;
+    padding: 0px 0px 0px 12px; /*XEm lai*/
+    box-shadow: 4px 0px 10px rgb(0, 0, 0, 0.15);
+}
+
+.sidebar__head--left {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar__head .m-logo {
+    width: 36px;
+    height: 36px;
+    background-size: contain;
+}
+
+.sidebar__head .m-title {
+    margin: 0px 8px;
+    font-size: 16px;
+    font-family: OpenSansSemiBold;
+    color: var(--grid-header); /*F3F4F6 hoac fullE*/
+}
+
+.sidebar__menu {
+    flex: 1;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    /* overflow-y: scroll; */
+}
+/* .sidebar__menu::-webkit-scrollbar-track {
+    background-color: var(--sidebar-bg);
+} */
+
+.sidebar__menu .menu-item {
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    color: var( --grid-line);
+    font-family: OpenSansSemiBold;
+    padding: 7px 14px; /*7px + (((+icon)32-(text)18)/2) = 7) = 14*/
+    background-position: 14px 50%;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.sidebar__menu .menu-item:hover {
+    background-color: var(--sidebar-bg-active);
+}
+.sidebar__menu .router-link-active { /*XEM LẠI TỈ MỈ HƠN CHO CHẮC*/
+    background-color: var(--sidebar-bg-active);
+    border-left: 2px solid var(--border-active);
+    color: var(--border-active);
+    padding-left: 12px;
+}
+
+.sidebar__menu .menu-item--icon {
+    margin-right: 8px;
+}
+
+/* Khi an sidebar di */
+.sidebarHidden {
+    width: 46px !important;
+}
+.sidebarHidden .sidebar__head {
+    padding: 0px;
+}
+.sidebarHidden .sidebar__head--left {
+    display: none;
+}
+.sidebarHidden ~ .header, .sidebarHidden ~ .content {
+    width: calc(100% - 46px);
+}
+.sidebarHidden .sidebar__menu .menu-item {
+    padding: 0px;
+    width: 46px;
+    height: 46px;
+ }
+ .sidebarHidden .sidebar__menu .menu-item--icon {
+    background-position: center;
+    width: 46px;
+    height: 46px;
+    margin: 0px;
+    background-size: 32px;
+ }
+.sidebarHidden .sidebar__menu .menu-item--text {
+    display: none;
+}

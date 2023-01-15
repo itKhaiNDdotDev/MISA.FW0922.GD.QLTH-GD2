@@ -1,0 +1,21 @@
+.m-tab {
+    font-family: OpenSansSemiBold;
+    color: var(--line-gray);
+    height: 40px;
+    width: fit-content;
+    padding: 0px 28px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+.m-tab:hover {
+    color: var(--border-active);
+}
+
+.tab--focus {
+    background-color: var(--white);
+    color: var(--border-active);
+    border-top: 2px solid var(--border-active);
+}

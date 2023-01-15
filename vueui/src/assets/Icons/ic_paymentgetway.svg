@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="Group_50074" data-name="Group 50074" transform="translate(457 207)">
+    <g id="Group_50622" data-name="Group 50622">
+      <g id="Group_50073" data-name="Group 50073" transform="translate(-463.667 -275.667)">
+        <path id="Path_96785" data-name="Path 96785" d="M10.667,77.77a2.9,2.9,0,0,1,2.649-3.1h18.7a2.9,2.9,0,0,1,2.649,3.1v6.771a.577.577,0,1,1-1.143,0V77.77a1.664,1.664,0,0,0-1.506-1.787h-18.7A1.664,1.664,0,0,0,11.81,77.77V90a1.664,1.664,0,0,0,1.506,1.787h8.208a.665.665,0,0,1,0,1.317H13.316A2.9,2.9,0,0,1,10.667,90Z" transform="translate(0 -1.216)" fill="#fff" stroke="#fff" stroke-width="0.25" fill-rule="evenodd"/>
+        <path id="Path_96786" data-name="Path 96786" d="M10.667,139.325a.619.619,0,0,1,.571-.658H34.1a.665.665,0,0,1,0,1.317H11.238A.62.62,0,0,1,10.667,139.325Z" transform="translate(0 -60.612)" fill="#fff" stroke="#fff" stroke-width="0.25" fill-rule="evenodd"/>
+        <path id="Path_96787" data-name="Path 96787" d="M53.333,245.991a.658.658,0,0,1,.658-.658h2.633a.658.658,0,0,1,0,1.317H53.992A.658.658,0,0,1,53.333,245.991Z" transform="translate(-40.033 -161.63)" fill="#fff" stroke="#fff" stroke-width="0.25" fill-rule="evenodd"/>
+        <path id="Path_96788" data-name="Path 96788" d="M53.333,299.325a.658.658,0,0,1,.658-.658h5.266a.658.658,0,1,1,0,1.317H53.992A.658.658,0,0,1,53.333,299.325Z" transform="translate(-40.033 -212.141)" fill="#fff" stroke="#fff" stroke-width="0.25" fill-rule="evenodd"/>
+        <path id="Path_96789" data-name="Path 96789" d="M272.146,267.663a4.483,4.483,0,1,0,4.483,4.483A4.483,4.483,0,0,0,272.146,267.663Zm-5.479,4.483a5.479,5.479,0,1,1,5.479,5.479A5.479,5.479,0,0,1,266.667,272.146Z" transform="translate(-243 -182)" fill="#0dd469" fill-rule="evenodd"/>
+        <path id="Path_97381" data-name="Path 97381" d="M345.444,362.832a.564.564,0,1,1,.8.8l-2.255,2.255a.564.564,0,0,1-.8,0l-1.691-1.691a.564.564,0,1,1,.8-.8l1.293,1.293Z" transform="translate(-314.667 -274)" fill="#0dd469" fill-rule="evenodd"/>
+      </g>
+    </g>
+    <rect id="Rectangle_20643" data-name="Rectangle 20643" width="32" height="32" transform="translate(-457 -207)" fill="none"/>
+  </g>
+</svg>

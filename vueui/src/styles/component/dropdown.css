@@ -1,0 +1,89 @@
+.m-dropdown {
+    position: relative;
+    border-radius: inherit;
+    z-index: inherit;
+}
+
+.m-dropdown .m-input {
+    z-index: inherit;
+    padding-right: 36px !important;
+    width: 100%;
+}
+
+.m-dropdown .icon-down {
+    z-index: calc(inherit + 1);
+    cursor: pointer;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    background-color: inherit;
+}
+
+.m-dropdown .icon-down:hover {
+    background-color: var(--icon-action-bg-focus);
+}
+.m-dropdown .icon-down:focus ~ .m-input {
+    border-color: var(--border-active);
+}
+
+.dropdown__option {
+    position: absolute;
+    /* top: calc(100% + 2px); */
+    /* left: 0px; */
+    /* min-width: 100%; */
+    max-height: 180px;
+    /* border-radius: 4px; */
+    box-shadow: 0px 0px 10px var(--box-shadow);
+    background-color: var(--white);
+    overflow: auto;
+    z-index: 1;
+}
+
+.option__item {
+    padding: 0px 16px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.option__item:hover {
+    background-color: var(--grid-line-hover);
+}
+.option__item:active,
+.option__item:focus {
+    background-color: var(--grid-line-focus);
+}
+
+.dropdown__option table {
+    z-index: 1;
+    background-color: inherit;
+    position: relative;
+    border: none;
+}
+
+.dropdown__option table thead, .dropdown__option table tr,
+.dropdown__option table th, .dropdown__option table td {
+    border: none;
+    height: 28px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown__option table th, .dropdown__option table td {
+    max-width: 300px;
+}
+
+.dropdown__option table tbody tr {
+    background-color: inherit;
+}
+.dropdown__option table tbody tr:hover {
+    cursor: pointer;
+    background-color: var(--grid-line-hover);
+}
+.dropdown__option table tbody tr:active,
+.dropdown__option table tbody tr:focus {
+    background-color: (--grid-line-focus);
+}

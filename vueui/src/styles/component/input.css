@@ -1,0 +1,48 @@
+.m-input-container {
+    display: flex;
+    flex-direction: column;
+    /* margin-right: 16px; */
+    border-radius: inherit;
+    position: relative;
+}
+
+.m-input-container label {
+    color: var(--label-text);
+    margin-bottom: 4px;
+}
+
+.m-input {
+    height: 32px;
+    border-radius: inherit;
+    border: 1px solid var(--line-gray);
+    outline: none;
+    box-sizing: border-box;
+    padding: 0px 12px;
+}
+
+.m-input:focus { /*Tu them vao*/
+    border-color: var(--border-active);
+}
+
+.text-input:disabled {
+    background-color: var(--control-light-gray);
+    cursor: not-allowed;
+}
+
+/*Input date icon*/
+::-webkit-calendar-picker-indicator {
+    background: url(../../assets/Icons/ic_date.svg) center/80% no-repeat;;
+}
+
+/*Hide up/down spinner input Number*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

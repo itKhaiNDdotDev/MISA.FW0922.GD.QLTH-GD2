@@ -1,0 +1,115 @@
+table {
+    border-collapse: collapse;
+    position: absolute;
+    width: 100%;
+    background-color: var(--white);
+    /*overflow: auto;*/
+    /* overflow-x: auto; */
+    /* border-spacing: 0 !important; */
+}
+
+/* .content__table {
+    border-top: 1px solid var(--border);
+} */
+
+thead {
+    /* border-bottom: 2px solid var(--border); */
+    /* position: sticky !important; */
+    /* top: -1px; */
+    position: relative;
+}
+
+tr {
+    height: 32px/*40px*/;
+    box-sizing: border-box;
+}
+
+table th {
+    background-color: var(--option-head-bg);
+    overflow: unset !important;
+    padding: 7px 10px !important;
+    position: sticky !important;
+    top: 0px;
+    border-top: none !important;
+    border-bottom: none !important;
+    /* border: 2px solid black; */
+}
+
+th, td {
+    border: 1px solid var(--border);
+    vertical-align: middle;
+    padding: 0px 10px;
+    /* box-sizing: border-box; */
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}
+
+/* tbody {
+    z-index: 0;
+} */
+
+tbody tr:nth-child(even) {
+    background-color: var(--grid-header);
+}
+
+tbody tr:hover {
+    background-color: var( --grid-line-hover); /*forcus: CCE8FF*/
+}
+tbody tr:focus {
+    background-color:  var(--grid-line-focus);
+}
+
+td {
+    white-space: nowrap;
+}
+
+table .thead__border-top, table .thead__border-bot {
+    background-color: var(--border);
+    position: fixed;
+    left: 217px;
+    right: 12px;
+}
+table .thead__border-top {
+    height: 1px;
+    top: 143px;
+}
+table .thead__border-bot {
+    top: 208px;
+    height: 2px;
+}
+
+table .thead__no-scroll {
+    position: fixed;
+    right: 13px;
+    top: 144px;
+    height: 64px;
+    width: 9px;
+    background-color:  var(--option-head-bg);
+}
+
+tr[selected="true"] {
+    background-color: var(--grid-line-focus) !important;
+  }
+
+.cell__icon {
+    display: flex;
+    /* justify-content: space-around; */
+    justify-content: space-evenly;
+}
+
+.cell__text--left {
+    text-align: left;
+}
+
+.cell__text--right {
+    text-align: right;
+}
+
+.cell__text--center {
+    text-align: center;
+}
+
+/******************************SỬA LẠI****/
+.content__table::-webkit-scrollbar-track {
+    margin-top: 65px;
+}

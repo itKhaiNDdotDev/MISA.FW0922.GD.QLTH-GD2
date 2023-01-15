@@ -1,0 +1,14 @@
+.m-popup-wrapper {
+    background-color: var(--popup-wrapper);
+}
+
+.popup__form {
+    background-color: var(--white);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: 1360px;
+    max-height: 768px;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+}

@@ -1,0 +1,40 @@
+CREATE DEFINER = 'root'@'localhost'
+PROCEDURE `misa.fw0922.gd.qlth.khoanthu`.Proc_StudentExemption_InsertUpdateDelete(IN `@InsertListString` TEXT, IN `@UpdateListString` TEXT, IN `@DeleteListIDString` TEXT)
+  COMMENT '-- Author:        KhaiND
+  -- Created date:  03/01/2022
+  -- Description:   Thêm, sửa, xóa nhiều bản ghi thông tin miễn giảm áp dụng cho học sinh tương ứng
+  -- Modified by:
+  -- Code chạy thử: CALL `misa.fw0922.gd.qlth.khoanthu`.Proc_StudentExemption_()'
+BEGIN   
+
+  SET @insertQuery = CONCAT('INSERT INTO studentexemption (StudentExemptionID, StudentID, FeeID, ExemptionID, StudentExemptionLevel, StudentExemptionLevelIsUnitByPercent, StudentExemptionFromDate, StudentExemptionToDate, CreatedDate, CreatedBy, ModifiedDate, ModifiedBy) VALUES ', `@InsertListString`);
+  /*PREPARE insertQuery FROM @insertQuery;
+  EXECUTE insertQuery;*/
+
+  CREATE TEMPORARY TABLE `temp` (StudentExemptionID char(36), StudentID char(36),
+    FID int, EID int, SELevel decimal(18, 4), IsByPercent tinyint, FromDate date, ToDate date,
+    ModifiedDate DATE, ModifiedBy varchar(100));
+
+  SET @initUpdateQuery = CONCAT('INSERT INTO temp (StudentExemptionID, StudentID, FID, EID, SELevel, IsByPercent, FromDate, ToDate, ModifiedDate, ModifiedBy) VALUES ', `@UpdateListString`);
+  PREPARE initUpdate FROM @initUpdateQuery;
+  EXECUTE initUpdate;
+
+  UPDATE studentexemption se INNER JOIN temp t ON se.StudentExemptionID = t.StudentExemptionID
+  SET se.StudentExemptionID = t.StudentExemptionID,
+    se.StudentID = t.StudentID,
+    se.FeeID = t.FID,
+    se.ExemptionID = t.EID,
+    se.StudentExemptionLevel = t.SELevel,
+    se.StudentExemptionLevelIsUnitByPercent = t.IsByPercent,
+    se.StudentExemptionFromDate = t.FromDate,
+    se.StudentExemptionToDate = t.ToDate,
+    se.ModifiedDate = t.ModifiedDate,
+    se.ModifiedBy = t.ModifiedBy
+  WHERE se.StudentExemptionID = t.StudentExemptionID;
+  DROP TEMPORARY TABLE `temp`;
+
+  /*SET @deleteQuery = CONCAT('DELETE FROM StudentExemption WHERE StudentExemptionID IN ', `@DeleteListIDString`);
+  PREPARE deleteQuery FROM @deleteQuery;
+  EXECUTE deleteQuery;*/
+
+END

@@ -1,0 +1,50 @@
+.m-radio {
+    user-select: none;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.radio--real {
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    cursor: pointer;
+    margin: 0px;
+    z-index: 1;
+}
+
+.radio--pseudo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 0;
+    background-image: url(../../assets/Icons/ic_Ratio_Inactive.png);
+}
+
+.radio--real:hover ~ .radio--pseudo/*,
+ .radio--real:focus ~ .radio--pseudo*/ {
+    background-image: url(../../assets/Icons/ic_Ratio_Hover.png);
+}
+
+.radio--real:checked ~ .radio--pseudo {
+    background-image: url(../../assets/Icons/ic_Ratio_Active.png);
+}
+
+.m-radio .radio--real:disabled {
+    cursor: not-allowed;
+}
+
+.radio--real:disabled ~ .radio--pseudo {
+    background-image: url(../../assets/Icons/ic_Ratio_Inactive_Disable.png);
+}
+
+.radio--real:checked:disabled ~ .radio--pseudo {
+    background-image: url(../../assets/Icons/ic_Ratio_Inactive_Disable.png);
+}
